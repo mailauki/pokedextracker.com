@@ -127,6 +127,8 @@
   height: 100%;
   background-color: #fff;
   border: 2px solid $brand-primary;
+  border-radius: 12px;
+  overflow: hidden;
 
   .progress-numbers {
     position: absolute;

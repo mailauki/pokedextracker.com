@@ -723,7 +723,7 @@ select {
 }
 
 .wrapper {
-  width: 6 * $pokemon-box-size + 2;
+  width: 6 * $pokemon-box-size + 2 + (5*8px);
   margin: 0 auto;
 }
 
