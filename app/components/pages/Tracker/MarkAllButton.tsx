@@ -12,6 +12,7 @@ import { useTrackerContext } from './use-tracker';
 import { useUser } from '../../../hooks/queries/users';
 
 import type { UICapture } from './use-tracker';
+import { Button } from '@mui/material';
 
 interface Props {
   captures: UICapture[];
@@ -90,7 +91,7 @@ export function MarkAllButton ({ captures }: Props) {
   const isLoading = createCapturesMutation.isLoading || deleteCapturesMutation.isLoading;
 
   return (
-    <button className="btn btn-blue" disabled={isLoading} onClick={handleButtonClick}>
+    <Button disabled={isLoading} onClick={handleButtonClick} variant='contained' size='small' disableElevation sx={{ borderRadius: '30px' }}>
       <span className={isLoading ? 'hidden' : ''}>{uncaught === 0 ? 'Unmark' : 'Mark'} All</span>
       {isLoading ?
         <span className="spinner">
@@ -98,6 +99,15 @@ export function MarkAllButton ({ captures }: Props) {
         </span> :
         null
       }
-    </button>
+    </Button>
+    // <button className="btn btn-blue" disabled={isLoading} onClick={handleButtonClick}>
+    //   <span className={isLoading ? 'hidden' : ''}>{uncaught === 0 ? 'Unmark' : 'Mark'} All</span>
+    //   {isLoading ?
+    //     <span className="spinner">
+    //       <FontAwesomeIcon icon={faCircleNotch} spin />
+    //     </span> :
+    //     null
+    //   }
+    // </button>
   );
 }

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import keyBy from 'lodash/keyBy';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfo } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import { Card, CardActionArea, CardActions, CardContent, IconButton } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useMemo } from 'react';
@@ -135,24 +135,5 @@ export function Pokemon ({ capture, delay = 0, setSelectedPokemon }: Props) {
         </IconButton>
       </CardActions>
     </Card>
-    // <div className={classNames(classes)}>
-    //   <div className="set-captured" onClick={handleSetCapturedClick}>
-    //     <h4><PokemonName name={capture.pokemon.name} /></h4>
-    //     <div className="icon-wrapper">
-    //       <i className={iconClass(capture.pokemon, dex)} />
-    //     </div>
-    //     <p>#{padding(idToDisplay, paddingDigits)}</p>
-    //   </div>
-    //   <div className="set-captured-mobile" onClick={handleSetCapturedClick}>
-    //     <div className="icon-wrapper">
-    //       <i className={iconClass(capture.pokemon, dex)} />
-    //     </div>
-    //     <h4><PokemonName name={capture.pokemon.name} /></h4>
-    //     <p>#{padding(idToDisplay, paddingDigits)}</p>
-    //   </div>
-    //   <div className="set-info" onClick={handleSetInfoClick}>
-    //     <FontAwesomeIcon icon={faInfo} />
-    //   </div>
-    // </div>
   );
 }
