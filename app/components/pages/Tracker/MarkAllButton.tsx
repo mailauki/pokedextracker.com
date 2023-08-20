@@ -1,6 +1,7 @@
 import keyBy from 'lodash/keyBy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { Button } from '@mui/material';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
 
@@ -12,7 +13,6 @@ import { useTrackerContext } from './use-tracker';
 import { useUser } from '../../../hooks/queries/users';
 
 import type { UICapture } from './use-tracker';
-import { Button } from '@mui/material';
 
 interface Props {
   captures: UICapture[];
@@ -91,7 +91,7 @@ export function MarkAllButton ({ captures }: Props) {
   const isLoading = createCapturesMutation.isLoading || deleteCapturesMutation.isLoading;
 
   return (
-    <Button disabled={isLoading} onClick={handleButtonClick} variant='contained' size='small' disableElevation sx={{ borderRadius: '30px' }}>
+    <Button className="btn btn-blue" disableElevation disabled={isLoading} onClick={handleButtonClick} size="small" sx={{ borderRadius: '30px' }} variant="contained" >
       <span className={isLoading ? 'hidden' : ''}>{uncaught === 0 ? 'Unmark' : 'Mark'} All</span>
       {isLoading ?
         <span className="spinner">
@@ -100,14 +100,5 @@ export function MarkAllButton ({ captures }: Props) {
         null
       }
     </Button>
-    // <button className="btn btn-blue" disabled={isLoading} onClick={handleButtonClick}>
-    //   <span className={isLoading ? 'hidden' : ''}>{uncaught === 0 ? 'Unmark' : 'Mark'} All</span>
-    //   {isLoading ?
-    //     <span className="spinner">
-    //       <FontAwesomeIcon icon={faCircleNotch} spin />
-    //     </span> :
-    //     null
-    //   }
-    // </button>
   );
 }

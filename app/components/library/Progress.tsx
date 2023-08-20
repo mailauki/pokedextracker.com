@@ -1,3 +1,4 @@
+import { Box, LinearProgress, Stack, Typography } from '@mui/material';
 import { decimal } from '../../utils/formatting';
 
 interface Props {
@@ -9,12 +10,20 @@ export function Progress ({ caught, total }: Props) {
   const percent = 100 * caught / total;
 
   return (
-    <div className="progress-container">
-      <div className="progress-outer">
-        <div className="progress-numbers"><b>{decimal(percent, 1)}%</b> done!<span className="mobile"> (<b>{caught}</b> caught, <b>{total - caught}</b> to go)</span></div>
-        <div className="progress-inner" style={{ width: `${percent}%` }} />
-      </div>
-      <h3>(<b>{caught}</b> caught, <b>{total - caught}</b> to go)</h3>
-    </div>
+    <Stack sx={{ mt: 1, mb: 2, position: 'relative', width: '100%' }}>
+      <LinearProgress sx={{ height: 25, borderRadius: 5, m: 0.5 }} value={percent} variant="determinate" />
+      <Box sx={{ position: 'absolute', top: 0, left: 0, width: '100%', textAlign: 'center' }}>
+        <Typography variant="overline">
+          <b>{decimal(percent, 1)}%</b> done!<span className="mobile"> (<b>{caught}</b> caught, <b>{total - caught}</b> to go)</span>
+        </Typography>
+      </Box>
+    </Stack>
+    // <div className="progress-container">
+    //   <div className="progress-outer">
+    //     <div className="progress-numbers"><b>{decimal(percent, 1)}%</b> done!<span className="mobile"> (<b>{caught}</b> caught, <b>{total - caught}</b> to go)</span></div>
+    //     <div className="progress-inner" style={{ width: `${percent}%` }} />
+    //   </div>
+    //   <h3>(<b>{caught}</b> caught, <b>{total - caught}</b> to go)</h3>
+    // </div>
   );
 }

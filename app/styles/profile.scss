@@ -99,12 +99,12 @@
   }
 }
 
-.percentage {
-  @include flexbox();
-  @include justify-content(space-between);
+// .percentage {
+//   @include flexbox();
+//   @include justify-content(space-between);
 
-  margin-top: 20px;
-}
+//   margin-top: 20px;
+// }
 
 .progress-container {
   width: 100%;
