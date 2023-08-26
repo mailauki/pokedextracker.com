@@ -1,19 +1,23 @@
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 import find from 'lodash/find';
 import groupBy from 'lodash/groupBy';
 import keyBy from 'lodash/keyBy';
 import slug from 'slug';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAsterisk, faChevronDown, faLongArrowAltRight, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faAsterisk, faChevronDown, faLongArrowAltRight, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, IconButton, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from '@mui/material';
+import type { SelectChangeEvent } from '@mui/material/Select';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Alert } from '../../library/Alert';
-import { FormWarning } from './FormWarning';
+// import { FormWarning } from './FormWarning';
 import { ReactGA } from '../../../utils/analytics';
 import { useDeleteDex, useUpdateDex } from '../../../hooks/queries/dexes';
 import { useDexTypes } from '../../../hooks/queries/dex-types';
 import { useGames } from '../../../hooks/queries/games';
-import { useLocalStorageContext } from '../../../hooks/contexts/use-local-storage-context';
+// import { useLocalStorageContext } from '../../../hooks/contexts/use-local-storage-context';
 import { useSession } from '../../../hooks/contexts/use-session';
 
 import type { ChangeEvent, MouseEvent, FormEvent } from 'react';
@@ -32,7 +36,7 @@ interface Props {
 export function DexEdit ({ dex, isOpen, onRequestClose }: Props) {
   const formRef = useRef<HTMLDivElement>(null);
 
-  const { isNightMode } = useLocalStorageContext();
+  // const { isNightMode } = useLocalStorageContext();
   const { session } = useSession();
   const { data: games } = useGames();
   const { data: dexTypes } = useDexTypes();
@@ -91,7 +95,7 @@ export function DexEdit ({ dex, isOpen, onRequestClose }: Props) {
     onRequestClose();
   };
 
-  const handleGameChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleGameChange = (e: SelectChangeEvent) => {
     const newGameId = e.target.value;
 
     // Update the dex type appropriately since every game family has a different
@@ -114,7 +118,7 @@ export function DexEdit ({ dex, isOpen, onRequestClose }: Props) {
 
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
 
-  const handleDeleteClick = async (e: MouseEvent<HTMLAnchorElement>) => {
+  const handleDeleteClick = async (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
 
     if (updateDexMutation.isLoading || deleteDexMutation.isLoading) {
@@ -182,107 +186,165 @@ export function DexEdit ({ dex, isOpen, onRequestClose }: Props) {
   }
 
   return (
-    <Modal
-      className={`modal ${isNightMode ? 'night-mode' : ''}`}
-      contentLabel="Edit Dex"
-      isOpen={isOpen}
-      onRequestClose={handleRequestClose}
-      overlayClassName="modal-overlay"
-    >
-      <div className="dex-delete-container">
-        {isConfirmingDelete ?
-          <>
-            Are you sure?&nbsp;
-            <a className="link" onClick={handleDeleteClick}>Yes</a>&nbsp;
-            <a className="link" onClick={() => setIsConfirmingDelete(false)}>No</a>
-          </> :
-          <a className="link" onClick={handleDeleteClick}>
-            <FontAwesomeIcon icon={faTrashAlt} />
-          </a>
-        }
-      </div>
-      <div className="form" ref={formRef}>
-        <h1>Edit a Dex</h1>
-        <form className="form-column" onSubmit={handleUpdateSubmit}>
+    // <Modal
+    //   className={`modal ${isNightMode ? 'night-mode' : ''}`}
+    //   contentLabel="Edit Dex"
+    //   isOpen={isOpen}
+    //   onRequestClose={handleRequestClose}
+    //   overlayClassName="modal-overlay"
+    // >
+    //   <div className="dex-delete-container">
+    //     {isConfirmingDelete ?
+    //       <>
+    //         Are you sure?&nbsp;
+    //         <a className="link" onClick={handleDeleteClick}>Yes</a>&nbsp;
+    //         <a className="link" onClick={() => setIsConfirmingDelete(false)}>No</a>
+    //       </> :
+    //       <a className="link" onClick={handleDeleteClick}>
+    //         <FontAwesomeIcon icon={faTrashAlt} />
+    //       </a>
+    //     }
+    //   </div>
+    //   <div className="form" ref={formRef}>
+    //     <h1>Edit a Dex</h1>
+    //     <form className="form-column" onSubmit={handleUpdateSubmit}>
+    //       <Alert message={updateDexMutation.error?.message || deleteDexMutation.error?.message} type="error" />
+    //       <div className="form-group">
+    //         <div className="form-note">/u/{session!.username}/{slug(title || 'Living Dex', { lower: true })}</div>
+    //         <label htmlFor="dex_title">Title</label>
+    //         <FormWarning message={showUrlWarning && URL_WARNING} />
+    //         <input
+    //           className="form-control"
+    //           id="dex_title"
+    //           maxLength={300}
+    //           name="dex_title"
+    //           onChange={handleTitleChange}
+    //           placeholder="Living Dex"
+    //           required
+    //           type="text"
+    //           value={title}
+    //         />
+    //         <FontAwesomeIcon icon={faAsterisk} />
+    //       </div>
+    //       <div className="form-group">
+    //         <FormWarning message={showGameWarning && GAME_WARNING} />
+    //         <label htmlFor="game">Game</label>
+    //         <select className="form-control" onChange={handleGameChange} value={game}>
+    //           {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
+    //         </select>
+    //         <FontAwesomeIcon icon={faChevronDown} />
+    //       </div>
+    //       <div className="form-group">
+    //         <FormWarning message={showRegionalWarning && REGIONAL_WARNING} />
+    //         <label htmlFor="dex-type">Dex Type</label>
+    //         {dexTypesByGameFamilyId[gamesById[game].game_family.id].map((dt) => (
+    //           <div className="radio" key={dt.id}>
+    //             <label>
+    //               <input
+    //                 checked={dexType === dt.id}
+    //                 name="dex-type"
+    //                 onChange={() => setDexType(dt.id)}
+    //                 type="radio"
+    //               />
+    //               <span className="radio-custom"><span /></span>{dt.name}
+    //             </label>
+    //           </div>
+    //         ))}
+    //       </div>
+    //       <div className="form-group">
+    //         <label htmlFor="type">Type</label>
+    //         <div className="radio">
+    //           <label>
+    //             <input
+    //               checked={!shiny}
+    //               name="type"
+    //               onChange={() => setShiny(false)}
+    //               type="radio"
+    //             />
+    //             <span className="radio-custom"><span /></span>Normal
+    //           </label>
+    //         </div>
+    //         <div className="radio">
+    //           <label>
+    //             <input
+    //               checked={shiny}
+    //               name="type"
+    //               onChange={() => setShiny(true)}
+    //               type="radio"
+    //             />
+    //             <span className="radio-custom"><span /></span>Shiny
+    //           </label>
+    //         </div>
+    //       </div>
+    //       <Alert className="form-confirm" message={isConfirmingUpdate && 'Please review the warnings above and confirm your edit!'} type="error" />
+    //       <button
+    //         className="btn btn-blue form-confirm"
+    //         disabled={updateDexMutation.isLoading || deleteDexMutation.isLoading}
+    //         type="submit"
+    //       >
+    //         {isConfirmingUpdate ? 'Confirm' : ''} Edit <FontAwesomeIcon icon={faLongArrowAltRight} />
+    //       </button>
+    //     </form>
+    //   </div>
+    //   <p><a className="link" onClick={handleRequestClose}>Go Back</a></p>
+    // </Modal>
+    <Dialog fullWidth maxWidth="sm" onClose={handleRequestClose} open={isOpen}>
+      <DialogTitle>{isConfirmingDelete ? 'Delete Dex?' : 'Edit a Dex'}</DialogTitle>
+      <IconButton aria-label="delete" color="error" onClick={handleDeleteClick} sx={{ position: 'absolute', top: 8, right: 8 }}>
+        <DeleteIcon />
+      </IconButton>
+
+      {isConfirmingDelete ? (
+        <DialogContent sx={{ pl: 8, pr: 8, pb: 6 }}>
+          <Stack alignItems="center" spacing={1}>
+            <Typography>Are you sure?</Typography>
+            <Button color="warning" onClick={handleDeleteClick}>Yes</Button>
+            <Button onClick={() => setIsConfirmingDelete(false)}>No</Button>
+          </Stack>
+        </DialogContent>
+      ) : (
+        <DialogContent sx={{ pl: 8, pr: 8, pb: 6 }}>
           <Alert message={updateDexMutation.error?.message || deleteDexMutation.error?.message} type="error" />
-          <div className="form-group">
-            <div className="form-note">/u/{session!.username}/{slug(title || 'Living Dex', { lower: true })}</div>
-            <label htmlFor="dex_title">Title</label>
-            <FormWarning message={showUrlWarning && URL_WARNING} />
-            <input
-              className="form-control"
-              id="dex_title"
-              maxLength={300}
-              name="dex_title"
-              onChange={handleTitleChange}
-              placeholder="Living Dex"
-              required
-              type="text"
-              value={title}
-            />
-            <FontAwesomeIcon icon={faAsterisk} />
-          </div>
-          <div className="form-group">
-            <FormWarning message={showGameWarning && GAME_WARNING} />
-            <label htmlFor="game">Game</label>
-            <select className="form-control" onChange={handleGameChange} value={game}>
-              {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
-            </select>
-            <FontAwesomeIcon icon={faChevronDown} />
-          </div>
-          <div className="form-group">
-            <FormWarning message={showRegionalWarning && REGIONAL_WARNING} />
-            <label htmlFor="dex-type">Dex Type</label>
-            {dexTypesByGameFamilyId[gamesById[game].game_family.id].map((dt) => (
-              <div className="radio" key={dt.id}>
-                <label>
-                  <input
-                    checked={dexType === dt.id}
-                    name="dex-type"
-                    onChange={() => setDexType(dt.id)}
-                    type="radio"
-                  />
-                  <span className="radio-custom"><span /></span>{dt.name}
-                </label>
-              </div>
-            ))}
-          </div>
-          <div className="form-group">
-            <label htmlFor="type">Type</label>
-            <div className="radio">
-              <label>
-                <input
-                  checked={!shiny}
-                  name="type"
-                  onChange={() => setShiny(false)}
-                  type="radio"
-                />
-                <span className="radio-custom"><span /></span>Normal
-              </label>
-            </div>
-            <div className="radio">
-              <label>
-                <input
-                  checked={shiny}
-                  name="type"
-                  onChange={() => setShiny(true)}
-                  type="radio"
-                />
-                <span className="radio-custom"><span /></span>Shiny
-              </label>
-            </div>
-          </div>
-          <Alert className="form-confirm" message={isConfirmingUpdate && 'Please review the warnings above and confirm your edit!'} type="error" />
-          <button
-            className="btn btn-blue form-confirm"
-            disabled={updateDexMutation.isLoading || deleteDexMutation.isLoading}
-            type="submit"
-          >
-            {isConfirmingUpdate ? 'Confirm' : ''} Edit <FontAwesomeIcon icon={faLongArrowAltRight} />
-          </button>
-        </form>
-      </div>
-      <p><a className="link" onClick={handleRequestClose}>Go Back</a></p>
-    </Modal>
+
+          <form onSubmit={handleUpdateSubmit}>
+            <TextField error={showUrlWarning} fullWidth helperText={<Typography align="left" fontSize={12} noWrap>{showUrlWarning ? URL_WARNING : `/u/${session!.username}/${slug(title || 'Living Dex', { lower: true })}` }</Typography>} id="dex_title" inputProps={{ maxLength: 300 }} label="Title" margin="normal" name="dex_title" onChange={handleTitleChange} placeholder="Living Dex" required type="text" value={title} />
+
+            <FormControl error={showGameWarning} fullWidth margin="normal">
+              <InputLabel>Game</InputLabel>
+              <Select label="Game" onChange={handleGameChange} value={game}>
+                {games.map((game) => (
+                  <MenuItem key={game.id} value={game.id}>{game.name}</MenuItem>
+                ))}
+              </Select>
+              {showGameWarning && <Typography align="left" color="error" fontSize={12} noWrap>{GAME_WARNING}</Typography>}
+            </FormControl>
+
+            <FormControl error={showRegionalWarning} fullWidth margin="normal">
+              <FormLabel>Dex Type</FormLabel>
+              <RadioGroup aria-labelledby="" name="dex-type" row>
+                {dexTypesByGameFamilyId[gamesById[game].game_family.id].map((dt) => (
+                  <FormControlLabel control={<Radio checked={dexType === dt.id} name="dex-type" onChange={() => setDexType(dt.id)} />} key={dt.id} label={dt.name} />
+                ))}
+              </RadioGroup>
+              {showRegionalWarning && <Typography align="left" color="error" fontSize={12} noWrap>{REGIONAL_WARNING}</Typography>}
+            </FormControl>
+
+            <FormControl fullWidth margin="normal">
+              <FormLabel>Type</FormLabel>
+              <RadioGroup aria-labelledby="" name="type" row>
+                <FormControlLabel control={<Radio checked={!shiny} name="type" onChange={() => setShiny(false)} />} label="Normal" />
+                <FormControlLabel control={<Radio checked={shiny} name="type" onChange={() => setShiny(true)} />} label="Shiny" />
+              </RadioGroup>
+            </FormControl>
+
+            <Button disabled={updateDexMutation.isLoading || deleteDexMutation.isLoading} endIcon={<ArrowRightIcon />} fullWidth size="large" type="submit" variant="contained">{isConfirmingUpdate ? 'Confirm' : ''} Edit</Button>
+          </form>
+        </DialogContent>
+      )}
+
+      <DialogActions sx={{ justifyContent: 'center' }}>
+        <Button aria-label="close" onClick={handleRequestClose}>Go Back</Button>
+      </DialogActions>
+    </Dialog>
   );
 }

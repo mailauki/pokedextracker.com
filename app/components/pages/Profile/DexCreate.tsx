@@ -5,9 +5,8 @@ import keyBy from 'lodash/keyBy';
 import slug from 'slug';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faAsterisk, faChevronDown, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, IconButton, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material/Select';
-// import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
@@ -17,7 +16,7 @@ import { ReactGA } from '../../../utils/analytics';
 import { useCreateDex } from '../../../hooks/queries/dexes';
 import { useDexTypes } from '../../../hooks/queries/dex-types';
 import { useGames } from '../../../hooks/queries/games';
-import { useLocalStorageContext } from '../../../hooks/contexts/use-local-storage-context';
+// import { useLocalStorageContext } from '../../../hooks/contexts/use-local-storage-context';
 import { useSession } from '../../../hooks/contexts/use-session';
 
 import type { ChangeEvent, FormEvent } from 'react';
@@ -33,7 +32,7 @@ export function DexCreate ({ isOpen, onRequestClose }: Props) {
 
   const formRef = useRef<HTMLDivElement>(null);
 
-  const { isNightMode } = useLocalStorageContext();
+  // const { isNightMode } = useLocalStorageContext();
   const { session } = useSession();
   const { data: games } = useGames();
   const { data: dexTypes } = useDexTypes();
@@ -217,9 +216,6 @@ export function DexCreate ({ isOpen, onRequestClose }: Props) {
     // </Modal>
     <Dialog onClose={handleRequestClose} open={isOpen}>
       <DialogTitle>Create New Dex</DialogTitle>
-      {/* <IconButton aria-label="delete" color="error" sx={{ position: 'absolute', top: 8, right: 8 }}>
-        <DeleteIcon />
-      </IconButton> */}
 
       <DialogContent sx={{ pl: 8, pr: 8, pb: 6 }}>
         <Alert message={createDexMutation.error?.message} type="error" />
