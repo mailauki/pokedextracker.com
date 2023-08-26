@@ -54,18 +54,22 @@ export function DexPreview ({ dex }: Props) {
     //     <Progress caught={dex.caught} total={dex.total} />
     //   </div>
     // </div>
-    <Stack direction="column">
-      <Stack alignItems={matches ? 'normal' : 'center'} direction={matches ? 'column' : 'row'} justifyContent="space-between">
-        <Stack alignItems="center" direction="row" spacing={1}>
-          <Link component={Anchor} noWrap to={`/u/${user.username}/${dex.slug}`} underline="hover" variant="h6">{dex.title}</Link>
-          <IconButton aria-label="edit" size="small">
-            <EditIcon fontSize="small" />
-          </IconButton>
+    <>
+      <Stack direction="column">
+        <Stack alignItems={matches ? 'normal' : 'center'} direction={matches ? 'column' : 'row'} justifyContent="space-between">
+          <Stack alignItems="center" direction="row" spacing={1}>
+            <Link component={Anchor} noWrap to={`/u/${user.username}/${dex.slug}`} underline="hover" variant="h6">{dex.title}</Link>
+            <IconButton aria-label="edit" disabled={!ownPage} onClick={handleEditClick} size="small" sx={{ display: !ownPage ? 'none' : '' }}>
+              <EditIcon fontSize="small" />
+            </IconButton>
+          </Stack>
+          <DexIndicator dex={dex} />
         </Stack>
-        <DexIndicator dex={dex} />
+
+        <Progress caught={dex.caught} total={dex.total} />
       </Stack>
 
-      <Progress caught={dex.caught} total={dex.total} />
-    </Stack>
+      <DexEdit dex={dex} isOpen={showEditDex} onRequestClose={handleRequestClose} />
+    </>
   );
 }
