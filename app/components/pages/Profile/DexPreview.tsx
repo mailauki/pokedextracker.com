@@ -1,6 +1,4 @@
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link as Anchor } from 'react-router-dom';
-// import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Stack, Link, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { useParams } from 'react-router';
@@ -39,21 +37,6 @@ export function DexPreview ({ dex }: Props) {
   const matches = useMediaQuery('(max-width:600px)');
 
   return (
-    // <div className="dex-preview">
-    //   <div className="dex-preview-header">
-    //     <h3><Link className="link" to={`/u/${user.username}/${dex.slug}`}>{dex.title}</Link></h3>
-    //     {ownPage &&
-    //       <div className="dex-edit">
-    //         <a className="link" onClick={handleEditClick}><FontAwesomeIcon icon={faPencilAlt} /></a>
-    //         <DexEdit dex={dex} isOpen={showEditDex} onRequestClose={handleRequestClose} />
-    //       </div>
-    //     }
-    //     <DexIndicator dex={dex} />
-    //   </div>
-    //   <div className="percentage">
-    //     <Progress caught={dex.caught} total={dex.total} />
-    //   </div>
-    // </div>
     <>
       <Stack direction="column">
         <Stack alignItems={matches ? 'normal' : 'center'} direction={matches ? 'column' : 'row'} justifyContent="space-between">

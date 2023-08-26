@@ -1,10 +1,14 @@
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 import find from 'lodash/find';
 import groupBy from 'lodash/groupBy';
 import keyBy from 'lodash/keyBy';
 import slug from 'slug';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAsterisk, faChevronDown, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faAsterisk, faChevronDown, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, IconButton, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from '@mui/material';
+import type { SelectChangeEvent } from '@mui/material/Select';
+// import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 
@@ -66,7 +70,7 @@ export function DexCreate ({ isOpen, onRequestClose }: Props) {
     onRequestClose();
   };
 
-  const handleGameChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleGameChange = (e: SelectChangeEvent) => {
     const newGameId = e.target.value;
 
     // Update the dex type appropriately since every game family has a different
@@ -121,95 +125,141 @@ export function DexCreate ({ isOpen, onRequestClose }: Props) {
   }
 
   return (
-    <Modal
-      className={`modal ${isNightMode ? 'night-mode' : ''}`}
-      contentLabel="Create a New Dex"
-      isOpen={isOpen}
-      onRequestClose={handleRequestClose}
-      overlayClassName="modal-overlay"
-    >
-      <div className="form" ref={formRef}>
-        <h1>Create New Dex</h1>
-        <form className="form-column" onSubmit={handleSubmit}>
-          <Alert message={createDexMutation.error?.message} type="error" />
-          <div className="form-group">
-            <div className="form-note">/u/{session!.username}/{slug(title || 'Living Dex', { lower: true })}</div>
-            <label htmlFor="dex_title">Title</label>
-            <input
-              className="form-control"
-              id="dex_title"
-              maxLength={300}
-              name="dex_title"
-              onChange={handleTitleChange}
-              placeholder="Living Dex"
-              required
-              type="text"
-              value={title}
-            />
-            <FontAwesomeIcon icon={faAsterisk} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="game">Game</label>
-            <select
-              className="form-control"
-              onChange={handleGameChange}
-              value={game}
-            >
-              {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
-            </select>
-            <FontAwesomeIcon icon={faChevronDown} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="dex-type">Dex Type</label>
-            {dexTypesByGameFamilyId[gamesById[game].game_family.id].map((dt) => (
-              <div className="radio" key={dt.id}>
-                <label>
-                  <input
-                    checked={dexType === dt.id}
-                    name="dex-type"
-                    onChange={() => setDexType(dt.id)}
-                    type="radio"
-                  />
-                  <span className="radio-custom"><span /></span>{dt.name}
-                </label>
-              </div>
-            ))}
-          </div>
-          <div className="form-group">
-            <label htmlFor="type">Type</label>
-            <div className="radio">
-              <label>
-                <input
-                  checked={!shiny}
-                  name="type"
-                  onChange={() => setShiny(false)}
-                  type="radio"
-                />
-                <span className="radio-custom"><span /></span>Normal
-              </label>
-            </div>
-            <div className="radio">
-              <label>
-                <input
-                  checked={shiny}
-                  name="type"
-                  onChange={() => setShiny(true)}
-                  type="radio"
-                />
-                <span className="radio-custom"><span /></span>Shiny
-              </label>
-            </div>
-          </div>
-          <button
-            className="btn btn-blue"
-            disabled={createDexMutation.isLoading}
-            type="submit"
-          >
-            Create <FontAwesomeIcon icon={faLongArrowAltRight} />
-          </button>
+    // <Modal
+    //   className={`modal ${isNightMode ? 'night-mode' : ''}`}
+    //   contentLabel="Create a New Dex"
+    //   isOpen={isOpen}
+    //   onRequestClose={handleRequestClose}
+    //   overlayClassName="modal-overlay"
+    // >
+    //   <div className="form" ref={formRef}>
+    //     <h1>Create New Dex</h1>
+    //     <form className="form-column" onSubmit={handleSubmit}>
+    //       <Alert message={createDexMutation.error?.message} type="error" />
+    //       <div className="form-group">
+    //         <div className="form-note">/u/{session!.username}/{slug(title || 'Living Dex', { lower: true })}</div>
+    //         <label htmlFor="dex_title">Title</label>
+    //         <input
+    //           className="form-control"
+    //           id="dex_title"
+    //           maxLength={300}
+    //           name="dex_title"
+    //           onChange={handleTitleChange}
+    //           placeholder="Living Dex"
+    //           required
+    //           type="text"
+    //           value={title}
+    //         />
+    //         <FontAwesomeIcon icon={faAsterisk} />
+    //       </div>
+    //       <div className="form-group">
+    //         <label htmlFor="game">Game</label>
+    //         <select
+    //           className="form-control"
+    //           onChange={handleGameChange}
+    //           value={game}
+    //         >
+    //           {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
+    //         </select>
+    //         <FontAwesomeIcon icon={faChevronDown} />
+    //       </div>
+    //       <div className="form-group">
+    //         <label htmlFor="dex-type">Dex Type</label>
+    //         {dexTypesByGameFamilyId[gamesById[game].game_family.id].map((dt) => (
+    //           <div className="radio" key={dt.id}>
+    //             <label>
+    //               <input
+    //                 checked={dexType === dt.id}
+    //                 name="dex-type"
+    //                 onChange={() => setDexType(dt.id)}
+    //                 type="radio"
+    //               />
+    //               <span className="radio-custom"><span /></span>{dt.name}
+    //             </label>
+    //           </div>
+    //         ))}
+    //       </div>
+    //       <div className="form-group">
+    //         <label htmlFor="type">Type</label>
+    //         <div className="radio">
+    //           <label>
+    //             <input
+    //               checked={!shiny}
+    //               name="type"
+    //               onChange={() => setShiny(false)}
+    //               type="radio"
+    //             />
+    //             <span className="radio-custom"><span /></span>Normal
+    //           </label>
+    //         </div>
+    //         <div className="radio">
+    //           <label>
+    //             <input
+    //               checked={shiny}
+    //               name="type"
+    //               onChange={() => setShiny(true)}
+    //               type="radio"
+    //             />
+    //             <span className="radio-custom"><span /></span>Shiny
+    //           </label>
+    //         </div>
+    //       </div>
+    //       <button
+    //         className="btn btn-blue"
+    //         disabled={createDexMutation.isLoading}
+    //         type="submit"
+    //       >
+    //         Create <FontAwesomeIcon icon={faLongArrowAltRight} />
+    //       </button>
+    //     </form>
+    //   </div>
+    //   <p><a className="link" onClick={handleRequestClose}>Go Back</a></p>
+    // </Modal>
+    <Dialog onClose={handleRequestClose} open={isOpen}>
+      <DialogTitle>Create New Dex</DialogTitle>
+      {/* <IconButton aria-label="delete" color="error" sx={{ position: 'absolute', top: 8, right: 8 }}>
+        <DeleteIcon />
+      </IconButton> */}
+
+      <DialogContent sx={{ pl: 8, pr: 8, pb: 6 }}>
+        <Alert message={createDexMutation.error?.message} type="error" />
+
+        <form onSubmit={handleSubmit}>
+          <TextField fullWidth helperText={<Typography align="left" fontSize={12} noWrap>/u/{session!.username}/{slug(title || 'Living Dex', { lower: true })}</Typography>} id="dex_title" inputProps={{ maxLength: 300 }} label="Title" margin="normal" name="dex_title" onChange={handleTitleChange} placeholder="Living Dex" required type="text" value={title} />
+
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Game</InputLabel>
+            <Select label="Game" onChange={handleGameChange} value={game}>
+              {games.map((game) => (
+                <MenuItem key={game.id} value={game.id}>{game.name}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl fullWidth margin="normal">
+            <FormLabel>Dex Type</FormLabel>
+            <RadioGroup aria-labelledby="" name="dex-type" row>
+              {dexTypesByGameFamilyId[gamesById[game].game_family.id].map((dt) => (
+                <FormControlLabel control={<Radio checked={dexType === dt.id} name="dex-type" onChange={() => setDexType(dt.id)} />} key={dt.id} label={dt.name} />
+              ))}
+            </RadioGroup>
+          </FormControl>
+
+          <FormControl fullWidth margin="normal">
+            <FormLabel>Type</FormLabel>
+            <RadioGroup aria-labelledby="" name="type" row>
+              <FormControlLabel control={<Radio checked={!shiny} name="type" onChange={() => setShiny(false)} />} label="Normal" />
+              <FormControlLabel control={<Radio checked={shiny} name="type" onChange={() => setShiny(true)} />} label="Shiny" />
+            </RadioGroup>
+          </FormControl>
+
+          <Button disabled={createDexMutation.isLoading} endIcon={<ArrowRightIcon />} fullWidth size="large" type="submit" variant="contained">Create</Button>
         </form>
-      </div>
-      <p><a className="link" onClick={handleRequestClose}>Go Back</a></p>
-    </Modal>
+      </DialogContent>
+
+      <DialogActions sx={{ justifyContent: 'center' }}>
+        <Button aria-label="close" onClick={handleRequestClose}>Go Back</Button>
+      </DialogActions>
+    </Dialog>
   );
 }
