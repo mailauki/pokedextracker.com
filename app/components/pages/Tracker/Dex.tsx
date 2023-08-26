@@ -17,6 +17,7 @@ import { useTrackerContext } from './use-tracker';
 import { useUser } from '../../../hooks/queries/users';
 
 import type { Dispatch, MouseEventHandler, SetStateAction } from 'react';
+import { Container } from '@mui/material';
 
 const DEFER_CUTOFF = 1;
 
@@ -63,33 +64,35 @@ export function Dex ({
   }, [groupedCaptures]);
 
   return (
-    <div className="dex">
-      <div className="wrapper">
-        <Scroll onClick={onScrollButtonClick} showScroll={showScrollButton} />
-        <Notification />
-        <header>
-          <Header />
-          <h3>
-            <Link onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Link>
-            <DonatedFlair user={user} />
-          </h3>
-          <FriendCode />
-        </header>
-        <div className="percentage">
-          <Progress caught={caught} total={total} />
-        </div>
-        {query.length > 0 || hideCaught ?
-          <SearchResults
-            captures={captures}
-            hideCaught={hideCaught}
-            query={query}
-            setHideCaught={setHideCaught}
-            setQuery={setQuery}
-            setSelectedPokemon={setSelectedPokemon}
-          /> :
-          boxes
-        }
-      </div>
-    </div>
+    <Container maxWidth="md">
+      {/* <div className="dex">
+        <div className="wrapper"> */}
+      {/* <Scroll onClick={onScrollButtonClick} showScroll={showScrollButton} /> */}
+      <Notification />
+      <header>
+        <Header />
+        <h3>
+          <Link onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Link>
+          <DonatedFlair user={user} />
+        </h3>
+        <FriendCode />
+      </header>
+      {/* <div className="percentage"> */}
+      <Progress caught={caught} total={total} />
+      {/* </div> */}
+      {query.length > 0 || hideCaught ?
+        <SearchResults
+          captures={captures}
+          hideCaught={hideCaught}
+          query={query}
+          setHideCaught={setHideCaught}
+          setQuery={setQuery}
+          setSelectedPokemon={setSelectedPokemon}
+        /> :
+        boxes
+      }
+      {/* </div>
+    </div> */}
+    </Container>
   );
 }

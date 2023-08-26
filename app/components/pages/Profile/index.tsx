@@ -14,6 +14,7 @@ import { Notification } from '../../library/Notification';
 import { Reload } from '../../library/Reload';
 import { useSession } from '../../../hooks/contexts/use-session';
 import { useUser } from '../../../hooks/queries/users';
+import { Container } from '@mui/material';
 
 export function Profile () {
   const { username } = useParams<{ username: string }>();
@@ -48,24 +49,26 @@ export function Profile () {
     <div className="profile-container">
       <Nav />
       <Reload />
-      <div className="profile">
-        <div className="wrapper">
-          <header>
-            <Notification />
-            <Header profile />
-            <FriendCode />
-          </header>
+      {/* <div className="profile"> */}
+      <Container maxWidth="md">
+        {/* <div className="wrapper"> */}
+        <header>
+          <Notification />
+          <Header profile />
+          <FriendCode />
+        </header>
 
-          {user.dexes.map((dex) => <DexPreview dex={dex} key={dex.id} />)}
+        {user.dexes.map((dex) => <DexPreview dex={dex} key={dex.id} />)}
 
-          {ownPage &&
-            <div className="dex-create">
-              <div className="btn btn-blue" onClick={handleCreateNewDexClick}>Create a New Dex <FontAwesomeIcon icon={faLongArrowAltRight} /></div>
-              <DexCreate isOpen={showDexCreate} onRequestClose={handleDexCreateRequestClose} />
-            </div>
-          }
-        </div>
-      </div>
+        {ownPage &&
+          <div className="dex-create">
+            <div className="btn btn-blue" onClick={handleCreateNewDexClick}>Create a New Dex <FontAwesomeIcon icon={faLongArrowAltRight} /></div>
+            <DexCreate isOpen={showDexCreate} onRequestClose={handleDexCreateRequestClose} />
+          </div>
+        }
+        {/* </div> */}
+      </Container>
+      {/* </div> */}
       <Footer />
     </div>
   );
