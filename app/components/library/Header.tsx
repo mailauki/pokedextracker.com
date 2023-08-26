@@ -14,6 +14,7 @@ import { useUser } from '../../hooks/queries/users';
 
 import type { Dex } from '../../types';
 import type { MouseEvent } from 'react';
+import { Stack, Typography } from '@mui/material';
 
 interface Props {
   profile?: boolean;
@@ -49,8 +50,29 @@ export function Header ({ profile = false }: Props) {
   const ownPage = session?.id === user.id;
 
   return (
-    <div className="header-row">
-      <h1>
+    // <div className="header-row">
+    //   <h1>
+    //     {dex?.title || `${user.username}'s Profile`}
+    //     <div className="share-container">
+    //       <a onClick={handleShareClick}>
+    //         <FontAwesomeIcon icon={faLink} />
+    //         {showShare && <Share profile={profile} />}
+    //       </a>
+    //       <a
+    //         href={`https://twitter.com/intent/tweet?text=Check out ${ownPage ? 'my' : `${user.username}'s`} ${profile ? 'profile' : 'living dex progress'} on @PokedexTracker! https://pokedextracker.com/u/${user.username}${dex ? `/${dex.slug}` : ''}`}
+    //         onClick={handleTweetClick}
+    //         rel="noopener noreferrer"
+    //         target="_blank"
+    //       >
+    //         <FontAwesomeIcon icon={faTwitter} />
+    //       </a>
+    //     </div>
+    //   </h1>
+    //   {profile && <DonatedFlair user={user} />}
+    //   {dex && <DexIndicator dex={dex} />}
+    // </div>
+    <Stack alignItems="center" direction="row" justifyContent="space-between">
+      <Typography color="primary" variant="h4">
         {dex?.title || `${user.username}'s Profile`}
         <div className="share-container">
           <a onClick={handleShareClick}>
@@ -66,9 +88,9 @@ export function Header ({ profile = false }: Props) {
             <FontAwesomeIcon icon={faTwitter} />
           </a>
         </div>
-      </h1>
+      </Typography>
       {profile && <DonatedFlair user={user} />}
       {dex && <DexIndicator dex={dex} />}
-    </div>
+    </Stack>
   );
 }
