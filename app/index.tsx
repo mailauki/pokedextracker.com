@@ -1,4 +1,6 @@
 // import './styles';
+import './styles/pokesprite.scss';
+import './styles/pokemon.scss';
 
 import Modal from 'react-modal';
 import { ErrorBoundary, Provider as RollbarProvider } from '@rollbar/react';

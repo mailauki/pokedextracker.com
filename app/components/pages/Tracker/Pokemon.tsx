@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import keyBy from 'lodash/keyBy';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faInfo } from '@fortawesome/free-solid-svg-icons';
-import { Card, CardActionArea, CardActions, CardContent, IconButton } from '@mui/material';
+import { Avatar, Card, CardActionArea, CardActions, CardContent, IconButton, Stack, Typography } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
@@ -119,15 +119,38 @@ export function Pokemon ({ capture, delay = 0, setSelectedPokemon }: Props) {
   const paddingDigits = dex.total >= 1000 ? 4 : 3;
 
   return (
-    <Card className={classNames(classes)}>
+    <Card className={classNames(classes)} sx={{ position: 'relative' }}>
       <CardActionArea className="set-captured" onClick={handleSetCapturedClick}>
-        <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <Avatar sx={{ height: '100%', width: '100%', backgroundColor: 'transparent' }} variant="square">
+          <i className={iconClass(capture.pokemon, dex)} />
+        </Avatar>
+
+        <Stack
+          alignItems="center"
+          direction="column"
+          height="var(--pokemon-box-size)"
+          justifyContent="space-between"
+          sx={{
+            bgcolor: 'transparent',
+            position: 'absolute',
+            top: 0, left: 0,
+          }}
+          width="var(--pokemon-box-size)"
+        >
+          <Typography sx={{ fontSize: 14, m: 1.5 }}>
+            {capture.pokemon.name}
+          </Typography>
+          <Typography sx={{ fontSize: 12, m: 1.5 }}>
+            #{padding(idToDisplay, paddingDigits)}
+          </Typography>
+        </Stack>
+        {/* <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <h4><PokemonName name={capture.pokemon.name} /></h4>
           <div className="icon-wrapper">
             <i className={iconClass(capture.pokemon, dex)} />
           </div>
           <p>#{padding(idToDisplay, paddingDigits)}</p>
-        </CardContent>
+        </CardContent> */}
       </CardActionArea>
       <CardActions sx={{ position: 'absolute', bottom: 0, right: 0, p: 0.15 }}>
         <IconButton onClick={handleSetInfoClick}>
