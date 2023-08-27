@@ -2,6 +2,7 @@ import keyBy from 'lodash/keyBy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { Stack, Typography } from '@mui/material';
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 
@@ -14,7 +15,6 @@ import { useUser } from '../../hooks/queries/users';
 
 import type { Dex } from '../../types';
 import type { MouseEvent } from 'react';
-import { Stack, Typography } from '@mui/material';
 
 interface Props {
   profile?: boolean;
