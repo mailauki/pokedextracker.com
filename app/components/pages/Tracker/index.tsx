@@ -2,6 +2,10 @@ import keyBy from 'lodash/keyBy';
 import throttle from 'lodash/throttle';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router';
+import { Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Toolbar } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 
 import { Dex } from './Dex';
 import { Footer } from '../../library/Footer';
@@ -41,6 +45,9 @@ export function TrackerInner () {
   const [hideCaught, setHideCaught] = useState(false);
   const [showScroll, setShowScroll] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(0);
+
+  const theme = useTheme();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     document.title = `${username}'s Living Dex | Pokédex Tracker`;
@@ -93,7 +100,7 @@ export function TrackerInner () {
             setHideCaught={setHideCaught}
             setQuery={setQuery}
           />
-          <div className="dex-column" onScroll={handleScroll} ref={trackerRef}>
+          {/* <div className="dex-column" onScroll={handleScroll} ref={trackerRef}>
             <Dex
               hideCaught={hideCaught}
               onScrollButtonClick={handleScrollButtonClick}
@@ -104,7 +111,52 @@ export function TrackerInner () {
               showScrollButton={showScroll}
             />
             <Footer />
-          </div>
+          </div> */}
+          <Dex
+            hideCaught={hideCaught}
+            onScrollButtonClick={handleScrollButtonClick}
+            query={query}
+            setHideCaught={setHideCaught}
+            setQuery={setQuery}
+            setSelectedPokemon={setSelectedPokemon}
+            showScrollButton={showScroll}
+          />
+          <Drawer
+            anchor="right"
+            open={open}
+            sx={{
+              flexShrink: 0,
+              ['& .MuiDrawer-paper']: {
+                // backgroundColor: 'primary.dark',
+                // color: 'primary.contrastText',
+                zIndex: 1050,
+              },
+            }}
+            variant="permanent"
+          >
+            <Stack alignItems="stretch" direction="row" justifyContent="space-between" sx={{ height: '100%' }}>
+              <IconButton
+                color="inherit"
+                disableRipple
+                onClick={() => setOpen(!open)}
+                size="small"
+                sx={{ borderRadius: 0, borderRight: '1px solid', borderColor: 'divider' }}
+              >
+                {open ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
+              </IconButton>
+
+              <List sx={{ width: '100%', display: open ? '' : 'none' }}>
+                <Toolbar />
+                {['One Fish', 'Two Fish', 'Red Fish', 'Blue Fish'].map((text) => (
+                  <ListItem disablePadding key={text}>
+                    <ListItemButton>
+                      <ListItemText primary={text} />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+            </Stack>
+          </Drawer>
         </div>
         <Info selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} />
       </div>
