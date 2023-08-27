@@ -88,7 +88,7 @@ export function Nav () {
       //   <Link to="/">Pokédex Tracker</Link>
       // </nav>
       <>
-        <AppBar color="secondary" position="static">
+        <AppBar color="secondary" position="fixed">
           <Toolbar sx={{ justifyContent: 'space-between' }} variant="dense">
             <Button color="inherit" component={Link} to="/">Pokédex Tracker</Button>
             <Stack alignItems="center" direction="row">

@@ -1,4 +1,4 @@
-// import './styles';
+import './styles';
 
 import Modal from 'react-modal';
 import { ErrorBoundary, Provider as RollbarProvider } from '@rollbar/react';
