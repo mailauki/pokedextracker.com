@@ -87,14 +87,17 @@ export function Nav () {
       // <nav>
       //   <Link to="/">Pokédex Tracker</Link>
       // </nav>
-      <AppBar color="secondary" position="static">
-        <Toolbar sx={{ justifyContent: 'space-between' }} variant="dense">
-          <Button color="inherit" component={Link} to="/">Pokédex Tracker</Button>
-          <Stack alignItems="center" direction="row">
-            {nav}
-          </Stack>
-        </Toolbar>
-      </AppBar>
+      <>
+        <AppBar color="secondary" position="static">
+          <Toolbar sx={{ justifyContent: 'space-between' }} variant="dense">
+            <Button color="inherit" component={Link} to="/">Pokédex Tracker</Button>
+            <Stack alignItems="center" direction="row">
+              {nav}
+            </Stack>
+          </Toolbar>
+        </AppBar>
+        <Toolbar id="back-to-top-anchor" variant="dense" />
+      </>
     );
   }
 
@@ -141,15 +144,18 @@ export function Nav () {
     );
 
     return (
-      <AppBar color="secondary" position="static">
-        <Toolbar sx={{ justifyContent: 'space-between' }} variant="dense">
-          <Button color="inherit" component={Link} to="/">Pokédex Tracker</Button>
-          <Stack alignItems="center" direction="row">
-            {nav}
-            {menu}
-          </Stack>
-        </Toolbar>
-      </AppBar>
+      <>
+        <AppBar color="secondary" position="fixed">
+          <Toolbar sx={{ justifyContent: 'space-between' }} variant="dense">
+            <Button color="inherit" component={Link} to="/">Pokédex Tracker</Button>
+            <Stack alignItems="center" direction="row">
+              {nav}
+              {menu}
+            </Stack>
+          </Toolbar>
+        </AppBar>
+        <Toolbar id="back-to-top-anchor" variant="dense" />
+      </>
     );
   }
 
@@ -159,14 +165,17 @@ export function Nav () {
     //   <Link to="/login">Login</Link>
     //   <Link to="/register">Register</Link>
     // </nav>
-    <AppBar color="secondary" position="static">
-      <Toolbar sx={{ justifyContent: 'space-between' }} variant="dense">
-        <Button color="inherit" component={Link} to="/">Pokédex Tracker</Button>
-        <Stack alignItems="center" direction="row">
-          {nav}
-          {signin}
-        </Stack>
-      </Toolbar>
-    </AppBar>
+    <>
+      <AppBar color="secondary" position="fixed">
+        <Toolbar sx={{ justifyContent: 'space-between' }} variant="dense">
+          <Button color="inherit" component={Link} to="/">Pokédex Tracker</Button>
+          <Stack alignItems="center" direction="row">
+            {nav}
+            {signin}
+          </Stack>
+        </Toolbar>
+      </AppBar>
+      <Toolbar id="back-to-top-anchor" variant="dense" />
+    </>
   );
 }

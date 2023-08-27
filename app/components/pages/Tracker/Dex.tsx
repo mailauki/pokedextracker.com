@@ -1,23 +1,24 @@
 import keyBy from 'lodash/keyBy';
 import { Link } from 'react-router-dom';
+import { Container } from '@mui/material';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
 
 import { Box } from './Box';
+import { BackToTop } from '../../library/BacktoTop';
 import { DonatedFlair } from '../../library/DonatedFlair';
 import { FriendCode } from '../../library/FriendCode';
 import { Header } from '../../library/Header';
 import { Notification } from '../../library/Notification';
 import { Progress } from '../../library/Progress';
 import { ReactGA } from '../../../utils/analytics';
-import { Scroll } from './Scroll';
+// import { Scroll } from './Scroll';
 import { SearchResults } from './SearchResults';
 import { groupBoxes } from '../../../utils/pokemon';
 import { useTrackerContext } from './use-tracker';
 import { useUser } from '../../../hooks/queries/users';
 
 import type { Dispatch, MouseEventHandler, SetStateAction } from 'react';
-import { Container } from '@mui/material';
 
 const DEFER_CUTOFF = 1;
 
@@ -33,12 +34,12 @@ interface Props {
 
 export function Dex ({
   hideCaught,
-  onScrollButtonClick,
+  // onScrollButtonClick,
   query,
   setHideCaught,
   setQuery,
   setSelectedPokemon,
-  showScrollButton,
+  // showScrollButton,
 }: Props) {
   const { username, slug } = useParams<{ username: string; slug: string }>();
 
@@ -64,35 +65,33 @@ export function Dex ({
   }, [groupedCaptures]);
 
   return (
-    <Container maxWidth="md">
-      {/* <div className="dex">
-        <div className="wrapper"> */}
-      {/* <Scroll onClick={onScrollButtonClick} showScroll={showScrollButton} /> */}
-      <Notification />
-      <header>
-        <Header />
-        <h3>
-          <Link onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Link>
-          <DonatedFlair user={user} />
-        </h3>
-        <FriendCode />
-      </header>
-      {/* <div className="percentage"> */}
-      <Progress caught={caught} total={total} />
-      {/* </div> */}
-      {query.length > 0 || hideCaught ?
-        <SearchResults
-          captures={captures}
-          hideCaught={hideCaught}
-          query={query}
-          setHideCaught={setHideCaught}
-          setQuery={setQuery}
-          setSelectedPokemon={setSelectedPokemon}
-        /> :
-        boxes
-      }
-      {/* </div>
-    </div> */}
-    </Container>
+    <>
+      <Container maxWidth="md">
+        <Notification />
+        <header>
+          <Header />
+          <h3>
+            <Link onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Link>
+            <DonatedFlair user={user} />
+          </h3>
+          <FriendCode />
+        </header>
+
+        <Progress caught={caught} total={total} />
+
+        {query.length > 0 || hideCaught ?
+          <SearchResults
+            captures={captures}
+            hideCaught={hideCaught}
+            query={query}
+            setHideCaught={setHideCaught}
+            setQuery={setQuery}
+            setSelectedPokemon={setSelectedPokemon}
+          /> :
+          boxes
+        }
+      </Container>
+      <BackToTop />
+    </>
   );
 }
