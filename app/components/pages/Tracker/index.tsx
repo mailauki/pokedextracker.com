@@ -121,7 +121,7 @@ export function TrackerInner () {
             setSelectedPokemon={setSelectedPokemon}
             showScrollButton={showScroll}
           />
-          <Drawer
+          {/* <Drawer
             anchor="right"
             open={open}
             sx={{
@@ -156,7 +156,7 @@ export function TrackerInner () {
                 ))}
               </List>
             </Stack>
-          </Drawer>
+          </Drawer> */}
         </div>
         <Info selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} />
       </div>

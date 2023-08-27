@@ -2,6 +2,10 @@ import find from 'lodash/find';
 import keyBy from 'lodash/keyBy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft, faCaretRight, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
+import { Avatar, Button, DialogContent, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, Toolbar, Typography } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import type { Dispatch, SetStateAction } from 'react';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
@@ -94,41 +98,118 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
   }
 
   return (
-    <div className={`info ${showInfo ? '' : 'collapsed'}`}>
-      <div className="info-collapse" onClick={handleInfoClick}>
-        <FontAwesomeIcon icon={showInfo ? faCaretRight : faCaretLeft} />
-      </div>
+    // <div className={`info ${showInfo ? '' : 'collapsed'}`}>
+    //   <div className="info-collapse" onClick={handleInfoClick}>
+    //     <FontAwesomeIcon icon={showInfo ? faCaretRight : faCaretLeft} />
+    //   </div>
 
-      <div className="info-main">
-        <div className="info-header">
-          <i className={iconClass(pokemon, dex)} />
-          <h1><PokemonName name={pokemon.name} /></h1>
-          <h2>#{padding(dex.dex_type.tags.includes('regional') ? (pokemon.dex_number === -1 ? '---' : pokemon.dex_number) : nationalId(pokemon.national_id), dex.total >= 1000 ? 4 : 3)}</h2>
-        </div>
+    //   <div className="info-main">
+    //     <div className="info-header">
+    //       <i className={iconClass(pokemon, dex)} />
+    //       <h1><PokemonName name={pokemon.name} /></h1>
+    //       <h2>#{padding(dex.dex_type.tags.includes('regional') ? (pokemon.dex_number === -1 ? '---' : pokemon.dex_number) : nationalId(pokemon.national_id), dex.total >= 1000 ? 4 : 3)}</h2>
+    //     </div>
 
-        <InfoLocations locations={pokemon.locations} />
+    //     <InfoLocations locations={pokemon.locations} />
 
-        <EvolutionFamily family={pokemon.evolution_family} setSelectedPokemon={setSelectedPokemon} />
+    //     <EvolutionFamily family={pokemon.evolution_family} setSelectedPokemon={setSelectedPokemon} />
 
-        <div className="info-footer">
-          <a
-            href={`http://bulbapedia.bulbagarden.net/wiki/${encodeURI(pokemon.name)}_(Pok%C3%A9mon)`}
-            onClick={() => ReactGA.event({ action: 'open Bulbapedia link', category: 'Info', label: pokemon.name })}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Bulbapedia <FontAwesomeIcon icon={faLongArrowAltRight} />
-          </a>
-          <a
-            href={serebiiLink(serebiiPath, pokemon.national_id)}
-            onClick={() => ReactGA.event({ action: 'open Serebii link', category: 'Info', label: pokemon.name })}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Serebii <FontAwesomeIcon icon={faLongArrowAltRight} />
-          </a>
-        </div>
-      </div>
-    </div>
+    //     <div className="info-footer">
+    //       <a
+    //         href={`http://bulbapedia.bulbagarden.net/wiki/${encodeURI(pokemon.name)}_(Pok%C3%A9mon)`}
+    //         onClick={() => ReactGA.event({ action: 'open Bulbapedia link', category: 'Info', label: pokemon.name })}
+    //         rel="noopener noreferrer"
+    //         target="_blank"
+    //       >
+    //         Bulbapedia <FontAwesomeIcon icon={faLongArrowAltRight} />
+    //       </a>
+    //       <a
+    //         href={serebiiLink(serebiiPath, pokemon.national_id)}
+    //         onClick={() => ReactGA.event({ action: 'open Serebii link', category: 'Info', label: pokemon.name })}
+    //         rel="noopener noreferrer"
+    //         target="_blank"
+    //       >
+    //         Serebii <FontAwesomeIcon icon={faLongArrowAltRight} />
+    //       </a>
+    //     </div>
+    //   </div>
+    // </div>
+    <Drawer
+      anchor="right"
+      open={showInfo}
+      sx={{
+        flexShrink: 0,
+        ['& .MuiDrawer-paper']: {
+          // backgroundColor: 'primary.dark',
+          // color: 'primary.contrastText',
+          zIndex: 1050,
+        },
+      }}
+      variant="permanent"
+    >
+      <Stack alignItems="stretch" direction="row" justifyContent="space-between" sx={{ height: '100%' }}>
+        <IconButton
+          color="inherit"
+          disableRipple
+          onClick={handleInfoClick}
+          size="small"
+          sx={{ borderRadius: 0, borderRight: '1px solid', borderColor: 'divider' }}
+        >
+          {showInfo ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
+        </IconButton>
+
+        <DialogContent dividers={scroll === 'paper'} sx={{ width: '100%', display: showInfo ? '' : 'none' }}>
+          <List>
+            <Toolbar />
+
+            <ListItem
+              secondaryAction={
+                <Typography variant="h5">#{padding(dex.dex_type.tags.includes('regional') ? (pokemon.dex_number === -1 ? '---' : pokemon.dex_number) : nationalId(pokemon.national_id), dex.total >= 1000 ? 4 : 3)}</Typography>
+              }
+            >
+              <ListItemIcon>
+                <i className={iconClass(pokemon, dex)} />
+              </ListItemIcon>
+              <ListItemText
+                primary={<Typography variant="h3">{pokemon.name}</Typography>}
+              />
+            </ListItem>
+
+            <InfoLocations locations={pokemon.locations} />
+
+            <EvolutionFamily family={pokemon.evolution_family} setSelectedPokemon={setSelectedPokemon} />
+
+            <Stack direction="row">
+              <Button
+                color="inherit"
+                component="a"
+                endIcon={<OpenInNewIcon sx={{ color: 'text.disabled' }} />}
+                href={`http://bulbapedia.bulbagarden.net/wiki/${encodeURI(pokemon.name)}_(Pok%C3%A9mon)`}
+                onClick={() => ReactGA.event({ action: 'open Bulbapedia link', category: 'Info', label: pokemon.name })}
+                rel="noopener noreferrer"
+                size="large"
+                sx={{ borderRadius: 0, width: '100%' }}
+                target="_blank"
+              >
+                Bulbapedia
+              </Button>
+              <Button
+                color="inherit"
+                component="a"
+                endIcon={<OpenInNewIcon sx={{ color: 'text.disabled' }} />}
+                href={serebiiLink(serebiiPath, pokemon.national_id)}
+                onClick={() => ReactGA.event({ action: 'open Serebii link', category: 'Info', label: pokemon.name })}
+                rel="noopener noreferrer"
+                size="large"
+                sx={{ borderRadius: 0, width: '100%' }}
+                target="_blank"
+              >
+                Serebii
+              </Button>
+            </Stack>
+          </List>
+        </DialogContent>
+      </Stack>
+    </Drawer>
   );
 }

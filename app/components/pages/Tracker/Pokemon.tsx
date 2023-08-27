@@ -144,13 +144,6 @@ export function Pokemon ({ capture, delay = 0, setSelectedPokemon }: Props) {
             #{padding(idToDisplay, paddingDigits)}
           </Typography>
         </Stack>
-        {/* <CardContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-          <h4><PokemonName name={capture.pokemon.name} /></h4>
-          <div className="icon-wrapper">
-            <i className={iconClass(capture.pokemon, dex)} />
-          </div>
-          <p>#{padding(idToDisplay, paddingDigits)}</p>
-        </CardContent> */}
       </CardActionArea>
       <CardActions sx={{ position: 'absolute', bottom: 0, right: 0, p: 0.15 }}>
         <IconButton onClick={handleSetInfoClick}>
