@@ -1,6 +1,7 @@
 import keyBy from 'lodash/keyBy';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
+import { Stack } from '@mui/material';
 
 import { Evolutions } from './Evolutions';
 import { iconClass } from '../../../utils/pokemon';
@@ -45,17 +46,14 @@ export function EvolutionFamily ({ family, setSelectedPokemon }: Props) {
   }
 
   return (
-    <div className="info-evolutions">
-      <div className="evolution-pokemon-column">
-        <a onClick={() => setSelectedPokemon(family.pokemon[0][0].id)} title={family.pokemon[0][0].name}>
-          <i className={iconClass(family.pokemon[0][0], dex)} />
-        </a>
-        {family.evolutions.length === 0 ? <div>Does not evolve</div> : null}
-      </div>
+    <Stack alignItems="center" direction="row" justifyContent="space-evenly" sx={{ p: 3 }}>
+      <a onClick={() => setSelectedPokemon(family.pokemon[0][0].id)} title={family.pokemon[0][0].name}>
+        <i className={iconClass(family.pokemon[0][0], dex)} />
+      </a>
       {family.evolutions.length > 0 ? <Evolutions evolutions={family.evolutions[0]} /> : null}
       {column1}
       {family.evolutions.length > 1 ? <Evolutions evolutions={family.evolutions[1]} pokemonId={family.pokemon[2][0].national_id} /> : null}
       {column2}
-    </div>
+    </Stack>
   );
 }

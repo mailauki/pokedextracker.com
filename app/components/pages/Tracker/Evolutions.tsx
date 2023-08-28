@@ -5,6 +5,7 @@ import { faLongArrowAltLeft, faLongArrowAltRight, faPlusCircle } from '@fortawes
 import { capitalize } from '../../../utils/formatting';
 
 import type { Evolution } from '../../../types';
+import { Stack, Typography } from '@mui/material';
 
 function evolutionKey (evolution: Evolution) {
   return `${evolution.trigger}:${evolution.level}:${evolution.stone}:${evolution.held_item}:${evolution.notes}`;
@@ -51,14 +52,22 @@ export function Evolutions ({ evolutions, pokemonId }: Props) {
     }
 
     return (
-      <div className="evolution-trigger" key={key}>
+      // <div className="evolution-trigger" key={key}>
+      //   <FontAwesomeIcon icon={evolution.trigger === 'breed' ? faLongArrowAltLeft : faLongArrowAltRight} />
+      //   <div>
+      //     {trigger}
+      //     {evolution.held_item ? <span>holding {capitalize(evolution.held_item)} </span> : null}
+      //     {notes}
+      //   </div>
+      // </div>
+      <Stack alignItems="center" className="evolution-trigger" direction="column" key={key} sx={{ textAlign: 'center', maxWidth: '85px' }}>
         <FontAwesomeIcon icon={evolution.trigger === 'breed' ? faLongArrowAltLeft : faLongArrowAltRight} />
-        <div>
+        <Typography variant="caption">
           {trigger}
           {evolution.held_item ? <span>holding {capitalize(evolution.held_item)} </span> : null}
           {notes}
-        </div>
-      </div>
+        </Typography>
+      </Stack>
     );
   });
 

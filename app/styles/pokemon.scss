@@ -10,6 +10,7 @@
 // .captured
 :root {
   --pokemon-box-size: 120px;
+  --info-drawer-width: 350px;
 }
 
 .box {
@@ -70,7 +71,7 @@
   &.pending {
     // background: rgba($brand-primary-light, .5);
   }
-  
+
   .set-captured {
     width: var(--pokemon-box-size);
     height: var(--pokemon-box-size);

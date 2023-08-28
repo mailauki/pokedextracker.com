@@ -1,3 +1,5 @@
+import { Box, List, ListItem, ListItemText, ListSubheader } from '@mui/material';
+import Bullet from '@mui/icons-material/Circle';
 import type { Location } from '../../../types';
 
 interface Props {
@@ -6,17 +8,28 @@ interface Props {
 
 export function InfoLocations ({ locations }: Props) {
   return (
-    <div className="info-locations">
-      {locations.map((location) => {
-        return (
-          <div key={location.game.id}>
-            <h3>Pokémon {location.game.name}</h3>
-            <ul>
-              {location.value.map((loc) => <li key={loc}>{loc}</li>)}
-            </ul>
-          </div>
-        );
-      })}
-    </div>
+    <Box
+      sx={{
+        overflowY: 'scroll',
+        height: '100%',
+        width: 'var(--info-drawer-width)',
+        pb: 4,
+      }}
+    >
+      {locations.map((location) => (
+        <div key={location.game.id}>
+          <List disablePadding sx={{ listStyleType: 'circle', listStylePosition: 'inside' }}>
+            <ListSubheader>Pokémon {location.game.name}</ListSubheader>
+
+            {location.value.map((loc) => (
+              <ListItem disablePadding key={loc} sx={{ ml: 4, width: 'calc(var(--info-drawer-width)-32px)' }}>
+                <Bullet fontSize="small" sx={{ fontSize: '8px', mr: 2, color: 'text.secondary' }} />
+                <ListItemText primary={loc} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      ))}
+    </Box>
   );
 }
