@@ -1,9 +1,5 @@
 import classNames from 'classnames';
 import keyBy from 'lodash/keyBy';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faInfo } from '@fortawesome/free-solid-svg-icons';
-import { Avatar, Card, CardActionArea, CardActions, IconButton, Stack, Typography } from '@mui/material';
-import InfoIcon from '@mui/icons-material/Info';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
 
@@ -20,6 +16,9 @@ import { useUser } from '../../../hooks/queries/users';
 
 import type { Dispatch, SetStateAction } from 'react';
 import type { UICapture } from './use-tracker';
+
+import { Avatar, Card, CardActionArea, CardActions, IconButton, Stack, Typography } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
 
 interface Props {
   capture: UICapture | null;
@@ -125,7 +124,6 @@ export function Pokemon ({ capture, delay = 0, setSelectedPokemon }: Props) {
       sx={{
         position: 'relative',
         backgroundColor: capture.captured ? 'primary.background' : '',
-        // color: capture.captured ? 'card.contrastText' : '',
       }}
     >
       <CardActionArea className="set-captured" onClick={handleSetCapturedClick}>
@@ -151,11 +149,13 @@ export function Pokemon ({ capture, delay = 0, setSelectedPokemon }: Props) {
           <Typography sx={{ fontSize: 14, m: 1.5 }}>
             {capture.pokemon.name}
           </Typography>
+
           <Typography sx={{ fontSize: 12, m: 1.5 }}>
             #{padding(idToDisplay, paddingDigits)}
           </Typography>
         </Stack>
       </CardActionArea>
+
       <CardActions sx={{ position: 'absolute', bottom: 0, right: 0, p: 0.15 }}>
         <IconButton onClick={handleSetInfoClick}>
           <InfoIcon />

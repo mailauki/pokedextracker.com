@@ -1,7 +1,4 @@
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-// import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import EditIcon from '@mui/icons-material/Edit';
 import { useParams } from 'react-router';
 
 import { ReactGA } from '../../utils/analytics';
@@ -9,7 +6,9 @@ import { useSession } from '../../hooks/contexts/use-session';
 import { useUser } from '../../hooks/queries/users';
 
 import type { ReactNode } from 'react';
+
 import { IconButton, Stack, Typography } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
 
 export function FriendCode () {
   const { username } = useParams<{ username: string }>();

@@ -1,7 +1,7 @@
+import type { Dex } from '../../types';
+
 import { Chip, Stack } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
-
-import type { Dex } from '../../types';
 
 interface Props {
   dex: Dex;

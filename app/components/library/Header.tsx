@@ -1,21 +1,19 @@
 import keyBy from 'lodash/keyBy';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faLink } from '@fortawesome/free-solid-svg-icons';
-// import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { IconButton, Stack, Typography } from '@mui/material';
-import { Link, Twitter } from '@mui/icons-material';
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 
 import { DexIndicator } from './DexIndicator';
 import { DonatedFlair } from './DonatedFlair';
 import { ReactGA } from '../../utils/analytics';
-import { Share } from './Share';
+// import { Share } from './Share';
 import { useSession } from '../../hooks/contexts/use-session';
 import { useUser } from '../../hooks/queries/users';
 
 import type { Dex } from '../../types';
 import type { MouseEvent } from 'react';
+
+import { IconButton, Stack, Typography } from '@mui/material';
+import { Link, Twitter } from '@mui/icons-material';
 
 interface Props {
   profile?: boolean;

@@ -13,13 +13,15 @@ import { Register } from './Register';
 import { Rollbar } from '../../utils/rollbar';
 import { Tracker } from './Tracker';
 import { Nav } from '../library/Nav';
+import { BackToTop } from '../library/BackToTop';
 import { logPageView } from '../../utils/analytics';
 import { useLocalStorageContext } from '../../hooks/contexts/use-local-storage-context';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+import { ThemeProvider, alpha, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Container } from '@mui/material';
-import { amber, indigo } from '@mui/material/colors';
+// import { Container } from '@mui/material';
+import { amber, lightBlue } from '@mui/material/colors';
 
 const history = createBrowserHistory();
 history.listen(() => logPageView());
@@ -45,17 +47,20 @@ export function App () {
           mode: darkMode ? 'dark' : 'light',
           ...(!darkMode
             ? {
-              // tonalOffset: 0.4,
               primary: {
-                main: '#12345F',
-                background: '#18447D80',
+                // main: '#12345F',
+                main: lightBlue[900],
+                // background: '#18447D80',
+                background: alpha(lightBlue[900], 0.5),
               },
               secondary: amber,
             }
             : {
               primary: {
-                main: '#12345F',
-                background: '#102D5280',
+                // main: '#12345F',
+                main: lightBlue[900],
+                // background: '#102D5280',
+                background: alpha(lightBlue[900], 0.5),
               },
               secondary: amber,
             }),
@@ -83,6 +88,7 @@ export function App () {
         </Switch>
         {/* </Container> */}
         {/* </div> */}
+        <BackToTop />
       </ThemeProvider>
     </Router>
   );

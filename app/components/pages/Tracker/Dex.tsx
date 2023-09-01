@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import { useParams } from 'react-router';
 
 import { Box } from './Box';
-import { BackToTop } from '../../library/BackToTop';
+// import { BackToTop } from '../../library/BackToTop';
 import { DonatedFlair } from '../../library/DonatedFlair';
 import { FriendCode } from '../../library/FriendCode';
 import { Header } from '../../library/Header';
@@ -102,7 +102,6 @@ export function Dex ({
         /> :
         boxes
       }
-      <BackToTop />
     </>
   );
 }
