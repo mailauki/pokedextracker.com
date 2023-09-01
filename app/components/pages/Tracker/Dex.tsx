@@ -1,6 +1,6 @@
 import keyBy from 'lodash/keyBy';
 import { Link } from 'react-router-dom';
-import { Container } from '@mui/material';
+// import { Container } from '@mui/material';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
 
@@ -66,31 +66,31 @@ export function Dex ({
 
   return (
     <>
-      <Container maxWidth="md">
-        <Notification />
-        <header>
-          <Header />
-          <h3>
-            <Link onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Link>
-            <DonatedFlair user={user} />
-          </h3>
-          <FriendCode />
-        </header>
+      {/* <Container maxWidth="md"> */}
+      <Notification />
+      <header>
+        <Header />
+        <h3>
+          <Link onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Link>
+          <DonatedFlair user={user} />
+        </h3>
+        <FriendCode />
+      </header>
 
-        <Progress caught={caught} total={total} />
+      <Progress caught={caught} total={total} />
 
-        {query.length > 0 || hideCaught ?
-          <SearchResults
-            captures={captures}
-            hideCaught={hideCaught}
-            query={query}
-            setHideCaught={setHideCaught}
-            setQuery={setQuery}
-            setSelectedPokemon={setSelectedPokemon}
-          /> :
-          boxes
-        }
-      </Container>
+      {query.length > 0 || hideCaught ?
+        <SearchResults
+          captures={captures}
+          hideCaught={hideCaught}
+          query={query}
+          setHideCaught={setHideCaught}
+          setQuery={setQuery}
+          setSelectedPokemon={setSelectedPokemon}
+        /> :
+        boxes
+      }
+      {/* </Container> */}
       <BackToTop />
     </>
   );

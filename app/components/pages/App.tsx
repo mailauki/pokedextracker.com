@@ -17,6 +17,8 @@ import { useLocalStorageContext } from '../../hooks/contexts/use-local-storage-c
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { Container } from '@mui/material';
+import { Nav } from '../library/Nav';
 
 const history = createBrowserHistory();
 history.listen(() => logPageView());
@@ -42,18 +44,21 @@ export function App () {
     <Router history={history}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className={`root ${isNightMode ? 'night-mode' : ''}`}>
-          <Switch>
-            <Route component={Home} exact path="/" />
-            <Route component={Login} exact path="/login" />
-            <Route component={Register} exact path="/register" />
-            <Route component={Account} exact path="/account" />
-            <Route component={ProfileRedirect} exact path="/profile" />
-            <Route component={Profile} exact path="/u/:username" />
-            <Route component={Tracker} exact path="/u/:username/:slug" />
-            <Route component={NotFound} path="/" />
-          </Switch>
-        </div>
+        {/* <div className={`root ${isNightMode ? 'night-mode' : ''}`}> */}
+        <Nav />
+        {/* <Container maxWidth="md"> */}
+        <Switch>
+          <Route component={Home} exact path="/" />
+          <Route component={Login} exact path="/login" />
+          <Route component={Register} exact path="/register" />
+          <Route component={Account} exact path="/account" />
+          <Route component={ProfileRedirect} exact path="/profile" />
+          <Route component={Profile} exact path="/u/:username" />
+          <Route component={Tracker} exact path="/u/:username/:slug" />
+          <Route component={NotFound} path="/" />
+        </Switch>
+        {/* </Container> */}
+        {/* </div> */}
       </ThemeProvider>
     </Router>
   );

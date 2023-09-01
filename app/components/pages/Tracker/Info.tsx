@@ -146,7 +146,7 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
           disableRipple
           onClick={handleInfoClick}
           size="small"
-          sx={{ borderRadius: 0, borderRight: '1px solid', borderColor: 'divider' }}
+          sx={{ borderRadius: 0, borderRight: '1px solid', borderColor: 'divider', width: 'var(--info-drawer-button-width)' }}
         >
           {showInfo ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
         </IconButton>

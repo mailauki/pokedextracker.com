@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 
 import { Dex } from './Dex';
-// import { Footer } from '../../library/Footer';
+import { Footer } from '../../library/Footer';
 import { Info } from './Info';
 import { Nav } from '../../library/Nav';
 import { NotFound } from '../NotFound';
@@ -14,6 +14,8 @@ import { SearchBar } from './SearchBar';
 import { TrackerContextProvider, useTrackerContext } from './use-tracker';
 import { useCaptures } from '../../../hooks/queries/captures';
 import { useUser } from '../../../hooks/queries/users';
+import { useLocalStorageContext } from '../../../hooks/contexts/use-local-storage-context';
+import { Box, Container } from '@mui/material';
 
 // To enable the inner component to access the context value, it needs to be nested under the provider, so we need this
 // wrapper component to add that nesting.
@@ -59,6 +61,8 @@ export function TrackerInner () {
     }
   }, [capturesFromServer]);
 
+  const { showInfo, setShowInfo } = useLocalStorageContext();
+
   const handleScroll = throttle(() => {
     if (!showScroll && trackerRef.current && trackerRef.current.scrollTop >= SHOW_SCROLL_THRESHOLD) {
       setShowScroll(true);
@@ -82,29 +86,42 @@ export function TrackerInner () {
   }
 
   return (
-    <div className="tracker-container">
-      <Nav />
-      <Reload />
-      <div className="tracker">
-        <div className="dex-wrapper">
-          <SearchBar
-            hideCaught={hideCaught}
-            query={query}
-            setHideCaught={setHideCaught}
-            setQuery={setQuery}
-          />
-          {/* <div className="dex-column" onScroll={handleScroll} ref={trackerRef}>
-            <Dex
-              hideCaught={hideCaught}
-              onScrollButtonClick={handleScrollButtonClick}
-              query={query}
-              setHideCaught={setHideCaught}
-              setQuery={setQuery}
-              setSelectedPokemon={setSelectedPokemon}
-              showScrollButton={showScroll}
-            />
-            <Footer />
-          </div> */}
+    // <div className="tracker-container">
+    //   <Nav />
+    //   <Reload />
+    //   <div className="tracker">
+    //     <div className="dex-wrapper">
+    //       <SearchBar
+    //         hideCaught={hideCaught}
+    //         query={query}
+    //         setHideCaught={setHideCaught}
+    //         setQuery={setQuery}
+    //       />
+    //       {/* <div className="dex-column" onScroll={handleScroll} ref={trackerRef}>
+    //         <Dex
+    //           hideCaught={hideCaught}
+    //           onScrollButtonClick={handleScrollButtonClick}
+    //           query={query}
+    //           setHideCaught={setHideCaught}
+    //           setQuery={setQuery}
+    //           setSelectedPokemon={setSelectedPokemon}
+    //           showScrollButton={showScroll}
+    //         />
+    //         <Footer />
+    //       </div> */}
+    //     </div>
+    //     <Info selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} />
+    //   </div>
+    // </div>
+    <>
+      <Box className="container" sx={{ marginRight: showInfo ? 'var(--drawer-width)' : 'var(--info-drawer-button-width)' }}>
+        <SearchBar
+          hideCaught={hideCaught}
+          query={query}
+          setHideCaught={setHideCaught}
+          setQuery={setQuery}
+        />
+        <Container fixed maxWidth="md">
           <Dex
             hideCaught={hideCaught}
             onScrollButtonClick={handleScrollButtonClick}
@@ -114,9 +131,10 @@ export function TrackerInner () {
             setSelectedPokemon={setSelectedPokemon}
             showScrollButton={showScroll}
           />
-        </div>
-        <Info selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} />
-      </div>
-    </div>
+        </Container>
+        <Footer />
+      </Box>
+      <Info selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} />
+    </>
   );
 }

@@ -74,7 +74,7 @@ export function Header ({ profile = false }: Props) {
     <Stack alignItems="center" direction="row" justifyContent="space-between">
       <Typography color="primary" variant="h4">
         {dex?.title || `${user.username}'s Profile`}
-        <div className="share-container">
+        {/* <div className="share-container">
           <a onClick={handleShareClick}>
             <FontAwesomeIcon icon={faLink} />
             {showShare && <Share profile={profile} />}
@@ -87,7 +87,7 @@ export function Header ({ profile = false }: Props) {
           >
             <FontAwesomeIcon icon={faTwitter} />
           </a>
-        </div>
+        </div> */}
       </Typography>
       {profile && <DonatedFlair user={user} />}
       {dex && <DexIndicator dex={dex} />}

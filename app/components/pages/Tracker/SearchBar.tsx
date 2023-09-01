@@ -39,7 +39,17 @@ export function SearchBar ({ hideCaught, query, setHideCaught, setQuery }: Props
   };
 
   return (
-    <AppBar color="inherit" elevation={0} position="sticky" sx={{ zIndex: 1000, top: '48px', borderBottom: '1px solid', borderBottomColor: 'divider' }}>
+    <AppBar
+      color="inherit"
+      elevation={0}
+      position="sticky"
+      sx={{
+        zIndex: 1000,
+        top: '48px',
+        borderBottom: '1px solid',
+        borderBottomColor: 'divider',
+      }}
+    >
       <Toolbar sx={{ flexDirection: 'column', mt: 2, alignItems: 'flex-start' }}>
         <TextField
           InputProps={{

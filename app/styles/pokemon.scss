@@ -11,6 +11,8 @@
 :root {
   --pokemon-box-size: 120px;
   --info-drawer-width: 350px;
+  --info-drawer-button-width: 32px;
+  --drawer-width: calc(var(--info-drawer-width) + var(--info-drawer-button-width));
 }
 
 .box {
@@ -43,30 +45,20 @@
   }
 
   .box-container {
-    // @include flexbox();
-    // @include flex-wrap(wrap);
-
-    // display: flex;
-    // flex-wrap: wrap;
     display: grid;
-    // grid-template-columns: repeat(6, minmax(120px, 1fr));
     grid-template-columns: repeat(6, var(--pokemon-box-size));
+    grid-template-columns: repeat(6, minmax(var(--pokemon-box-size), 1fr));
     grid-auto-rows: var(--pokemon-box-size);
-    // border: 1px solid $gray-light;
+
     gap: 8px;
-    justify-content: center;
+    justify-content: space-between;
   }
 }
 
 .pokemon {
-  // @include flexbox();
-
-  // position: relative;
-  // width: $pokemon-box-size;
-  // height: $pokemon-box-size;
-  width: var(--pokemon-box-size);
+  // width: var(--pokemon-box-size);
+  width: 100%;
   height: var(--pokemon-box-size);
-  // border-radius: 6px;
 
   &.pending {
     // background: rgba($brand-primary-light, .5);
@@ -78,16 +70,11 @@
   }
 
   &.captured {
-    // background-color: $brand-primary-light;
-
     .set-captured,
     .set-captured-mobile {
-      // border-color: darken($brand-primary-light, 5%);
-      // border-radius: 6px;
     }
 
     .game-family-legends_arceus {
-      // background-color: rgba(#ffffff, .5);
     }
   }
 
@@ -213,5 +200,31 @@
     // height: 21px;
     // margin: 2px;
     // font-size: 14px;
+  }
+}
+
+.container {
+  container-type: inline-size;
+}
+
+@container (max-width: 900px) {
+  :root {
+    --info-drawer-width: 100%;
+  }
+
+  .box {
+    .box-container {
+      grid-template-columns: repeat(3, minmax(var(--pokemon-box-size), 1fr));
+    }
+  }
+}
+
+@container (max-width: 500px) {
+  .box {
+    .box-container {
+      display: flex;
+      flex-direction: column;
+      // grid-template-columns: repeat(1, var(--pokemon-box-size));
+    }
   }
 }
