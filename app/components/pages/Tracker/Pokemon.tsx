@@ -2,12 +2,12 @@ import classNames from 'classnames';
 import keyBy from 'lodash/keyBy';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faInfo } from '@fortawesome/free-solid-svg-icons';
-import { Avatar, Card, CardActionArea, CardActions, CardContent, IconButton, Stack, Typography } from '@mui/material';
+import { Avatar, Card, CardActionArea, CardActions, IconButton, Stack, Typography } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
 
-import { PokemonName } from '../../library/PokemonName';
+// import { PokemonName } from '../../library/PokemonName';
 import { ReactGA } from '../../../utils/analytics';
 import { iconClass } from '../../../utils/pokemon';
 import { nationalId, padding } from '../../../utils/formatting';
@@ -119,9 +119,20 @@ export function Pokemon ({ capture, delay = 0, setSelectedPokemon }: Props) {
   const paddingDigits = dex.total >= 1000 ? 4 : 3;
 
   return (
-    <Card className={classNames(classes)} sx={{ position: 'relative' }}>
+    <Card
+      className={classNames(classes)}
+      elevation={capture.captured ? 0 : 2}
+      sx={{
+        position: 'relative',
+        backgroundColor: capture.captured ? 'primary.background' : '',
+        // color: capture.captured ? 'card.contrastText' : '',
+      }}
+    >
       <CardActionArea className="set-captured" onClick={handleSetCapturedClick}>
-        <Avatar sx={{ height: '100%', width: '100%', backgroundColor: 'transparent' }} variant="square">
+        <Avatar
+          sx={{ height: '100%', width: '100%', backgroundColor: 'transparent' }}
+          variant="square"
+        >
           <i className={iconClass(capture.pokemon, dex)} />
         </Avatar>
 
@@ -135,7 +146,7 @@ export function Pokemon ({ capture, delay = 0, setSelectedPokemon }: Props) {
             position: 'absolute',
             top: 0, left: 0,
           }}
-          width="var(--pokemon-box-size)"
+          width="100%"
         >
           <Typography sx={{ fontSize: 14, m: 1.5 }}>
             {capture.pokemon.name}

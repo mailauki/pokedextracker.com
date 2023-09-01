@@ -20,6 +20,8 @@ import { useUser } from '../../../hooks/queries/users';
 
 import type { Dispatch, MouseEventHandler, SetStateAction } from 'react';
 
+import { Box as Wrapper, Link as Anchor } from '@mui/material';
+
 const DEFER_CUTOFF = 1;
 
 interface Props {
@@ -68,14 +70,22 @@ export function Dex ({
     <>
       {/* <Container maxWidth="md"> */}
       <Notification />
-      <header>
+      <Wrapper>
+        <Header />
+        <>
+          <Anchor component={Link} onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Anchor>
+          <DonatedFlair user={user} />
+        </>
+        <FriendCode />
+      </Wrapper>
+      {/* <header>
         <Header />
         <h3>
           <Link onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Link>
           <DonatedFlair user={user} />
         </h3>
         <FriendCode />
-      </header>
+      </header> */}
 
       <Progress caught={caught} total={total} />
 

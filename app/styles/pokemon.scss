@@ -10,6 +10,7 @@
 // .captured
 :root {
   --pokemon-box-size: 120px;
+
   --info-drawer-width: 350px;
   --info-drawer-button-width: 32px;
   --drawer-width: calc(var(--info-drawer-width) + var(--info-drawer-button-width));
@@ -65,7 +66,8 @@
   }
 
   .set-captured {
-    width: var(--pokemon-box-size);
+    // width: var(--pokemon-box-size);
+    width: 100%;
     height: var(--pokemon-box-size);
   }
 
@@ -122,14 +124,9 @@
 }
 
 // .set-captured {
-//   // @include flex-grow(1);
-//   // @include flexbox();
-//   // @include flex-direction(column);
-//   // @include align-items(center);
-//   // @include justify-content(center);
-
 //   // border: 1px solid $gray-light;
 //   // border-radius: 6px;
+//   // background-color: ;
 
 //   h4 {
 //   //   margin: 0;
@@ -138,9 +135,6 @@
 //   // }
 
 //   .icon-wrapper {
-//     // @include flexbox();
-//     // @include align-items(center);
-
 //     // height: 49px;
 //   }
 
@@ -153,9 +147,6 @@
 // }
 
 // .set-captured-mobile {
-//   // @include flex-grow(1);
-//   // @include align-items(center);
-
 //   display: none;
 //   // border: 1px solid $gray-light;
 //   // border-radius: 6px;
@@ -182,26 +173,26 @@
 //   }
 // }
 
-.set-info {
-  // @include flexbox();
+// .set-info {
+//   // @include flexbox();
 
-  // opacity: 0;
-  // position: absolute;
-  // right: 0;
-  // bottom: 0;
-  // padding: 5px;
+//   // opacity: 0;
+//   // position: absolute;
+//   // right: 0;
+//   // bottom: 0;
+//   // padding: 5px;
 
-  .fa-info {
-    // border-radius: 50%;
-    // border: 2px solid $brand-secondary-light;
-    // color: $brand-secondary-light;
-    // padding: 4px;
-    // width: 21px;
-    // height: 21px;
-    // margin: 2px;
-    // font-size: 14px;
-  }
-}
+//   .fa-info {
+//     // border-radius: 50%;
+//     // border: 2px solid $brand-secondary-light;
+//     // color: $brand-secondary-light;
+//     // padding: 4px;
+//     // width: 21px;
+//     // height: 21px;
+//     // margin: 2px;
+//     // font-size: 14px;
+//   }
+// }
 
 .container {
   container-type: inline-size;
