@@ -128,7 +128,7 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
       sx={{
         flexShrink: 0,
         ['& .MuiDrawer-paper']: {
-          // backgroundColor: 'primary.dark',
+          // backgroundColor: 'primary.main',
           // color: 'primary.contrastText',
           zIndex: 1050,
         },
@@ -146,7 +146,14 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
           disableRipple
           onClick={handleInfoClick}
           size="small"
-          sx={{ borderRadius: 0, borderRight: '1px solid', borderColor: 'divider', width: 'var(--info-drawer-button-width)' }}
+          sx={{
+            backgroundColor: 'primary.main',
+            borderRadius: 0,
+            borderRight: '1px solid',
+            borderColor: 'divider',
+            color: 'primary.contrastText',
+            width: 'var(--info-drawer-button-width)',
+          }}
         >
           {showInfo ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
         </IconButton>
@@ -183,6 +190,8 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
 
             <EvolutionFamily family={pokemon.evolution_family} setSelectedPokemon={setSelectedPokemon} />
 
+            <Divider />
+
             <Stack direction="row">
               <Button
                 color="inherit"
@@ -197,6 +206,9 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
               >
                 Bulbapedia
               </Button>
+
+              <Divider flexItem orientation="vertical" />
+
               <Button
                 color="inherit"
                 component="a"

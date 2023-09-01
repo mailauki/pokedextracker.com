@@ -50,7 +50,7 @@ export function SearchBar ({ hideCaught, query, setHideCaught, setQuery }: Props
         borderBottomColor: 'divider',
       }}
     >
-      <Toolbar sx={{ flexDirection: 'column', mt: 2, alignItems: 'flex-start' }}>
+      <Toolbar sx={{ flexDirection: 'column', pt: 1, mt: 1.5, alignItems: 'flex-start' }}>
         <TextField
           InputProps={{
             startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,
@@ -82,6 +82,8 @@ export function SearchBar ({ hideCaught, query, setHideCaught, setQuery }: Props
             '&:hover': {
               backgroundColor: 'action.selected',
             },
+            borderRadius: '4px',
+            overflow: 'hidden',
           }}
           type="text"
           value={query}

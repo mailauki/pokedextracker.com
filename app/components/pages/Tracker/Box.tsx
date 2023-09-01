@@ -8,7 +8,8 @@ import { useDeferredRender } from '../../../hooks/use-deferred-render';
 
 import type { Dispatch, SetStateAction } from 'react';
 import type { UICapture } from './use-tracker';
-import { Stack, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Stack, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 interface Props {
   captures: UICapture[];
@@ -62,22 +63,12 @@ export function Box ({ captures, deferred = false, dexTotal, setSelectedPokemon 
   }
 
   return (
-    // <div className="box">
-    //   <div className="box-header">
-    //     <h1>{title}</h1>
-    //     <MarkAllButton captures={captures} />
-    //   </div>
-    //   <div className="box-container">
-    //     {captures.map((capture) => <Pokemon capture={capture} key={capture.pokemon.id} setSelectedPokemon={setSelectedPokemon} />)}
-    //     {empties.map((index) => <Pokemon capture={null} key={index} setSelectedPokemon={setSelectedPokemon} />)}
-    //   </div>
-    // </div>
     <div className="box">
       <Stack
         alignItems="center"
         direction="row"
         justifyContent="space-between"
-        sx={{ mb: 1 }}
+        sx={{ mt: 6, mb: 1 }}
       >
         <Typography variant="h5">{title}</Typography>
         <MarkAllButton captures={captures} />
@@ -87,5 +78,28 @@ export function Box ({ captures, deferred = false, dexTotal, setSelectedPokemon 
         {empties.map((index) => <Pokemon capture={null} key={index} setSelectedPokemon={setSelectedPokemon} />)}
       </div>
     </div>
+    // <Accordion className="box" elevation={0}>
+    //   <AccordionSummary
+    //     expandIcon={<ExpandMoreIcon />}
+    //     aria-controls={`panel${title}-content`}
+    //     id={`panel${title}-header`}
+    //   >
+    //     <Stack
+    //       alignItems="center"
+    //       direction="row"
+    //       justifyContent="space-between"
+    //       sx={{ mr: 1, width: '100%' }}
+    //     >
+    //       <Typography variant="h5">{title}</Typography>
+    //       <MarkAllButton captures={captures} />
+    //     </Stack>
+    //   </AccordionSummary>
+    //   <AccordionDetails>
+    //     <div className="box-container">
+    //       {captures.map((capture) => <Pokemon capture={capture} key={capture.pokemon.id} setSelectedPokemon={setSelectedPokemon} />)}
+    //       {empties.map((index) => <Pokemon capture={null} key={index} setSelectedPokemon={setSelectedPokemon} />)}
+    //     </div>
+    //   </AccordionDetails>
+    // </Accordion>
   );
 }

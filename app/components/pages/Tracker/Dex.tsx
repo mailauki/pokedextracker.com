@@ -55,37 +55,39 @@ export function Dex ({
 
   const groupedCaptures = useMemo(() => groupBoxes(captures), [captures]);
   const boxes = useMemo(() => {
-    return groupedCaptures.map((box, i) => (
-      <Box
-        captures={box}
-        deferred={i > DEFER_CUTOFF}
-        dexTotal={dex.total}
-        key={box[0].pokemon.id}
-        setSelectedPokemon={setSelectedPokemon}
-      />
-    ));
+    return (
+      <>
+        {groupedCaptures.map((box, i) => (
+          <Box
+            captures={box}
+            deferred={i > DEFER_CUTOFF}
+            dexTotal={dex.total}
+            key={box[0].pokemon.id}
+            setSelectedPokemon={setSelectedPokemon}
+          />
+        ))}
+      </>
+    );
   }, [groupedCaptures]);
 
   return (
     <>
-      {/* <Container maxWidth="md"> */}
       <Notification />
       <Wrapper>
         <Header />
         <>
-          <Anchor component={Link} onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Anchor>
+          <Anchor
+            color="text.secondary"
+            component={Link}
+            onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })}
+            to={`/u/${username}`}
+          >
+            /u/{username}
+          </Anchor>
           <DonatedFlair user={user} />
         </>
         <FriendCode />
       </Wrapper>
-      {/* <header>
-        <Header />
-        <h3>
-          <Link onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Link>
-          <DonatedFlair user={user} />
-        </h3>
-        <FriendCode />
-      </header> */}
 
       <Progress caught={caught} total={total} />
 
@@ -100,7 +102,6 @@ export function Dex ({
         /> :
         boxes
       }
-      {/* </Container> */}
       <BackToTop />
     </>
   );
