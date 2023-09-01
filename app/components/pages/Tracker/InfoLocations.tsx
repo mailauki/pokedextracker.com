@@ -1,6 +1,7 @@
+import type { Location } from '../../../types';
+
 import { Box, List, ListItem, ListItemText, ListSubheader } from '@mui/material';
 import Bullet from '@mui/icons-material/Circle';
-import type { Location } from '../../../types';
 
 interface Props {
   locations: Location[];

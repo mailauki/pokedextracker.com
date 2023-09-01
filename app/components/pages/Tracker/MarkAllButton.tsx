@@ -1,6 +1,4 @@
 import keyBy from 'lodash/keyBy';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
 
@@ -13,7 +11,7 @@ import { useUser } from '../../../hooks/queries/users';
 
 import type { UICapture } from './use-tracker';
 
-import { Button, CircularProgress, Stack, Typography } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 
 interface Props {
   captures: UICapture[];

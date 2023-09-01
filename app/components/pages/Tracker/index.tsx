@@ -123,7 +123,7 @@ export function TrackerInner () {
           setHideCaught={setHideCaught}
           setQuery={setQuery}
         />
-        <Container maxWidth="md" sx={{ mt: 2 }}>
+        <Container maxWidth="md" sx={{ mt: 2, mb: 4 }}>
           <Dex
             hideCaught={hideCaught}
             // onScrollButtonClick={handleScrollButtonClick}

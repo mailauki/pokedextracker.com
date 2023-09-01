@@ -1,7 +1,6 @@
 import keyBy from 'lodash/keyBy';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
-import { Stack } from '@mui/material';
 
 import { Evolutions } from './Evolutions';
 import { iconClass } from '../../../utils/pokemon';
@@ -9,6 +8,8 @@ import { useUser } from '../../../hooks/queries/users';
 
 import type { Dispatch, SetStateAction } from 'react';
 import type { EvolutionFamily as EvolutionFamilyType } from '../../../types';
+
+import { Stack } from '@mui/material';
 
 interface Props {
   family: EvolutionFamilyType;

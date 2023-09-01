@@ -5,6 +5,7 @@ import { faLongArrowAltLeft, faLongArrowAltRight, faPlusCircle } from '@fortawes
 import { capitalize } from '../../../utils/formatting';
 
 import type { Evolution } from '../../../types';
+
 import { Stack, Typography } from '@mui/material';
 
 function evolutionKey (evolution: Evolution) {

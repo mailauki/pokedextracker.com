@@ -1,11 +1,5 @@
 import find from 'lodash/find';
 import keyBy from 'lodash/keyBy';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faCaretLeft, faCaretRight, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
-import { Box, Button, DialogContent, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Stack, Toolbar, Typography } from '@mui/material';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import type { Dispatch, SetStateAction } from 'react';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
@@ -21,6 +15,11 @@ import { usePokemon } from '../../../hooks/queries/pokemon';
 import { useUser } from '../../../hooks/queries/users';
 
 import type { Dex } from '../../../types';
+
+import { Box, Button, DialogContent, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Stack, Toolbar, Typography } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 const SEREBII_LINKS: Record<string, string> = {
   x_y: 'pokedex-xy',

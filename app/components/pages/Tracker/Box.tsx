@@ -8,8 +8,8 @@ import { useDeferredRender } from '../../../hooks/use-deferred-render';
 
 import type { Dispatch, SetStateAction } from 'react';
 import type { UICapture } from './use-tracker';
-import { Accordion, AccordionDetails, AccordionSummary, Stack, Typography } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+import { Stack, Typography } from '@mui/material';
 
 interface Props {
   captures: UICapture[];
