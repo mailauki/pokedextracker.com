@@ -178,11 +178,11 @@ export function Account () {
     //   <Footer />
     // </div>
     <>
-      <Container maxWidth="md" sx={{ mt: 2, mb: 4, height: '100%' }}>
+      <Container maxWidth="xs" sx={{ mt: 2, mb: 4 }}>
         <Stack direction="column">
           <Typography color="primary" sx={{ mb: 2 }} variant="h4">{sessionUser.username}&apos;s Account</Typography>
 
-          <Box component="form" onSubmit={handleSubmit} sx={{ pl: 4, pr: 4 }}>
+          <Box component="form" onSubmit={handleSubmit}>
             <Alert message={error || updateUserMutation.error?.message} type="error" />
             <Alert message={updateUserMutation.isSuccess && 'Account settings saved!'} type="success" />
 
@@ -279,6 +279,7 @@ export function Account () {
           </Box>
         </Stack>
       </Container>
+
       <Footer />
     </>
   );

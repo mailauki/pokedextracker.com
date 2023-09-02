@@ -79,19 +79,22 @@ export function App () {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {/* <div className={`root ${isNightMode ? 'night-mode' : ''}`}> */}
-        <Nav />
-        <Switch>
-          <Route component={Home} exact path="/" />
-          <Route component={Login} exact path="/login" />
-          <Route component={Register} exact path="/register" />
-          <Route component={Account} exact path="/account" />
-          <Route component={ProfileRedirect} exact path="/profile" />
-          <Route component={Profile} exact path="/u/:username" />
-          <Route component={Tracker} exact path="/u/:username/:slug" />
-          <Route component={NotFound} path="/" />
-        </Switch>
-        {/* </div> */}
-        <BackToTop />
+        <div className="page">
+          <Nav />
+
+          <Switch>
+            <Route component={Home} exact path="/" />
+            <Route component={Login} exact path="/login" />
+            <Route component={Register} exact path="/register" />
+            <Route component={Account} exact path="/account" />
+            <Route component={ProfileRedirect} exact path="/profile" />
+            <Route component={Profile} exact path="/u/:username" />
+            <Route component={Tracker} exact path="/u/:username/:slug" />
+            <Route component={NotFound} path="/" />
+          </Switch>
+
+          <BackToTop />
+        </div>
       </ThemeProvider>
     </Router>
   );

@@ -1,24 +1,21 @@
 import keyBy from 'lodash/keyBy';
 import { Link } from 'react-router-dom';
-// import { Container } from '@mui/material';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
 
 import { Box } from './Box';
-// import { BackToTop } from '../../library/BackToTop';
 import { DonatedFlair } from '../../library/DonatedFlair';
 import { FriendCode } from '../../library/FriendCode';
 import { Header } from '../../library/Header';
 import { Notification } from '../../library/Notification';
 import { Progress } from '../../library/Progress';
 import { ReactGA } from '../../../utils/analytics';
-// import { Scroll } from './Scroll';
 import { SearchResults } from './SearchResults';
 import { groupBoxes } from '../../../utils/pokemon';
 import { useTrackerContext } from './use-tracker';
 import { useUser } from '../../../hooks/queries/users';
 
-import type { Dispatch, MouseEventHandler, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 
 import { Box as Wrapper, Link as Anchor } from '@mui/material';
 
@@ -26,22 +23,18 @@ const DEFER_CUTOFF = 1;
 
 interface Props {
   hideCaught: boolean;
-  onScrollButtonClick: MouseEventHandler<HTMLDivElement>;
   query: string;
   setHideCaught: Dispatch<SetStateAction<boolean>>;
   setQuery: Dispatch<SetStateAction<string>>;
   setSelectedPokemon: Dispatch<SetStateAction<number>>;
-  showScrollButton: boolean;
 }
 
 export function Dex ({
   hideCaught,
-  // onScrollButtonClick,
   query,
   setHideCaught,
   setQuery,
   setSelectedPokemon,
-  // showScrollButton,
 }: Props) {
   const { username, slug } = useParams<{ username: string; slug: string }>();
 

@@ -88,33 +88,6 @@ export function TrackerInner () {
   }
 
   return (
-    // <div className="tracker-container">
-    //   <Nav />
-    //   <Reload />
-    //   <div className="tracker">
-    //     <div className="dex-wrapper">
-    //       <SearchBar
-    //         hideCaught={hideCaught}
-    //         query={query}
-    //         setHideCaught={setHideCaught}
-    //         setQuery={setQuery}
-    //       />
-    //       {/* <div className="dex-column" onScroll={handleScroll} ref={trackerRef}>
-    //         <Dex
-    //           hideCaught={hideCaught}
-    //           onScrollButtonClick={handleScrollButtonClick}
-    //           query={query}
-    //           setHideCaught={setHideCaught}
-    //           setQuery={setQuery}
-    //           setSelectedPokemon={setSelectedPokemon}
-    //           showScrollButton={showScroll}
-    //         />
-    //         <Footer />
-    //       </div> */}
-    //     </div>
-    //     <Info selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} />
-    //   </div>
-    // </div>
     <>
       <Box className="container" sx={{ marginRight: showInfo ? 'var(--drawer-width)' : 'var(--info-drawer-button-width)' }}>
         <SearchBar
@@ -123,19 +96,20 @@ export function TrackerInner () {
           setHideCaught={setHideCaught}
           setQuery={setQuery}
         />
+
         <Container maxWidth="md" sx={{ mt: 2, mb: 4 }}>
           <Dex
             hideCaught={hideCaught}
-            // onScrollButtonClick={handleScrollButtonClick}
             query={query}
             setHideCaught={setHideCaught}
             setQuery={setQuery}
             setSelectedPokemon={setSelectedPokemon}
-            // showScrollButton={showScroll}
           />
         </Container>
+
         <Footer />
       </Box>
+
       <Info selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} />
     </>
   );

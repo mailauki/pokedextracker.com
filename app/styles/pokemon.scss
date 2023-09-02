@@ -6,6 +6,14 @@
   --drawer-width: calc(var(--info-drawer-width) + var(--info-drawer-button-width));
 }
 
+.page {
+  display: grid;
+  grid-template-rows:auto 1fr auto;
+  grid-template-columns:100%;
+  min-height:100vh;
+  min-height:100svh;
+}
+
 .empty {
   display: none;
 }
