@@ -12,12 +12,15 @@ import { useUser } from '../../../hooks/queries/users';
 import type { UICapture } from './use-tracker';
 
 import { Button, CircularProgress } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 interface Props {
   captures: UICapture[];
 }
 
 export function MarkAllButton ({ captures }: Props) {
+  const theme = useTheme();
+
   const { username, slug } = useParams<{ username: string; slug: string }>();
 
   const { session } = useSession();
@@ -91,13 +94,13 @@ export function MarkAllButton ({ captures }: Props) {
 
   return (
     <Button
-      className="btn btn-blue"
+      // className="btn btn-blue"
       disableElevation
       disabled={isLoading}
-      endIcon={<CircularProgress color="inherit" size={14} sx={{ display: isLoading ? '' : 'none' }} thickness={6} />}
+      endIcon={isLoading ? <CircularProgress color="inherit" size={14} sx={{ display: isLoading ? '' : 'none' }} thickness={6} /> : null}
       onClick={handleButtonClick}
       size="small"
-      sx={{ borderRadius: '30px' }}
+      sx={{ borderRadius: theme.shape.pill }}
       variant="contained"
     >
       {uncaught === 0 ? 'Unmark' : 'Mark'} All

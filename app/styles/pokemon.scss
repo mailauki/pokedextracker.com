@@ -14,11 +14,9 @@
   display: grid;
   grid-template-columns: repeat(6, minmax(var(--pokemon-box-size), 1fr));
   grid-auto-rows: var(--pokemon-box-size);
-  // grid-auto-rows: minmax(0, var(--pokemon-box-size));
 
   gap: 8px;
   justify-content: space-between;
-  // overflow-y: hidden;
 }
 
 .pokemon {

@@ -3,11 +3,7 @@ import find from 'lodash/find';
 import groupBy from 'lodash/groupBy';
 import keyBy from 'lodash/keyBy';
 import slug from 'slug';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faAsterisk, faChevronDown, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from '@mui/material';
-import type { SelectChangeEvent } from '@mui/material/Select';
-import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
+
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 
@@ -21,6 +17,10 @@ import { useSession } from '../../../hooks/contexts/use-session';
 
 import type { ChangeEvent, FormEvent } from 'react';
 import type { DexType, Game } from '../../../types';
+
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from '@mui/material';
+import type { SelectChangeEvent } from '@mui/material/Select';
+import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
 
 interface Props {
   isOpen: boolean;
@@ -131,7 +131,21 @@ export function DexCreate ({ isOpen, onRequestClose }: Props) {
         <Alert message={createDexMutation.error?.message} type="error" />
 
         <form onSubmit={handleSubmit}>
-          <TextField fullWidth helperText={<Typography align="left" fontSize={12} noWrap>/u/{session!.username}/{slug(title || 'Living Dex', { lower: true })}</Typography>} id="dex_title" inputProps={{ maxLength: 300 }} label="Title" margin="normal" name="dex_title" onChange={handleTitleChange} placeholder="Living Dex" required type="text" value={title} />
+          <TextField
+            fullWidth
+            helperText={
+              <Typography align="left" fontSize={12} noWrap>/u/{session!.username}/{slug(title || 'Living Dex', { lower: true })}</Typography>
+            }
+            id="dex_title"
+            inputProps={{ maxLength: 300 }}
+            label="Title" margin="normal"
+            name="dex_title"
+            onChange={handleTitleChange}
+            placeholder="Living Dex"
+            required
+            type="text"
+            value={title}
+          />
 
           <FormControl fullWidth margin="normal">
             <InputLabel>Game</InputLabel>
@@ -146,7 +160,17 @@ export function DexCreate ({ isOpen, onRequestClose }: Props) {
             <FormLabel>Dex Type</FormLabel>
             <RadioGroup aria-labelledby="" name="dex-type" row>
               {dexTypesByGameFamilyId[gamesById[game].game_family.id].map((dt) => (
-                <FormControlLabel control={<Radio checked={dexType === dt.id} name="dex-type" onChange={() => setDexType(dt.id)} />} key={dt.id} label={dt.name} />
+                <FormControlLabel
+                  control={
+                    <Radio
+                      checked={dexType === dt.id}
+                      name="dex-type"
+                      onChange={() => setDexType(dt.id)}
+                    />
+                  }
+                  key={dt.id}
+                  label={dt.name}
+                />
               ))}
             </RadioGroup>
           </FormControl>
@@ -154,17 +178,47 @@ export function DexCreate ({ isOpen, onRequestClose }: Props) {
           <FormControl fullWidth margin="normal">
             <FormLabel>Type</FormLabel>
             <RadioGroup aria-labelledby="" name="type" row>
-              <FormControlLabel control={<Radio checked={!shiny} name="type" onChange={() => setShiny(false)} />} label="Normal" />
-              <FormControlLabel control={<Radio checked={shiny} name="type" onChange={() => setShiny(true)} />} label="Shiny" />
+              <FormControlLabel
+                control={
+                  <Radio
+                    checked={!shiny}
+                    name="type"
+                    onChange={() => setShiny(false)}
+                  />
+                }
+                label="Normal"
+              />
+              <FormControlLabel
+                control={
+                  <Radio
+                    checked={shiny}
+                    name="type"
+                    onChange={() => setShiny(true)}
+                  />
+                }
+                label="Shiny"
+              />
             </RadioGroup>
           </FormControl>
 
-          <Button disabled={createDexMutation.isLoading} endIcon={<ArrowRightIcon />} fullWidth size="large" type="submit" variant="contained">Create</Button>
+          <Button
+            disabled={createDexMutation.isLoading}
+            endIcon={<ArrowRightIcon />}
+            fullWidth
+            size="large"
+            sx={{ mt: 2, mb: 2 }}
+            type="submit"
+            variant="contained"
+          >
+            Create
+          </Button>
         </form>
       </DialogContent>
 
       <DialogActions sx={{ justifyContent: 'center' }}>
-        <Button aria-label="close" onClick={handleRequestClose}>Go Back</Button>
+        <Button aria-label="close" onClick={handleRequestClose}>
+          Go Back
+        </Button>
       </DialogActions>
     </Dialog>
   );

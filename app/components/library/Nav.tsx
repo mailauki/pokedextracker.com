@@ -1,16 +1,15 @@
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-// import { faCaretDown, faCog, faMoon, faSignOutAlt, faSun, faTh, faUser } from '@fortawesome/free-solid-svg-icons';
-import { AppBar, Button, IconButton, ListItemIcon, Menu, MenuItem, Stack, Toolbar, Tooltip } from '@mui/material';
-import LightIcon from '@mui/icons-material/Brightness4';
-import DarkIcon from '@mui/icons-material/Brightness7';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useState } from 'react';
 
 import { ReactGA } from '../../utils/analytics';
 import { useLocalStorageContext } from '../../hooks/contexts/use-local-storage-context';
 import { useSession } from '../../hooks/contexts/use-session';
 import type { MouseEvent } from 'react';
+
+import { AppBar, Button, IconButton, ListItemIcon, Menu, MenuItem, Stack, Toolbar, Tooltip } from '@mui/material';
+import LightIcon from '@mui/icons-material/Brightness4';
+import DarkIcon from '@mui/icons-material/Brightness7';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Logout, Person, Settings } from '@mui/icons-material';
 
 export function Nav () {
@@ -175,7 +174,7 @@ export function Nav () {
           </Stack>
         </Toolbar>
       </AppBar>
-      <Toolbar id="back-to-top-anchor" variant="dense" />
+      <Toolbar id="back-to-top-anchor" sx={{ position: 'fixed', top: 0 }} variant="dense" />
     </>
   );
 }

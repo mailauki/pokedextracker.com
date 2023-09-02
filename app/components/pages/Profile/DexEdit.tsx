@@ -3,12 +3,7 @@ import find from 'lodash/find';
 import groupBy from 'lodash/groupBy';
 import keyBy from 'lodash/keyBy';
 import slug from 'slug';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faAsterisk, faChevronDown, faLongArrowAltRight, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, IconButton, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from '@mui/material';
-import type { SelectChangeEvent } from '@mui/material/Select';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
+
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Alert } from '../../library/Alert';
@@ -22,6 +17,11 @@ import { useSession } from '../../../hooks/contexts/use-session';
 
 import type { ChangeEvent, MouseEvent, FormEvent } from 'react';
 import type { Dex, DexType, Game } from '../../../types';
+
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, IconButton, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, TextField, Typography } from '@mui/material';
+import type { SelectChangeEvent } from '@mui/material/Select';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
 
 const GAME_WARNING = 'Any capture info specific to your old game will be lost.';
 const REGIONAL_WARNING = 'Any non-regional capture info will be lost.';
@@ -194,10 +194,27 @@ export function DexEdit ({ dex, isOpen, onRequestClose }: Props) {
 
       {isConfirmingDelete ? (
         <DialogContent sx={{ pl: 8, pr: 8, pb: 6 }}>
-          <Stack alignItems="center" spacing={1}>
-            <Typography>Are you sure?</Typography>
-            <Button color="warning" onClick={handleDeleteClick}>Yes</Button>
-            <Button onClick={() => setIsConfirmingDelete(false)}>No</Button>
+          <Stack alignItems="center" spacing={2}>
+            <Typography variant="h5">Are you sure?</Typography>
+
+            <Button
+              color="error"
+              fullWidth
+              onClick={handleDeleteClick}
+              size="large"
+              variant="contained"
+            >
+              Yes
+            </Button>
+
+            <Button
+              fullWidth
+              onClick={() => setIsConfirmingDelete(false)}
+              size="large"
+              variant="outlined"
+            >
+              No
+            </Button>
           </Stack>
         </DialogContent>
       ) : (
@@ -205,7 +222,25 @@ export function DexEdit ({ dex, isOpen, onRequestClose }: Props) {
           <Alert message={updateDexMutation.error?.message || deleteDexMutation.error?.message} type="error" />
 
           <form onSubmit={handleUpdateSubmit}>
-            <TextField error={showUrlWarning} fullWidth helperText={<Typography align="left" fontSize={12} noWrap>{showUrlWarning ? URL_WARNING : `/u/${session!.username}/${slug(title || 'Living Dex', { lower: true })}` }</Typography>} id="dex_title" inputProps={{ maxLength: 300 }} label="Title" margin="normal" name="dex_title" onChange={handleTitleChange} placeholder="Living Dex" required type="text" value={title} />
+            <TextField
+              error={showUrlWarning}
+              fullWidth
+              helperText={
+                <Typography align="left" fontSize={12} noWrap>
+                  {showUrlWarning ? URL_WARNING : `/u/${session!.username}/${slug(title || 'Living Dex', { lower: true })}` }
+                </Typography>
+              }
+              id="dex_title"
+              inputProps={{ maxLength: 300 }}
+              label="Title"
+              margin="normal"
+              name="dex_title"
+              onChange={handleTitleChange}
+              placeholder="Living Dex"
+              required
+              type="text"
+              value={title}
+            />
 
             <FormControl error={showGameWarning} fullWidth margin="normal">
               <InputLabel>Game</InputLabel>
@@ -235,7 +270,17 @@ export function DexEdit ({ dex, isOpen, onRequestClose }: Props) {
               </RadioGroup>
             </FormControl>
 
-            <Button disabled={updateDexMutation.isLoading || deleteDexMutation.isLoading} endIcon={<ArrowRightIcon />} fullWidth size="large" type="submit" variant="contained">{isConfirmingUpdate ? 'Confirm' : ''} Edit</Button>
+            <Button
+              disabled={updateDexMutation.isLoading || deleteDexMutation.isLoading}
+              endIcon={<ArrowRightIcon />}
+              fullWidth
+              size="large"
+              sx={{ mt: 2, mb: 2 }}
+              type="submit"
+              variant="contained"
+            >
+              {isConfirmingUpdate ? 'Confirm' : ''} Edit
+            </Button>
           </form>
         </DialogContent>
       )}

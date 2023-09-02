@@ -5,6 +5,7 @@ import { nationalId, padding } from '../../../utils/formatting';
 
 import type { Dispatch, SetStateAction } from 'react';
 import type { UICapture } from './use-tracker';
+import { Box } from '@mui/material';
 
 const DEFER_CUTOFF = 120;
 
@@ -66,7 +67,7 @@ export function SearchResults ({ captures, hideCaught, query, setHideCaught, set
   }
 
   return (
-    <div className="search-results">
+    <Box className="search-results" sx={{ mt: 6 }}>
       {filteredCaptures.map((capture, i) => (
         <Pokemon
           capture={capture}
@@ -75,6 +76,6 @@ export function SearchResults ({ captures, hideCaught, query, setHideCaught, set
           setSelectedPokemon={setSelectedPokemon}
         />
       ))}
-    </div>
+    </Box>
   );
 }

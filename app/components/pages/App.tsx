@@ -13,6 +13,7 @@ import { Register } from './Register';
 import { Rollbar } from '../../utils/rollbar';
 import { Tracker } from './Tracker';
 import { Nav } from '../library/Nav';
+import { Footer } from '../library/Footer';
 import { BackToTop } from '../library/BackToTop';
 import { logPageView } from '../../utils/analytics';
 import { useLocalStorageContext } from '../../hooks/contexts/use-local-storage-context';
@@ -65,6 +66,10 @@ export function App () {
               secondary: amber,
             }),
         },
+        shape: {
+          // pill: '30px',
+          pill: 5,
+        }
       }),
     [darkMode],
   );
@@ -75,7 +80,6 @@ export function App () {
         <CssBaseline />
         {/* <div className={`root ${isNightMode ? 'night-mode' : ''}`}> */}
         <Nav />
-        {/* <Container maxWidth="md"> */}
         <Switch>
           <Route component={Home} exact path="/" />
           <Route component={Login} exact path="/login" />
@@ -86,7 +90,6 @@ export function App () {
           <Route component={Tracker} exact path="/u/:username/:slug" />
           <Route component={NotFound} path="/" />
         </Switch>
-        {/* </Container> */}
         {/* </div> */}
         <BackToTop />
       </ThemeProvider>

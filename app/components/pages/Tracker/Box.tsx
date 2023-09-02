@@ -78,28 +78,5 @@ export function Box ({ captures, deferred = false, dexTotal, setSelectedPokemon 
         {empties.map((index) => <Pokemon capture={null} key={index} setSelectedPokemon={setSelectedPokemon} />)}
       </div>
     </div>
-    // <Accordion className="box" elevation={0}>
-    //   <AccordionSummary
-    //     expandIcon={<ExpandMoreIcon />}
-    //     aria-controls={`panel${title}-content`}
-    //     id={`panel${title}-header`}
-    //   >
-    //     <Stack
-    //       alignItems="center"
-    //       direction="row"
-    //       justifyContent="space-between"
-    //       sx={{ mr: 1, width: '100%' }}
-    //     >
-    //       <Typography variant="h5">{title}</Typography>
-    //       <MarkAllButton captures={captures} />
-    //     </Stack>
-    //   </AccordionSummary>
-    //   <AccordionDetails>
-    //     <div className="box-container">
-    //       {captures.map((capture) => <Pokemon capture={capture} key={capture.pokemon.id} setSelectedPokemon={setSelectedPokemon} />)}
-    //       {empties.map((index) => <Pokemon capture={null} key={index} setSelectedPokemon={setSelectedPokemon} />)}
-    //     </div>
-    //   </AccordionDetails>
-    // </Accordion>
   );
 }

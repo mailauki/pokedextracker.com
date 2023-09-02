@@ -3,8 +3,17 @@ import { Circle } from '@mui/icons-material';
 
 export function Footer () {
   return (
-    <Paper elevation={1} sx={{ p: '100px 20px' }}>
-      <Stack alignItems="center" direction="row" justifyContent="center" spacing={1}>
+    <Paper elevation={1}>
+      <Stack
+        alignItems="center"
+        direction="row"
+        divider={<Circle fontSize="small" sx={{ fontSize: '8px' }} />}
+        flexWrap="wrap"
+        justifyContent="center"
+        spacing={1}
+        sx={{ p: '80px 20px' }}
+        useFlexGap
+      >
         <Link
           href="https://pokedextracker.com/"
           rel="noopener noreferrer"
@@ -12,8 +21,6 @@ export function Footer () {
           target="_blank"
           variant="overline"
         >PokédexTracker</Link>
-
-        <Circle fontSize="small" sx={{ fontSize: '8px' }} />
 
         <Link
           href="https://pokedextracker.com/blog/"
@@ -23,8 +30,6 @@ export function Footer () {
           variant="overline"
         >Blog</Link>
 
-        <Circle fontSize="small" sx={{ fontSize: '8px' }} />
-
         <Link href="https://twitter.com/PokedexTracker"
           rel="noopener noreferrer"
           sx={{ fontWeight: 'bold' }}
@@ -32,16 +37,12 @@ export function Footer () {
           variant="overline"
         >Twitter</Link>
 
-        <Circle fontSize="small" sx={{ fontSize: '8px' }} />
-
         <Link href="https://github.com/pokedextracker"
           rel="noopener noreferrer"
           sx={{ fontWeight: 'bold' }}
           target="_blank"
           variant="overline"
         >Github</Link>
-
-        <Circle fontSize="small" sx={{ fontSize: '8px' }} />
 
         <Link href="https://www.patreon.com/pokedextracker"
           rel="noopener noreferrer"

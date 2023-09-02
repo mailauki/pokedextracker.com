@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
@@ -8,15 +6,21 @@ import { DexPreview } from './DexPreview';
 import { Footer } from '../../library/Footer';
 import { FriendCode } from '../../library/FriendCode';
 import { Header } from '../../library/Header';
-import { Nav } from '../../library/Nav';
+// import { Nav } from '../../library/Nav';
 import { NotFound } from '../NotFound';
+import { Loading } from '../../library/Loading';
 import { Notification } from '../../library/Notification';
 import { Reload } from '../../library/Reload';
 import { useSession } from '../../../hooks/contexts/use-session';
 import { useUser } from '../../../hooks/queries/users';
-import { Container } from '@mui/material';
+
+import { Box, Button, Container, Stack } from '@mui/material';
+import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
+import { useTheme } from '@mui/material/styles';
 
 export function Profile () {
+  const theme = useTheme();
+
   const { username } = useParams<{ username: string }>();
 
   const {
@@ -36,7 +40,7 @@ export function Profile () {
   const handleDexCreateRequestClose = () => setShowDexCreate(false);
 
   if (userIsLoading) {
-    return <div className="loading">Loading...</div>;
+    return <Loading />;
   }
 
   if (!user) {
@@ -47,24 +51,50 @@ export function Profile () {
 
   return (
     <div className="profile-container">
-      <Nav />
+      {/* <Nav /> */}
       <Reload />
       {/* <div className="profile"> */}
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{ mt: 2, mb: 4 }}>
         {/* <div className="wrapper"> */}
-        <header>
+        {/* <header>
           <Notification />
           <Header profile />
           <FriendCode />
-        </header>
+        </header> */}
+        <Box>
+          <Notification />
+          <Header profile />
+          <FriendCode />
+        </Box>
 
         {user.dexes.map((dex) => <DexPreview dex={dex} key={dex.id} />)}
 
-        {ownPage &&
+        {/* {ownPage &&
           <div className="dex-create">
-            <div className="btn btn-blue" onClick={handleCreateNewDexClick}>Create a New Dex <FontAwesomeIcon icon={faLongArrowAltRight} /></div>
+            <Button
+              endIcon={<ArrowRightIcon />}
+              onClick={handleCreateNewDexClick}
+              size="large"
+              sx={{ m: 'auto' }}
+              variant="contained"
+            >
+              Create a New Dex
+            </Button>
             <DexCreate isOpen={showDexCreate} onRequestClose={handleDexCreateRequestClose} />
           </div>
+        } */}
+        {ownPage &&
+          <Stack alignItems="center" className="dex-create" justifyContent="center" sx={{ mt: 2, mb: 2 }}>
+            <Button
+              endIcon={<ArrowRightIcon />}
+              onClick={handleCreateNewDexClick}
+              size="large"
+              variant="contained"
+            >
+              Create a New Dex
+            </Button>
+            <DexCreate isOpen={showDexCreate} onRequestClose={handleDexCreateRequestClose} />
+          </Stack>
         }
         {/* </div> */}
       </Container>

@@ -1,12 +1,13 @@
 import uniqBy from 'lodash/uniqBy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowAltLeft, faLongArrowAltRight, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { capitalize } from '../../../utils/formatting';
 
 import type { Evolution } from '../../../types';
 
 import { Stack, Typography } from '@mui/material';
+import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
 
 function evolutionKey (evolution: Evolution) {
   return `${evolution.trigger}:${evolution.level}:${evolution.stone}:${evolution.held_item}:${evolution.notes}`;
@@ -53,16 +54,17 @@ export function Evolutions ({ evolutions, pokemonId }: Props) {
     }
 
     return (
-      // <div className="evolution-trigger" key={key}>
-      //   <FontAwesomeIcon icon={evolution.trigger === 'breed' ? faLongArrowAltLeft : faLongArrowAltRight} />
-      //   <div>
-      //     {trigger}
-      //     {evolution.held_item ? <span>holding {capitalize(evolution.held_item)} </span> : null}
-      //     {notes}
-      //   </div>
-      // </div>
-      <Stack alignItems="center" className="evolution-trigger" direction="column" key={key} sx={{ textAlign: 'center', maxWidth: '85px' }}>
-        <FontAwesomeIcon icon={evolution.trigger === 'breed' ? faLongArrowAltLeft : faLongArrowAltRight} />
+      <Stack
+        alignItems="center"
+        // className="evolution-trigger"
+        direction="column"
+        key={key}
+        sx={{ textAlign: 'center', maxWidth: '85px' }}
+      >
+        <ArrowRightIcon
+          fontSize="small"
+          sx={{ transform: evolution.trigger === 'breed' ? 'rotate(180deg)' : '' }}
+        />
         <Typography variant="caption">
           {trigger}
           {evolution.held_item ? <span>holding {capitalize(evolution.held_item)} </span> : null}

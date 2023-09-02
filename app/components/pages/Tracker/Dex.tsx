@@ -72,8 +72,8 @@ export function Dex ({
 
   return (
     <>
-      <Notification />
       <Wrapper>
+        <Notification />
         <Header />
         <>
           <Anchor
