@@ -13,14 +13,15 @@ export function InfoLocations ({ locations }: Props) {
       sx={{
         overflowY: 'scroll',
         height: '100%',
-        width: 'var(--info-drawer-width)',
+        // width: 'var(--info-drawer-width)',
+        width: '100%',
         pb: 4,
       }}
     >
       {locations.map((location) => (
         <div key={location.game.id}>
-          <List disablePadding sx={{ listStyleType: 'circle', listStylePosition: 'inside' }}>
-            <ListSubheader>Pokémon {location.game.name}</ListSubheader>
+          <List disablePadding>
+            <ListSubheader disableSticky>Pokémon {location.game.name}</ListSubheader>
 
             {location.value.map((loc) => (
               <ListItem disablePadding key={loc} sx={{ ml: 4, width: 'calc(var(--info-drawer-width)-32px)' }}>

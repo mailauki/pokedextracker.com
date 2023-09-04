@@ -86,145 +86,151 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
 
   if (!pokemon) {
     return (
-      <Drawer
-        anchor="right"
-        open={showInfo}
-        sx={{
-          flexShrink: 0,
-          ['& .MuiDrawer-paper']: {
-            // backgroundColor: 'primary.dark',
-            // color: 'primary.contrastText',
-            zIndex: 1050,
-          },
-        }}
-        variant="permanent"
-      >
-        <Stack alignItems="stretch" direction="row" justifyContent="space-between" sx={{ height: '100%' }}>
-          <IconButton
-            color="inherit"
-            disableRipple
-            onClick={handleInfoClick}
-            size="small"
-            sx={{ borderRadius: 0, borderRight: '1px solid', borderColor: 'divider' }}
-          >
-            {showInfo ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
-          </IconButton>
+      // <Drawer
+      //   anchor="right"
+      //   open={showInfo}
+      //   sx={{
+      //     flexShrink: 0,
+      //     ['& .MuiDrawer-paper']: {
+      //       zIndex: 1050,
+      //     },
+      //   }}
+      //   variant="permanent"
+      // >
+      //   <Stack alignItems="stretch" direction="row" justifyContent="space-between" sx={{ height: '100%' }}>
+      //     <IconButton
+      //       color="inherit"
+      //       disableRipple
+      //       onClick={handleInfoClick}
+      //       size="small"
+      //       sx={{ borderRadius: 0, borderRight: '1px solid', borderColor: 'divider' }}
+      //     >
+      //       {showInfo ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
+      //     </IconButton>
 
-          <DialogContent dividers={scroll === 'paper'} sx={{ width: '100%', display: showInfo ? '' : 'none' }}>
-            <List>
-              <Toolbar />
-            </List>
-          </DialogContent>
-        </Stack>
-      </Drawer>
+      //     <Stack
+      //       direction="column"
+      //       justifyContent="space-between"
+      //       sx={{
+      //         height: '100%',
+      //         width: 'var(--info-drawer-width)',
+      //         display: showInfo ? '' : 'none',
+      //       }}
+      //     >
+      <Box>
+        <Toolbar variant="dense" />
+      </Box>
+      //     </Stack>
+      //   </Stack>
+      // </Drawer>
     );
   }
 
   return (
-    <Drawer
-      anchor="right"
-      open={showInfo}
-      sx={{
-        flexShrink: 0,
-        ['& .MuiDrawer-paper']: {
-          // backgroundColor: 'primary.main',
-          // color: 'primary.contrastText',
-          zIndex: 1050,
-        },
-      }}
-      variant="permanent"
-    >
-      <Stack
-        alignItems="stretch"
-        direction="row"
-        justifyContent="space-between"
-        sx={{ height: '100%' }}
-      >
-        <IconButton
-          color="inherit"
-          disableRipple
-          onClick={handleInfoClick}
-          size="small"
-          sx={{
-            backgroundColor: 'primary.main',
-            borderRadius: 0,
-            borderRight: '1px solid',
-            borderColor: 'divider',
-            color: 'primary.contrastText',
-            width: 'var(--info-drawer-button-width)',
-          }}
+    // <Drawer
+    //   anchor="right"
+    //   open={showInfo}
+    //   sx={{
+    //     flexShrink: 0,
+    //     ['& .MuiDrawer-paper']: {
+    //       zIndex: 1050,
+    //     },
+    //   }}
+    //   variant="permanent"
+    // >
+    //   <Stack
+    //     alignItems="stretch"
+    //     direction="row"
+    //     justifyContent="space-between"
+    //     sx={{ height: '100%' }}
+    //   >
+    //     <IconButton
+    //       color="inherit"
+    //       disableRipple
+    //       onClick={handleInfoClick}
+    //       size="small"
+    //       sx={{
+    //         backgroundColor: 'primary.main',
+    //         borderRadius: 0,
+    //         borderRight: '1px solid',
+    //         borderColor: 'divider',
+    //         color: 'primary.contrastText',
+    //         width: 'var(--info-drawer-button-width)',
+    //       }}
+    //     >
+    //       {showInfo ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
+    //     </IconButton>
+
+    //     <Stack
+    //       direction="column"
+    //       justifyContent="space-between"
+    //       sx={{
+    //         height: '100%',
+    //         width: 'var(--info-drawer-width)',
+    //         display: showInfo ? '' : 'none',
+    //       }}
+    //     >
+    <>
+      <Box>
+        <Toolbar variant="dense" />
+        <ListItem
+          secondaryAction={
+            <Typography variant="h5">#{padding(dex.dex_type.tags.includes('regional') ? (pokemon.dex_number === -1 ? '---' : pokemon.dex_number) : nationalId(pokemon.national_id), dex.total >= 1000 ? 4 : 3)}</Typography>
+          }
         >
-          {showInfo ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
-        </IconButton>
+          <ListItemIcon>
+            <i className={iconClass(pokemon, dex)} />
+          </ListItemIcon>
+          <ListItemText primary={<Typography variant="h4">{pokemon.name}</Typography>} />
+        </ListItem>
 
-        <Stack
-          direction="column"
-          justifyContent="space-between"
-          sx={{
-            height: '100%',
-            width: 'var(--info-drawer-width)',
-            display: showInfo ? '' : 'none',
-          }}
-        >
-          <Box>
-            <Toolbar variant="dense" />
-            <ListItem
-              secondaryAction={
-                <Typography variant="h5">#{padding(dex.dex_type.tags.includes('regional') ? (pokemon.dex_number === -1 ? '---' : pokemon.dex_number) : nationalId(pokemon.national_id), dex.total >= 1000 ? 4 : 3)}</Typography>
-              }
-            >
-              <ListItemIcon>
-                <i className={iconClass(pokemon, dex)} />
-              </ListItemIcon>
-              <ListItemText primary={<Typography variant="h3">{pokemon.name}</Typography>} />
-            </ListItem>
+        <Divider />
+      </Box>
 
-            <Divider />
-          </Box>
+      <InfoLocations locations={pokemon.locations} />
 
-          <InfoLocations locations={pokemon.locations} />
+      <Box>
+        <Divider />
 
-          <Box>
-            <Divider />
+        <EvolutionFamily family={pokemon.evolution_family} setSelectedPokemon={setSelectedPokemon} />
 
-            <EvolutionFamily family={pokemon.evolution_family} setSelectedPokemon={setSelectedPokemon} />
+        <Divider />
 
-            <Divider />
+        <Stack direction="row">
+          <Button
+            color="inherit"
+            component="a"
+            endIcon={<OpenInNewIcon sx={{ color: 'text.disabled' }} />}
+            href={`http://bulbapedia.bulbagarden.net/wiki/${encodeURI(pokemon.name)}_(Pok%C3%A9mon)`}
+            onClick={() => ReactGA.event({ action: 'open Bulbapedia link', category: 'Info', label: pokemon.name })}
+            rel="noopener noreferrer"
+            size="large"
+            sx={{ p: 2, borderRadius: 0, width: '100%' }}
+            target="_blank"
+          >
+            Bulbapedia
+          </Button>
 
-            <Stack direction="row">
-              <Button
-                color="inherit"
-                component="a"
-                endIcon={<OpenInNewIcon sx={{ color: 'text.disabled' }} />}
-                href={`http://bulbapedia.bulbagarden.net/wiki/${encodeURI(pokemon.name)}_(Pok%C3%A9mon)`}
-                onClick={() => ReactGA.event({ action: 'open Bulbapedia link', category: 'Info', label: pokemon.name })}
-                rel="noopener noreferrer"
-                size="large"
-                sx={{ p: 2, borderRadius: 0, width: '100%' }}
-                target="_blank"
-              >
-                Bulbapedia
-              </Button>
+          <Divider flexItem orientation="vertical" />
 
-              <Divider flexItem orientation="vertical" />
-
-              <Button
-                color="inherit"
-                component="a"
-                endIcon={<OpenInNewIcon sx={{ color: 'text.disabled' }} />}
-                href={serebiiLink(serebiiPath, pokemon.national_id)}
-                onClick={() => ReactGA.event({ action: 'open Serebii link', category: 'Info', label: pokemon.name })}
-                rel="noopener noreferrer"
-                size="large"
-                sx={{ p: 2, borderRadius: 0, width: '100%' }}
-                target="_blank"
-              >
-                Serebii
-              </Button>
-            </Stack>
-          </Box>
+          <Button
+            color="inherit"
+            component="a"
+            endIcon={<OpenInNewIcon sx={{ color: 'text.disabled' }} />}
+            href={serebiiLink(serebiiPath, pokemon.national_id)}
+            onClick={() => ReactGA.event({ action: 'open Serebii link', category: 'Info', label: pokemon.name })}
+            rel="noopener noreferrer"
+            size="large"
+            sx={{ p: 2, borderRadius: 0, width: '100%' }}
+            target="_blank"
+          >
+            Serebii
+          </Button>
         </Stack>
-      </Stack>
-    </Drawer>
+      </Box>
+    </>
+    //     </Stack>
+    //   </Stack>
+    // </Drawer>
   );
 }

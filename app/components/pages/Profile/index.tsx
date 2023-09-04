@@ -99,7 +99,7 @@ export function Profile () {
         {/* </div> */}
       </Container>
       {/* </div> */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

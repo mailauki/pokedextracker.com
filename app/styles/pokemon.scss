@@ -1,8 +1,9 @@
 :root {
   --pokemon-box-size: 120px;
 
-  --info-drawer-width: 350px;
   --info-drawer-button-width: 32px;
+  --info-drawer-width: 350px;
+  --info-drawer-width-mobile: calc(100% - (var(--info-drawer-button-width)));
   --drawer-width: calc(var(--info-drawer-width) + var(--info-drawer-button-width));
 }
 

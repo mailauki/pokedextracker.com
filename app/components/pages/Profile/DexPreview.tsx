@@ -19,6 +19,8 @@ interface Props {
 }
 
 export function DexPreview ({ dex }: Props) {
+  const matches = useMediaQuery('(max-width:600px)');
+
   const { username } = useParams<{ username: string }>();
 
   const user = useUser(username).data!;
@@ -34,8 +36,6 @@ export function DexPreview ({ dex }: Props) {
   const handleEditClick = () => setShowEditDex(true);
 
   const ownPage = session?.id === user.id;
-
-  const matches = useMediaQuery('(max-width:600px)');
 
   return (
     <>

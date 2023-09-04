@@ -7,6 +7,7 @@ import { Dex } from './Dex';
 import { Footer } from '../../library/Footer';
 import { Loading } from '../../library/Loading';
 import { Info } from './Info';
+import { InfoDrawer } from './InfoDrawer';
 // import { Nav } from '../../library/Nav';
 import { NotFound } from '../NotFound';
 // import { Reload } from '../../library/Reload';
@@ -110,7 +111,7 @@ export function TrackerInner () {
         <Footer />
       </Box>
 
-      <Info selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} />
+      <InfoDrawer selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} />
     </>
   );
 }

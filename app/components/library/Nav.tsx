@@ -153,7 +153,7 @@ export function Nav () {
             </Stack>
           </Toolbar>
         </AppBar>
-        <Toolbar id="back-to-top-anchor" variant="dense" />
+        {/* <Toolbar id="back-to-top-anchor" variant="dense" /> */}
       </>
     );
   }
@@ -174,7 +174,7 @@ export function Nav () {
           </Stack>
         </Toolbar>
       </AppBar>
-      <Toolbar id="back-to-top-anchor" sx={{ position: 'fixed', top: 0 }} variant="dense" />
+      {/* <Toolbar id="back-to-top-anchor" sx={{ position: 'fixed', top: 0 }} variant="dense" /> */}
     </>
   );
 }

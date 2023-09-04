@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 import { useSession } from '../../hooks/contexts/use-session';
 
-import { AppBar, Avatar, Box, Button, Container, IconButton, Link as Anchor, List, Stack, Typography, ListSubheader, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import { AppBar, Avatar, Box, Button, Container, IconButton, Link as Anchor, List, Stack, Typography, ListSubheader, ListItem, ListItemButton, ListItemText, Toolbar } from '@mui/material';
 import Bullet from '@mui/icons-material/Circle';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
 import { RssFeed, Twitter } from '@mui/icons-material';
@@ -62,17 +62,17 @@ export function Home () {
     //   <div className="footer">Made with <i className="pkicon pkicon-ball-love" /> in San Francisco</div>
     // </div>
     <>
-      <Box
+      {/* <Box
         bgcolor="background.paper"
         sx={{
           backgroundImage: 'url(/pattern-night.png)',
           backgroundSize: '500px 250px',
-          // backgroundSize: 'contain',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat',
           backgroundBlendMode: 'difference',
         }}
       >
+        <Toolbar variant="dense" /> */}
         <Container maxWidth="sm" sx={{ mt: 2, mb: 4 }}>
           <Stack alignItems="center" direction="column" sx={{ textAlign: 'center' }}>
             <Avatar
@@ -85,7 +85,7 @@ export function Home () {
             <Typography>A tool for tracking your Living Dex progress!</Typography>
 
             <List>
-              <ListSubheader sx={{ bgcolor: 'transparent' }}>We currently support:</ListSubheader>
+              <ListSubheader disableGutters disableSticky sx={{ bgcolor: 'transparent' }}>We currently support:</ListSubheader>
 
               <ListItem disablePadding>
                 <Bullet fontSize="small" sx={{ fontSize: '8px', mr: 2, color: 'text.secondary' }} />
@@ -239,13 +239,15 @@ export function Home () {
               </ListItem>
             </List>
 
-            {/* {session ? (
+            {session ? (
               <>
                 <Button
+                  component={Link}
                   endIcon={<ArrowRightIcon />}
                   // fullWidth
                   size="large"
                   sx={{ mt: 2, mb: 2 }}
+                  to={`/u/${session.username}`}
                   type="submit"
                   variant="contained"
                 >
@@ -253,21 +255,30 @@ export function Home () {
                 </Button>
               </>
             ) : (
-              <>
+              <Stack direction="row" spacing={2} sx={{ mt: 2, mb: 2 }}>
                 <Button
+                  component={Link}
+                  endIcon={<ArrowRightIcon />}
+                  size="large"
+                  to="/register"
                   type="submit"
                   variant="contained"
                 >
                   Register
                 </Button>
                 <Button
+                  color="inherit"
+                  component={Link}
+                  endIcon={<ArrowRightIcon />}
+                  size="large"
+                  to="/login"
                   type="submit"
                   variant="contained"
                 >
                   Login
                 </Button>
-              </>
-            )} */}
+              </Stack>
+            )}
 
             <Typography paragraph>Easily toggle between and track your captured Pokémon, find the locations of those left to be captured, manage all your dexes on one <Anchor component={Link} to="/u/ashketchum10">profile</Anchor>, and share a public link with others to see how you can help each other out.</Typography>
 
@@ -298,7 +309,7 @@ export function Home () {
             </Box>
           </Stack>
         </Container>
-      </Box>
+      {/* </Box> */}
 
       <AppBar color="inherit" component="footer" elevation={1} position="relative">
         <Stack

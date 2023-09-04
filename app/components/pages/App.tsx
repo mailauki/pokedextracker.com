@@ -18,6 +18,7 @@ import { BackToTop } from '../library/BackToTop';
 import { logPageView } from '../../utils/analytics';
 import { useLocalStorageContext } from '../../hooks/contexts/use-local-storage-context';
 
+import { Container, Toolbar } from '@mui/material';
 import { ThemeProvider, alpha, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -81,17 +82,23 @@ export function App () {
         {/* <div className={`root ${isNightMode ? 'night-mode' : ''}`}> */}
         <div className="page">
           <Nav />
+          <Toolbar id="back-to-top-anchor" variant="dense" />
 
-          <Switch>
-            <Route component={Home} exact path="/" />
-            <Route component={Login} exact path="/login" />
-            <Route component={Register} exact path="/register" />
-            <Route component={Account} exact path="/account" />
-            <Route component={ProfileRedirect} exact path="/profile" />
-            <Route component={Profile} exact path="/u/:username" />
-            <Route component={Tracker} exact path="/u/:username/:slug" />
-            <Route component={NotFound} path="/" />
-          </Switch>
+          {/* <Container maxWidth="md" sx={{ mt: 2, mb: 4 }}> */}
+
+            <Switch>
+              <Route component={Home} exact path="/" />
+              <Route component={Login} exact path="/login" />
+              <Route component={Register} exact path="/register" />
+              <Route component={Account} exact path="/account" />
+              <Route component={ProfileRedirect} exact path="/profile" />
+              <Route component={Profile} exact path="/u/:username" />
+              <Route component={Tracker} exact path="/u/:username/:slug" />
+              <Route component={NotFound} path="/" />
+            </Switch>
+
+          {/* </Container> */}
+          {/* <Footer /> */}
 
           <BackToTop />
         </div>
