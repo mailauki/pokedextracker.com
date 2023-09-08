@@ -50,7 +50,7 @@ export function Profile () {
   const ownPage = session?.id === user.id;
 
   return (
-    <div className="profile-container">
+    <>
       {/* <Nav /> */}
       <Reload />
       {/* <div className="profile"> */}
@@ -99,7 +99,7 @@ export function Profile () {
         {/* </div> */}
       </Container>
       {/* </div> */}
-      {/* <Footer /> */}
-    </div>
+      <Footer />
+    </>
   );
 }
