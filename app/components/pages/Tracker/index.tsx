@@ -4,13 +4,14 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 
 import { Dex } from './Dex';
-import { Footer } from '../../library/Footer';
+// import { Footer } from '../../library/Footer';
 import { Loading } from '../../library/Loading';
-import { Info } from './Info';
+// import { Info } from './Info';
 import { InfoDrawer } from './InfoDrawer';
 // import { Nav } from '../../library/Nav';
+import { Main } from '../../library/Main';
 import { NotFound } from '../NotFound';
-import { Reload } from '../../library/Reload';
+// import { Reload } from '../../library/Reload';
 // import { SCROLL_DEBOUNCE, SHOW_SCROLL_THRESHOLD } from './Scroll';
 import { SearchBar } from './SearchBar';
 import { TrackerContextProvider, useTrackerContext } from './use-tracker';
@@ -98,8 +99,7 @@ export function TrackerInner () {
           setQuery={setQuery}
         />
 
-        <Container maxWidth="md" sx={{ mt: 2, mb: 4 }}>
-          <Reload />
+        <Main>
           <Dex
             hideCaught={hideCaught}
             query={query}
@@ -107,9 +107,7 @@ export function TrackerInner () {
             setQuery={setQuery}
             setSelectedPokemon={setSelectedPokemon}
           />
-        </Container>
-
-        <Footer />
+        </Main>
       </Box>
 
       <InfoDrawer selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} />
