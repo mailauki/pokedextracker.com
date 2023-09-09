@@ -13,10 +13,11 @@ import { ReactGA } from '../../utils/analytics';
 import { useLogin } from '../../hooks/queries/sessions';
 import { useSession } from '../../hooks/contexts/use-session';
 
-import type { ChangeEvent, FormEvent } from 'react';
+import type { ChangeEvent, FormEvent, MouseEvent } from 'react';
 
-import { Box, Button, CircularProgress, Link as Anchor, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Link as Anchor, Stack, TextField, Typography, InputAdornment, IconButton } from '@mui/material';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 export function Login () {
   const history = useHistory();
@@ -25,6 +26,8 @@ export function Login () {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const loginMutation = useLogin();
 
@@ -37,6 +40,12 @@ export function Login () {
       history.push(`/u/${session.username}`);
     }
   }, []);
+  
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  
+  const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -133,6 +142,20 @@ export function Login () {
             value={username}
           />
           <TextField
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    edge="end"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
             error={loginMutation.error?.message.includes('password')}
             fullWidth
             helperText={loginMutation.error?.message.includes('password') ? loginMutation.error?.message : null}
@@ -143,7 +166,7 @@ export function Login () {
             onChange={handlePasswordChange}
             placeholder="••••••••••••"
             required
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             value={password}
           />
 
