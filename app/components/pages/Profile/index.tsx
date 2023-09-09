@@ -52,9 +52,10 @@ export function Profile () {
   return (
     <>
       {/* <Nav /> */}
-      <Reload />
       {/* <div className="profile"> */}
       <Container maxWidth="md" sx={{ mt: 2, mb: 4 }}>
+        <Reload />
+
         {/* <div className="wrapper"> */}
         {/* <header>
           <Notification />

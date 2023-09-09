@@ -1,5 +1,5 @@
 import keyBy from 'lodash/keyBy';
-import throttle from 'lodash/throttle';
+// import throttle from 'lodash/throttle';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 
@@ -10,8 +10,8 @@ import { Info } from './Info';
 import { InfoDrawer } from './InfoDrawer';
 // import { Nav } from '../../library/Nav';
 import { NotFound } from '../NotFound';
-// import { Reload } from '../../library/Reload';
-import { SCROLL_DEBOUNCE, SHOW_SCROLL_THRESHOLD } from './Scroll';
+import { Reload } from '../../library/Reload';
+// import { SCROLL_DEBOUNCE, SHOW_SCROLL_THRESHOLD } from './Scroll';
 import { SearchBar } from './SearchBar';
 import { TrackerContextProvider, useTrackerContext } from './use-tracker';
 import { useCaptures } from '../../../hooks/queries/captures';
@@ -99,6 +99,7 @@ export function TrackerInner () {
         />
 
         <Container maxWidth="md" sx={{ mt: 2, mb: 4 }}>
+          <Reload />
           <Dex
             hideCaught={hideCaught}
             query={query}

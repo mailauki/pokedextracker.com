@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
-import { Alert } from '../library/Alert';
+// import { Alert } from '../library/Alert';
 import { Footer } from '../library/Footer';
 // import { Nav } from '../library/Nav';
 import { ReactGA } from '../../utils/analytics';
@@ -109,6 +109,8 @@ export function Login () {
     // </div>
     <>
       <Container maxWidth="xs" sx={{ mt: 2, mb: 4 }}>
+        <Reload />
+
         <Stack alignItems="center" direction="column">
           <Typography color="primary" sx={{ mb: 2 }} variant="h4">Login</Typography>
 

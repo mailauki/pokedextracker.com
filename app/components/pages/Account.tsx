@@ -178,8 +178,10 @@ export function Account () {
     //   <Footer />
     // </div>
     <>
-      <Container maxWidth="md" sx={{ mt: 2, mb: 4 }}>
-        <Stack direction="column">
+      <Container maxWidth="xs" sx={{ mt: 2, mb: 4 }}>
+        <Reload />
+
+        <Stack alignItems="center" direction="column">
           <Typography color="primary" sx={{ mb: 2 }} variant="h4">{sessionUser.username}&apos;s Account</Typography>
 
           <Box component="form" onSubmit={handleSubmit}>

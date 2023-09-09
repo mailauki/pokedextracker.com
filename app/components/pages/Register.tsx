@@ -322,6 +322,8 @@ export function Register () {
     // </div>
     <>
       <Container sx={{ mt: 2, mb: 4 }}>
+        <Reload />
+
         <Stack alignItems="center" direction="column">
           <Typography color="primary" sx={{ mb: 2 }} variant="h4">Register</Typography>
 
