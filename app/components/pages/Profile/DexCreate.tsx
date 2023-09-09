@@ -18,9 +18,10 @@ import { useSession } from '../../../hooks/contexts/use-session';
 import type { ChangeEvent, FormEvent } from 'react';
 import type { DexType, Game } from '../../../types';
 
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, IconButton, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface Props {
   isOpen: boolean;
@@ -126,6 +127,13 @@ export function DexCreate ({ isOpen, onRequestClose }: Props) {
   return (
     <Dialog onClose={handleRequestClose} open={isOpen}>
       <DialogTitle>Create New Dex</DialogTitle>
+      <IconButton
+        aria-label="close"
+        onClick={handleRequestClose}
+        sx={{ position: 'absolute', top: 8, right: 8 }}
+      >
+        <CloseIcon />
+      </IconButton>
 
       <DialogContent sx={{ pl: 8, pr: 8, pb: 6 }}>
         <Alert message={createDexMutation.error?.message} type="error" />

@@ -19,7 +19,7 @@ import { useCaptures } from '../../../hooks/queries/captures';
 import { useUser } from '../../../hooks/queries/users';
 import { useLocalStorageContext } from '../../../hooks/contexts/use-local-storage-context';
 
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 
 // To enable the inner component to access the context value, it needs to be nested under the provider, so we need this
 // wrapper component to add that nesting.

@@ -10,7 +10,7 @@ import { useUser } from '../../../hooks/queries/users';
 
 import type { Dex } from '../../../types';
 
-import { Stack, Link, IconButton, Divider } from '@mui/material';
+import { Stack, Link, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -39,7 +39,6 @@ export function DexPreview ({ dex }: Props) {
 
   return (
     <>
-      {/* <Divider /> */}
       <Stack direction="column" sx={{ mt: 2 }}>
         <Stack
           alignItems={matches ? 'normal' : 'center'}

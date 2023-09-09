@@ -10,15 +10,13 @@ import { InfoLocations } from './InfoLocations';
 import { ReactGA } from '../../../utils/analytics';
 import { iconClass } from '../../../utils/pokemon';
 import { nationalId, padding, serebiiLink } from '../../../utils/formatting';
-import { useLocalStorageContext } from '../../../hooks/contexts/use-local-storage-context';
+// import { useLocalStorageContext } from '../../../hooks/contexts/use-local-storage-context';
 import { usePokemon } from '../../../hooks/queries/pokemon';
 import { useUser } from '../../../hooks/queries/users';
 
 import type { Dex } from '../../../types';
 
-import { Box, Button, DialogContent, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Stack, Toolbar, Typography } from '@mui/material';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Box, Button, Divider, ListItem, ListItemIcon, ListItemText, Stack, Toolbar, Typography } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 const SEREBII_LINKS: Record<string, string> = {
@@ -49,8 +47,6 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
     dex_type: dex.dex_type.id,
   });
 
-  const { showInfo, setShowInfo } = useLocalStorageContext();
-
   const serebiiPath = useMemo(() => {
     if (!pokemon) {
       return '';
@@ -79,97 +75,15 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
     return SEREBII_LINKS[dex.game.game_family.id];
   }, [dex, pokemon]);
 
-  const handleInfoClick = () => {
-    ReactGA.event({ action: showInfo ? 'collapse' : 'uncollapse', category: 'Info' });
-    setShowInfo(!showInfo);
-  };
-
   if (!pokemon) {
     return (
-      // <Drawer
-      //   anchor="right"
-      //   open={showInfo}
-      //   sx={{
-      //     flexShrink: 0,
-      //     ['& .MuiDrawer-paper']: {
-      //       zIndex: 1050,
-      //     },
-      //   }}
-      //   variant="permanent"
-      // >
-      //   <Stack alignItems="stretch" direction="row" justifyContent="space-between" sx={{ height: '100%' }}>
-      //     <IconButton
-      //       color="inherit"
-      //       disableRipple
-      //       onClick={handleInfoClick}
-      //       size="small"
-      //       sx={{ borderRadius: 0, borderRight: '1px solid', borderColor: 'divider' }}
-      //     >
-      //       {showInfo ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
-      //     </IconButton>
-
-      //     <Stack
-      //       direction="column"
-      //       justifyContent="space-between"
-      //       sx={{
-      //         height: '100%',
-      //         width: 'var(--info-drawer-width)',
-      //         display: showInfo ? '' : 'none',
-      //       }}
-      //     >
       <Box>
         <Toolbar variant="dense" />
       </Box>
-      //     </Stack>
-      //   </Stack>
-      // </Drawer>
     );
   }
 
   return (
-    // <Drawer
-    //   anchor="right"
-    //   open={showInfo}
-    //   sx={{
-    //     flexShrink: 0,
-    //     ['& .MuiDrawer-paper']: {
-    //       zIndex: 1050,
-    //     },
-    //   }}
-    //   variant="permanent"
-    // >
-    //   <Stack
-    //     alignItems="stretch"
-    //     direction="row"
-    //     justifyContent="space-between"
-    //     sx={{ height: '100%' }}
-    //   >
-    //     <IconButton
-    //       color="inherit"
-    //       disableRipple
-    //       onClick={handleInfoClick}
-    //       size="small"
-    //       sx={{
-    //         backgroundColor: 'primary.main',
-    //         borderRadius: 0,
-    //         borderRight: '1px solid',
-    //         borderColor: 'divider',
-    //         color: 'primary.contrastText',
-    //         width: 'var(--info-drawer-button-width)',
-    //       }}
-    //     >
-    //       {showInfo ? <ChevronRightIcon fontSize="small" /> : <ChevronLeftIcon fontSize="small" />}
-    //     </IconButton>
-
-    //     <Stack
-    //       direction="column"
-    //       justifyContent="space-between"
-    //       sx={{
-    //         height: '100%',
-    //         width: 'var(--info-drawer-width)',
-    //         display: showInfo ? '' : 'none',
-    //       }}
-    //     >
     <>
       <Box>
         <Toolbar variant="dense" />
@@ -229,8 +143,5 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
         </Stack>
       </Box>
     </>
-    //     </Stack>
-    //   </Stack>
-    // </Drawer>
   );
 }

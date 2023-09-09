@@ -111,6 +111,71 @@
 //   // padding: 5px;
 // }
 
+// .evolution-pokemon-column,
+// .evolution-trigger-column {
+//   display: flex;
+//   flex-direction: column;
+//   // justify-content: space-around;
+//   justify-content: space-evenly;
+
+//   &.push {
+//     justify-content: flex-end;
+//   }
+// }
+
+// .evolution-pokemon-column {
+//   .pkicon-809 {
+//     margin-left: 3px;
+//   }
+
+//   a {
+//     cursor: pointer;
+//     padding: 0 5px;
+//   }
+// }
+
+// .evolution-trigger-column {
+//   flex-grow: 1;
+
+//   max-width: 90px;
+
+//   .evolution-trigger {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+
+//     margin: 8px 0;
+
+//     &:first-child {
+//       margin-top: 0;
+//     }
+
+//     &:last-child {
+//       margin-bottom: 0;
+//     }
+
+//     > .svg-inline--fa {
+//       margin-bottom: 3px;
+//       width: unset;
+//     }
+
+//     .tooltip {
+//       .fa-plus-circle {
+//         color: white;
+//       }
+
+//       .tooltip-text {
+//         color: black;
+//         background-color: white;
+
+//         &::after {
+//           border-color: #fff transparent transparent transparent;
+//         }
+//       }
+//     }
+//   }
+// }
+
 .container {
   container-type: inline-size;
 }

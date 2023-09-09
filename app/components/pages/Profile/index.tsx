@@ -48,34 +48,6 @@ export function Profile () {
   const ownPage = session?.id === user.id;
 
   return (
-    // <>
-    //   <Container maxWidth="md" sx={{ mt: 2, mb: 4 }}>
-    //     <Reload />
-
-    //     <Box>
-    //       <Notification />
-    //       <Header profile />
-    //       <FriendCode />
-    //     </Box>
-
-    //     {user.dexes.map((dex) => <DexPreview dex={dex} key={dex.id} />)}
-
-    //     {ownPage &&
-    //       <Stack alignItems="center" className="dex-create" justifyContent="center" sx={{ mt: 2, mb: 2 }}>
-    //         <Button
-    //           endIcon={<ArrowRightIcon />}
-    //           onClick={handleCreateNewDexClick}
-    //           size="large"
-    //           variant="contained"
-    //         >
-    //           Create a New Dex
-    //         </Button>
-    //         <DexCreate isOpen={showDexCreate} onRequestClose={handleDexCreateRequestClose} />
-    //       </Stack>
-    //     }
-    //   </Container>
-    //   <Footer />
-    // </>
     <Main size="md">
       <Box>
         <Notification />

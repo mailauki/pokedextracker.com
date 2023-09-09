@@ -22,6 +22,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl,
 import type { SelectChangeEvent } from '@mui/material/Select';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
+import CloseIcon from '@mui/icons-material/Close';
 
 const GAME_WARNING = 'Any capture info specific to your old game will be lost.';
 const REGIONAL_WARNING = 'Any non-regional capture info will be lost.';
@@ -187,10 +188,25 @@ export function DexEdit ({ dex, isOpen, onRequestClose }: Props) {
 
   return (
     <Dialog fullWidth maxWidth="sm" onClose={handleRequestClose} open={isOpen}>
-      <DialogTitle>{isConfirmingDelete ? 'Delete Dex?' : 'Edit a Dex'}</DialogTitle>
-      <IconButton aria-label="delete" color="error" onClick={handleDeleteClick} sx={{ position: 'absolute', top: 8, right: 8 }}>
-        <DeleteIcon />
-      </IconButton>
+      <DialogTitle>{isConfirmingDelete ? `Delete ${title || 'Dex'}` : 'Edit a Dex'}</DialogTitle>
+      {isConfirmingDelete ? (
+        <IconButton
+          aria-label="close"
+          onClick={() => setIsConfirmingDelete(false)}
+          sx={{ position: 'absolute', top: 8, right: 8 }}
+        >
+          <CloseIcon />
+        </IconButton>
+      ) : (
+        <IconButton
+          aria-label="delete"
+          color="error"
+          onClick={handleDeleteClick}
+          sx={{ position: 'absolute', top: 8, right: 8 }}
+        >
+          <DeleteIcon />
+        </IconButton>
+      )}
 
       {isConfirmingDelete ? (
         <DialogContent sx={{ pl: 8, pr: 8, pb: 6 }}>

@@ -56,8 +56,8 @@ export function Evolutions ({ evolutions, pokemonId }: Props) {
     return (
       <Stack
         alignItems="center"
-        // className="evolution-trigger"
         direction="column"
+        justifyContent="center"
         key={key}
         sx={{ textAlign: 'center', maxWidth: '85px' }}
       >
@@ -76,6 +76,12 @@ export function Evolutions ({ evolutions, pokemonId }: Props) {
 
   return (
     // styling hack for mr.rime
-    <div className={`evolution-trigger-column ${pokemonId === 866 ? 'push' : ''}`}>{elements}</div>
+    <Stack
+      direction="column"
+      justifyContent={elements.length > 1 || pokemonId === 866 ? 'space-between' : 'center'}
+    >
+      {pokemonId === 866 ? <div></div> : null}
+      {elements}
+    </Stack>
   );
 }
