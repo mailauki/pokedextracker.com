@@ -2,15 +2,15 @@ import find from 'lodash/find';
 import groupBy from 'lodash/groupBy';
 import keyBy from 'lodash/keyBy';
 import slug from 'slug';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { faAsterisk, faChevronDown, faLongArrowAltRight, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+// import { faAsterisk, faChevronDown, faLongArrowAltRight, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router';
 
 import { Alert } from '../library/Alert';
 import { Footer } from '../library/Footer';
-import { Nav } from '../library/Nav';
+// import { Nav } from '../library/Nav';
 import { ReactGA } from '../../utils/analytics';
 import { Reload } from '../library/Reload';
 import { friendCode3dsFormatter, friendCodeSwitchFormatter } from '../../utils/formatting';
@@ -23,7 +23,16 @@ import { useSession } from '../../hooks/contexts/use-session';
 import type { ChangeEvent, FormEvent } from 'react';
 import type { DexType, Game } from '../../types';
 
+import { Box, Button, CircularProgress, Container, Link as Anchor, Stack, TextField, Typography, FormControl, InputLabel, Select, MenuItem, Radio, FormControlLabel, RadioGroup, FormLabel, Grid, Tooltip, SelectChangeEvent } from '@mui/material';
+import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import HelpIcon from '@mui/icons-material/Help';
+
 export function Register () {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('md'));
+
   const history = useHistory();
 
   const { setHideNotification } = useLocalStorageContext();
@@ -114,7 +123,7 @@ export function Register () {
   const handleFriendCodeSwitchChange = (e: ChangeEvent<HTMLInputElement>) => setFriendCodeSwitch(friendCodeSwitchFormatter(e.target.value));
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
 
-  const handleGameChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleGameChange = (e: SelectChangeEvent) => {
     const newGameId = e.target.value;
 
     // Update the dex type appropriately since every game family has a different
@@ -140,27 +149,197 @@ export function Register () {
   }
 
   return (
-    <div className="register-container">
-      <Nav />
-      <Reload />
-      <div className="form register">
-        <h1>Register</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="form-column">
-            <Alert message={error || createUserMutation.error?.message} type="error" />
-          </div>
+    // <div className="register-container">
+    //   <Nav />
+    //   <Reload />
+    //   <div className="form register">
+    //     <h1>Register</h1>
+    //     <form onSubmit={handleSubmit}>
+    //       <div className="form-column">
+    //         <Alert message={error || createUserMutation.error?.message} type="error" />
+    //       </div>
 
-          <div className="form-row">
-            <div className="form-column">
-              <h2>Account Info</h2>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <input
+    //       <div className="form-row">
+    //         <div className="form-column">
+    //           <h2>Account Info</h2>
+    //           <div className="form-group">
+    //             <label htmlFor="username">Username</label>
+    //             <input
+    //               autoCapitalize="off"
+    //               autoComplete="off"
+    //               autoCorrect="off"
+    //               className="form-control"
+    //               id="username"
+    //               name="username"
+    //               onChange={handleUsernameChange}
+    //               placeholder="ashketchum10"
+    //               required
+    //               spellCheck="false"
+    //               type="text"
+    //               value={username}
+    //             />
+    //             <FontAwesomeIcon icon={faAsterisk} />
+    //           </div>
+    //           <div className="form-group">
+    //             <label htmlFor="password">Password</label>
+    //             <input
+    //               className="form-control"
+    //               id="password"
+    //               name="password"
+    //               onChange={handlePasswordChange}
+    //               placeholder="••••••••••••"
+    //               required
+    //               type="password"
+    //               value={password}
+    //             />
+    //             <FontAwesomeIcon icon={faAsterisk} />
+    //           </div>
+    //           <div className="form-group">
+    //             <label htmlFor="password_confirm">Confirm Password</label>
+    //             <input
+    //               className="form-control"
+    //               id="password_confirm"
+    //               name="password_confirm"
+    //               onChange={handlePasswordConfirmChange}
+    //               placeholder="••••••••••••"
+    //               required
+    //               type="password"
+    //               value={passwordConfirm}
+    //             />
+    //             <FontAwesomeIcon icon={faAsterisk} />
+    //           </div>
+    //           <div className="form-group">
+    //             <label htmlFor="friend_code_3ds">3DS Friend Code</label>
+    //             <input
+    //               className="form-control"
+    //               id="friend_code_3ds"
+    //               name="friend_code_3ds"
+    //               onChange={handleFriendCode3dsChange}
+    //               placeholder="XXXX-XXXX-XXXX"
+    //               type="text"
+    //               value={friendCode3ds}
+    //             />
+    //           </div>
+    //           <div className="form-group">
+    //             <label htmlFor="friend_code_switch">Switch Friend Code</label>
+    //             <input
+    //               className="form-control"
+    //               id="friend_code_switch"
+    //               name="friend_code_switch"
+    //               onChange={handleFriendCodeSwitchChange}
+    //               placeholder="SW-XXXX-XXXX-XXXX"
+    //               type="text"
+    //               value={friendCodeSwitch}
+    //             />
+    //           </div>
+    //         </div>
+
+    //         <div className="form-column">
+    //           <h2>
+    //             First Dex Info
+    //             <div className="tooltip">
+    //               <FontAwesomeIcon icon={faQuestionCircle} />
+    //               <span className="tooltip-text">You can track multiple dexes on our app! This sets the settings for the first dex on your account.</span>
+    //             </div>
+    //           </h2>
+    //           <div className="form-group">
+    //             <label htmlFor="dex_title">Title</label>
+    //             <input
+    //               className="form-control"
+    //               id="dex_title"
+    //               maxLength={300}
+    //               name="dex_title"
+    //               onChange={handleTitleChange}
+    //               placeholder="Living Dex"
+    //               required
+    //               type="text"
+    //               value={title}
+    //             />
+    //             <FontAwesomeIcon icon={faAsterisk} />
+    //           </div>
+    //           <div className="form-group">
+    //             <label htmlFor="game">Game</label>
+    //             <select
+    //               className="form-control"
+    //               onChange={handleGameChange}
+    //               value={game}
+    //             >
+    //               {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
+    //             </select>
+    //             <FontAwesomeIcon icon={faChevronDown} />
+    //           </div>
+    //           <div className="form-group">
+    //             <label htmlFor="dex-type">Dex Type</label>
+    //             {dexTypesByGameFamilyId[gamesById[game].game_family.id].map((dt) => (
+    //               <div className="radio" key={dt.id}>
+    //                 <label>
+    //                   <input
+    //                     checked={dexType === dt.id}
+    //                     name="dex-type"
+    //                     onChange={() => setDexType(dt.id)}
+    //                     type="radio"
+    //                   />
+    //                   <span className="radio-custom"><span /></span>{dt.name}
+    //                 </label>
+    //               </div>
+    //             ))}
+    //           </div>
+    //           <div className="form-group">
+    //             <label htmlFor="type">Type</label>
+    //             <div className="radio">
+    //               <label>
+    //                 <input
+    //                   checked={!shiny}
+    //                   name="type"
+    //                   onChange={() => setShiny(false)}
+    //                   type="radio"
+    //                 />
+    //                 <span className="radio-custom"><span /></span>Normal
+    //               </label>
+    //             </div>
+    //             <div className="radio">
+    //               <label>
+    //                 <input
+    //                   checked={shiny}
+    //                   name="type"
+    //                   onChange={() => setShiny(true)}
+    //                   type="radio"
+    //                 />
+    //                 <span className="radio-custom"><span /></span>Shiny
+    //               </label>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+
+    //       <div className="form-column">
+    //         <button className="btn btn-blue" disabled={createUserMutation.isLoading} type="submit">Let&apos;s go! <FontAwesomeIcon icon={faLongArrowAltRight} /></button>
+    //         <p>Already have an account? <Link className="link" to="/login">Login here</Link>!</p>
+    //       </div>
+    //     </form>
+    //   </div>
+    //   <Footer />
+    // </div>
+    <>
+      <Container sx={{ mt: 2, mb: 4 }}>
+        <Stack alignItems="center" direction="column">
+          <Typography color="primary" sx={{ mb: 2 }} variant="h4">Register</Typography>
+
+          <Box component="form" onSubmit={handleSubmit}>
+            <Alert message={error || createUserMutation.error?.message} type="error" />
+
+            <Stack alignItems="flex-start" direction="row" flexWrap="wrap" spacing={2} useFlexGap>
+              <Container maxWidth="xs">
+                <Typography variant="h6">Account Info</Typography>
+
+                <TextField
                   autoCapitalize="off"
                   autoComplete="off"
                   autoCorrect="off"
-                  className="form-control"
+                  fullWidth
                   id="username"
+                  label="Username"
+                  margin="normal"
                   name="username"
                   onChange={handleUsernameChange}
                   placeholder="ashketchum10"
@@ -169,13 +348,12 @@ export function Register () {
                   type="text"
                   value={username}
                 />
-                <FontAwesomeIcon icon={faAsterisk} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input
-                  className="form-control"
+
+                <TextField
+                  fullWidth
                   id="password"
+                  label="Password"
+                  margin="normal"
                   name="password"
                   onChange={handlePasswordChange}
                   placeholder="••••••••••••"
@@ -183,13 +361,11 @@ export function Register () {
                   type="password"
                   value={password}
                 />
-                <FontAwesomeIcon icon={faAsterisk} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password_confirm">Confirm Password</label>
-                <input
-                  className="form-control"
+                <TextField
+                  fullWidth
                   id="password_confirm"
+                  label="Confirm Password"
+                  margin="normal"
                   name="password_confirm"
                   onChange={handlePasswordConfirmChange}
                   placeholder="••••••••••••"
@@ -197,48 +373,53 @@ export function Register () {
                   type="password"
                   value={passwordConfirm}
                 />
-                <FontAwesomeIcon icon={faAsterisk} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="friend_code_3ds">3DS Friend Code</label>
-                <input
-                  className="form-control"
+
+                <TextField
+                  fullWidth
                   id="friend_code_3ds"
+                  label="3DS Friend Code"
+                  margin="normal"
                   name="friend_code_3ds"
                   onChange={handleFriendCode3dsChange}
                   placeholder="XXXX-XXXX-XXXX"
                   type="text"
                   value={friendCode3ds}
                 />
-              </div>
-              <div className="form-group">
-                <label htmlFor="friend_code_switch">Switch Friend Code</label>
-                <input
-                  className="form-control"
+
+                <TextField
+                  fullWidth
                   id="friend_code_switch"
+                  label="Switch Friend Code"
+                  margin="normal"
                   name="friend_code_switch"
                   onChange={handleFriendCodeSwitchChange}
                   placeholder="SW-XXXX-XXXX-XXXX"
                   type="text"
                   value={friendCodeSwitch}
                 />
-              </div>
-            </div>
+              </Container>
 
-            <div className="form-column">
-              <h2>
-                First Dex Info
-                <div className="tooltip">
-                  <FontAwesomeIcon icon={faQuestionCircle} />
-                  <span className="tooltip-text">You can track multiple dexes on our app! This sets the settings for the first dex on your account.</span>
-                </div>
-              </h2>
-              <div className="form-group">
-                <label htmlFor="dex_title">Title</label>
-                <input
-                  className="form-control"
+              <Container maxWidth="xs">
+                <Stack alignItems="center" direction="row" spacing={1}>
+                  <Typography variant="h6">First Dex Info</Typography>
+
+                  <Tooltip
+                    arrow
+                    title={
+                      <Box sx={{ textAlign: 'center', maxWidth: '200px' }}>
+                        <Typography variant="caption">You can track multiple dexes on our app! This sets the settings for the first dex on your account.</Typography>
+                      </Box>
+                    }
+                  >
+                    <HelpIcon fontSize="small" sx={{ color: 'text.secondary' }} />
+                  </Tooltip>
+                </Stack>
+
+                <TextField
+                  fullWidth
                   id="dex_title"
-                  maxLength={300}
+                  inputProps={{ maxLength: 300 }}
+                  label="Title" margin="normal"
                   name="dex_title"
                   onChange={handleTitleChange}
                   placeholder="Living Dex"
@@ -246,70 +427,83 @@ export function Register () {
                   type="text"
                   value={title}
                 />
-                <FontAwesomeIcon icon={faAsterisk} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="game">Game</label>
-                <select
-                  className="form-control"
-                  onChange={handleGameChange}
-                  value={game}
-                >
-                  {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
-                </select>
-                <FontAwesomeIcon icon={faChevronDown} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="dex-type">Dex Type</label>
-                {dexTypesByGameFamilyId[gamesById[game].game_family.id].map((dt) => (
-                  <div className="radio" key={dt.id}>
-                    <label>
-                      <input
-                        checked={dexType === dt.id}
-                        name="dex-type"
-                        onChange={() => setDexType(dt.id)}
-                        type="radio"
-                      />
-                      <span className="radio-custom"><span /></span>{dt.name}
-                    </label>
-                  </div>
-                ))}
-              </div>
-              <div className="form-group">
-                <label htmlFor="type">Type</label>
-                <div className="radio">
-                  <label>
-                    <input
-                      checked={!shiny}
-                      name="type"
-                      onChange={() => setShiny(false)}
-                      type="radio"
-                    />
-                    <span className="radio-custom"><span /></span>Normal
-                  </label>
-                </div>
-                <div className="radio">
-                  <label>
-                    <input
-                      checked={shiny}
-                      name="type"
-                      onChange={() => setShiny(true)}
-                      type="radio"
-                    />
-                    <span className="radio-custom"><span /></span>Shiny
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div className="form-column">
-            <button className="btn btn-blue" disabled={createUserMutation.isLoading} type="submit">Let&apos;s go! <FontAwesomeIcon icon={faLongArrowAltRight} /></button>
-            <p>Already have an account? <Link className="link" to="/login">Login here</Link>!</p>
-          </div>
-        </form>
-      </div>
+                <FormControl fullWidth margin="normal">
+                  <InputLabel>Game</InputLabel>
+                  <Select label="Game" onChange={handleGameChange} value={game}>
+                    {games.map((game) => (
+                      <MenuItem key={game.id} value={game.id}>{game.name}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+
+                <FormControl fullWidth margin="normal">
+                  <FormLabel>Dex Type</FormLabel>
+                  <RadioGroup aria-labelledby="" name="dex-type" row>
+                    {dexTypesByGameFamilyId[gamesById[game].game_family.id].map((dt) => (
+                      <FormControlLabel
+                        control={
+                          <Radio
+                            checked={dexType === dt.id}
+                            name="dex-type"
+                            onChange={() => setDexType(dt.id)}
+                          />
+                        }
+                        key={dt.id}
+                        label={dt.name}
+                      />
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+
+                <FormControl fullWidth margin="normal">
+                  <FormLabel>Type</FormLabel>
+                  <RadioGroup aria-labelledby="" name="type" row>
+                    <FormControlLabel
+                      control={
+                        <Radio
+                          checked={!shiny}
+                          name="type"
+                          onChange={() => setShiny(false)}
+                        />
+                      }
+                      label="Normal"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Radio
+                          checked={shiny}
+                          name="type"
+                          onChange={() => setShiny(true)}
+                        />
+                      }
+                      label="Shiny"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Container>
+            </Stack>
+
+            <Container maxWidth="xs">
+              <Button
+                disabled={createUserMutation.isLoading}
+                endIcon={createUserMutation.isLoading ? <CircularProgress color="inherit" size={14} sx={{ display: createUserMutation.isLoading ? '' : 'none' }} thickness={6} /> : <ArrowRightIcon />}
+                fullWidth
+                size="large"
+                sx={{ mt: 2, mb: 2 }}
+                type="submit"
+                variant="contained"
+              >
+                Let&apos;s go!
+              </Button>
+
+              <Typography align="center">Already have an account? <Anchor component={Link} to="/login">Login here</Anchor>!</Typography>
+            </Container>
+          </Box>
+        </Stack>
+      </Container>
+
       <Footer />
-    </div>
+    </>
   );
 }

@@ -1,12 +1,12 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { faAsterisk, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
+// import { faAsterisk, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
 import { Alert } from '../library/Alert';
 import { Footer } from '../library/Footer';
-import { Nav } from '../library/Nav';
+// import { Nav } from '../library/Nav';
 import { ReactGA } from '../../utils/analytics';
 import { Reload } from '../library/Reload';
 import { useLogin } from '../../hooks/queries/sessions';
@@ -14,7 +14,7 @@ import { useSession } from '../../hooks/contexts/use-session';
 
 import type { ChangeEvent, FormEvent } from 'react';
 
-import { Box, Button, CircularProgress, Container, Divider, FormControl, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Container, Link as Anchor, Stack, TextField, Typography } from '@mui/material';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
 
 export function Login () {
@@ -116,18 +116,6 @@ export function Login () {
             <Alert message={loginMutation.error?.message} type="error" />
 
             <TextField
-              fullWidth
-              id="password"
-              label="Password"
-              margin="normal"
-              name="password"
-              onChange={handlePasswordChange}
-              placeholder="••••••••••••"
-              required
-              type="password"
-              value={password}
-            />
-            <TextField
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
@@ -143,6 +131,18 @@ export function Login () {
               type="text"
               value={username}
             />
+            <TextField
+              fullWidth
+              id="password"
+              label="Password"
+              margin="normal"
+              name="password"
+              onChange={handlePasswordChange}
+              placeholder="••••••••••••"
+              required
+              type="password"
+              value={password}
+            />
 
             <Button
               disabled={loginMutation.isLoading}
@@ -156,7 +156,7 @@ export function Login () {
               Let&apos;s go!
             </Button>
 
-            <Typography>Don&apos;t have an account yet? <Link to="/register">Register here</Link>!</Typography>
+            <Typography align="center">Don&apos;t have an account yet? <Anchor component={Link} to="/register">Register here</Anchor>!</Typography>
           </Box>
         </Stack>
       </Container>

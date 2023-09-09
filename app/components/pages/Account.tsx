@@ -198,7 +198,6 @@ export function Account () {
             {isEditingPassword &&
               <>
                 <TextField
-                  className="form-control"
                   fullWidth
                   id="password"
                   label="Password"
@@ -211,7 +210,6 @@ export function Account () {
                   value={password}
                 />
                 <TextField
-                  className="form-control"
                   fullWidth
                   id="password_confirm"
                   label="Confirm Password"
@@ -228,7 +226,6 @@ export function Account () {
             }
 
             <TextField
-              className="form-control"
               fullWidth
               id="friend_code_3ds"
               label="3DS Friend Code"
@@ -241,7 +238,6 @@ export function Account () {
             />
 
             <TextField
-              className="form-control"
               fullWidth
               id="friend_code_switch"
               label="Switch Friend Code"
@@ -256,7 +252,6 @@ export function Account () {
             <FormControl fullWidth margin="normal">
               <InputLabel id="language">Pokémon Name Language</InputLabel>
               <Select
-                className="form-control"
                 defaultValue="english"
                 label="Pokémon Name Language"
                 labelId="language"

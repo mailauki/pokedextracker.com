@@ -18,7 +18,7 @@ import { useSession } from '../../../hooks/contexts/use-session';
 import type { ChangeEvent, FormEvent } from 'react';
 import type { DexType, Game } from '../../../types';
 
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
 
@@ -130,7 +130,7 @@ export function DexCreate ({ isOpen, onRequestClose }: Props) {
       <DialogContent sx={{ pl: 8, pr: 8, pb: 6 }}>
         <Alert message={createDexMutation.error?.message} type="error" />
 
-        <form onSubmit={handleSubmit}>
+        <Box component="form" onSubmit={handleSubmit}>
           <TextField
             fullWidth
             helperText={
@@ -212,7 +212,7 @@ export function DexCreate ({ isOpen, onRequestClose }: Props) {
           >
             Create
           </Button>
-        </form>
+        </Box>
       </DialogContent>
 
       <DialogActions sx={{ justifyContent: 'center' }}>
