@@ -113,13 +113,13 @@ export function Login () {
           <Typography color="primary" sx={{ mb: 2 }} variant="h4">Login</Typography>
 
           <Box component="form" onSubmit={handleSubmit}>
-            <Alert message={loginMutation.error?.message} type="error" />
-
             <TextField
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
+              error={loginMutation.error?.message.includes('user')}
               fullWidth
+              helperText={loginMutation.error?.message.includes('user') ? loginMutation.error?.message : null}
               id="username"
               label="Username"
               margin="normal"
@@ -132,7 +132,9 @@ export function Login () {
               value={username}
             />
             <TextField
+              error={loginMutation.error?.message.includes('password')}
               fullWidth
+              helperText={loginMutation.error?.message.includes('password') ? loginMutation.error?.message : null}
               id="password"
               label="Password"
               margin="normal"

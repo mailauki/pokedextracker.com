@@ -69,20 +69,6 @@ export function Profile () {
 
         {user.dexes.map((dex) => <DexPreview dex={dex} key={dex.id} />)}
 
-        {/* {ownPage &&
-          <div className="dex-create">
-            <Button
-              endIcon={<ArrowRightIcon />}
-              onClick={handleCreateNewDexClick}
-              size="large"
-              sx={{ m: 'auto' }}
-              variant="contained"
-            >
-              Create a New Dex
-            </Button>
-            <DexCreate isOpen={showDexCreate} onRequestClose={handleDexCreateRequestClose} />
-          </div>
-        } */}
         {ownPage &&
           <Stack alignItems="center" className="dex-create" justifyContent="center" sx={{ mt: 2, mb: 2 }}>
             <Button
