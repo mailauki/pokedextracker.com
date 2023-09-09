@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
 import { Alert } from '../library/Alert';
-import { Footer } from '../library/Footer';
-import { Nav } from '../library/Nav';
+// import { Footer } from '../library/Footer';
+// import { Nav } from '../library/Nav';
+import { Main } from '../library/Main';
 import { ReactGA } from '../../utils/analytics';
-import { Reload } from '../library/Reload';
+// import { Reload } from '../library/Reload';
 import { friendCode3dsFormatter, friendCodeSwitchFormatter } from '../../utils/formatting';
 import { useSession } from '../../hooks/contexts/use-session';
 import { useUpdateUser } from '../../hooks/queries/users';
@@ -178,9 +179,7 @@ export function Account () {
     //   <Footer />
     // </div>
     <>
-      <Container maxWidth="xs" sx={{ mt: 2, mb: 4 }}>
-        <Reload />
-
+      <Main size="xs">
         <Stack alignItems="center" direction="column">
           <Typography color="primary" sx={{ mb: 2 }} variant="h4">{sessionUser.username}&apos;s Account</Typography>
 
@@ -275,9 +274,7 @@ export function Account () {
             </Button>
           </Box>
         </Stack>
-      </Container>
-
-      <Footer />
+      </Main>
     </>
   );
 }

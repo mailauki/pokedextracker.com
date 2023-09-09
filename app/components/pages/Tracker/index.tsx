@@ -99,7 +99,7 @@ export function TrackerInner () {
           setQuery={setQuery}
         />
 
-        <Main>
+        <Main size="md">
           <Dex
             hideCaught={hideCaught}
             query={query}

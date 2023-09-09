@@ -1,11 +1,12 @@
-import { Container } from '@mui/material';
 import { Reload } from './Reload';
 import { Footer } from './Footer';
 
-export function Main ({ children }: any) {
+import { Container } from '@mui/material';
+
+export function Main ({ children, size }: any) {
   return (
     <>
-      <Container maxWidth="md" sx={{ mt: 2, mb: 4 }}>
+      <Container maxWidth={size} sx={{ mt: 2, mb: 4 }}>
         <Reload />
         {children}
       </Container>

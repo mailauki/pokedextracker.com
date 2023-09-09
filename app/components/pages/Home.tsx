@@ -198,7 +198,6 @@ export function Home () {
                 <Button
                   component={Link}
                   endIcon={<ArrowRightIcon />}
-                  // fullWidth
                   size="large"
                   sx={{ mt: 2, mb: 2 }}
                   to={`/u/${session.username}`}

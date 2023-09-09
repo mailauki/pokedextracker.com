@@ -5,16 +5,17 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 
 // import { Alert } from '../library/Alert';
-import { Footer } from '../library/Footer';
+// import { Footer } from '../library/Footer';
 // import { Nav } from '../library/Nav';
+import { Main } from '../library/Main';
 import { ReactGA } from '../../utils/analytics';
-import { Reload } from '../library/Reload';
+// import { Reload } from '../library/Reload';
 import { useLogin } from '../../hooks/queries/sessions';
 import { useSession } from '../../hooks/contexts/use-session';
 
 import type { ChangeEvent, FormEvent } from 'react';
 
-import { Box, Button, CircularProgress, Container, Link as Anchor, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Link as Anchor, Stack, TextField, Typography } from '@mui/material';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
 
 export function Login () {
@@ -107,65 +108,60 @@ export function Login () {
     //   </div>
     //   <Footer />
     // </div>
-    <>
-      <Container maxWidth="xs" sx={{ mt: 2, mb: 4 }}>
-        <Reload />
+    <Main size="xs">
 
-        <Stack alignItems="center" direction="column">
-          <Typography color="primary" sx={{ mb: 2 }} variant="h4">Login</Typography>
+      <Stack alignItems="center" direction="column">
+        <Typography color="primary" sx={{ mb: 2 }} variant="h4">Login</Typography>
 
-          <Box component="form" onSubmit={handleSubmit}>
-            <TextField
-              autoCapitalize="off"
-              autoComplete="off"
-              autoCorrect="off"
-              error={loginMutation.error?.message.includes('user')}
-              fullWidth
-              helperText={loginMutation.error?.message.includes('user') ? loginMutation.error?.message : null}
-              id="username"
-              label="Username"
-              margin="normal"
-              name="username"
-              onChange={handleUsernameChange}
-              placeholder="ashketchum10"
-              required
-              spellCheck="false"
-              type="text"
-              value={username}
-            />
-            <TextField
-              error={loginMutation.error?.message.includes('password')}
-              fullWidth
-              helperText={loginMutation.error?.message.includes('password') ? loginMutation.error?.message : null}
-              id="password"
-              label="Password"
-              margin="normal"
-              name="password"
-              onChange={handlePasswordChange}
-              placeholder="••••••••••••"
-              required
-              type="password"
-              value={password}
-            />
+        <Box component="form" onSubmit={handleSubmit}>
+          <TextField
+            autoCapitalize="off"
+            autoComplete="off"
+            autoCorrect="off"
+            error={loginMutation.error?.message.includes('user')}
+            fullWidth
+            helperText={loginMutation.error?.message.includes('user') ? loginMutation.error?.message : null}
+            id="username"
+            label="Username"
+            margin="normal"
+            name="username"
+            onChange={handleUsernameChange}
+            placeholder="ashketchum10"
+            required
+            spellCheck="false"
+            type="text"
+            value={username}
+          />
+          <TextField
+            error={loginMutation.error?.message.includes('password')}
+            fullWidth
+            helperText={loginMutation.error?.message.includes('password') ? loginMutation.error?.message : null}
+            id="password"
+            label="Password"
+            margin="normal"
+            name="password"
+            onChange={handlePasswordChange}
+            placeholder="••••••••••••"
+            required
+            type="password"
+            value={password}
+          />
 
-            <Button
-              disabled={loginMutation.isLoading}
-              endIcon={loginMutation.isLoading ? <CircularProgress color="inherit" size={14} sx={{ display: loginMutation.isLoading ? '' : 'none' }} thickness={6} /> : <ArrowRightIcon />}
-              fullWidth
-              size="large"
-              sx={{ mt: 2, mb: 2 }}
-              type="submit"
-              variant="contained"
-            >
-              Let&apos;s go!
-            </Button>
+          <Button
+            disabled={loginMutation.isLoading}
+            endIcon={loginMutation.isLoading ? <CircularProgress color="inherit" size={14} sx={{ display: loginMutation.isLoading ? '' : 'none' }} thickness={6} /> : <ArrowRightIcon />}
+            fullWidth
+            size="large"
+            sx={{ mt: 2, mb: 2 }}
+            type="submit"
+            variant="contained"
+          >
+            Let&apos;s go!
+          </Button>
 
-            <Typography align="center">Don&apos;t have an account yet? <Anchor component={Link} to="/register">Register here</Anchor>!</Typography>
-          </Box>
-        </Stack>
-      </Container>
-
-      <Footer />
-    </>
+          <Typography align="center">Don&apos;t have an account yet? <Anchor component={Link} to="/register">Register here</Anchor>!</Typography>
+        </Box>
+      </Stack>
+    </Main>
   );
 }

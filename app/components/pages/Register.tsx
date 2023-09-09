@@ -9,10 +9,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router';
 
 import { Alert } from '../library/Alert';
-import { Footer } from '../library/Footer';
+// import { Footer } from '../library/Footer';
 // import { Nav } from '../library/Nav';
+import { Main } from '../library/Main';
 import { ReactGA } from '../../utils/analytics';
-import { Reload } from '../library/Reload';
+// import { Reload } from '../library/Reload';
 import { friendCode3dsFormatter, friendCodeSwitchFormatter } from '../../utils/formatting';
 import { useCreateUser } from '../../hooks/queries/users';
 import { useDexTypes } from '../../hooks/queries/dex-types';
@@ -23,15 +24,12 @@ import { useSession } from '../../hooks/contexts/use-session';
 import type { ChangeEvent, FormEvent } from 'react';
 import type { DexType, Game } from '../../types';
 
-import { Box, Button, CircularProgress, Container, Link as Anchor, Stack, TextField, Typography, FormControl, InputLabel, Select, MenuItem, Radio, FormControlLabel, RadioGroup, FormLabel, Grid, Tooltip, SelectChangeEvent } from '@mui/material';
+import { Box, Button, CircularProgress, Container, Link as Anchor, Stack, TextField, Typography, FormControl, InputLabel, Select, MenuItem, Radio, FormControlLabel, RadioGroup, FormLabel, Tooltip } from '@mui/material';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 import HelpIcon from '@mui/icons-material/Help';
+import type { SelectChangeEvent } from '@mui/material/Select';
 
 export function Register () {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('md'));
 
   const history = useHistory();
 
@@ -149,192 +147,186 @@ export function Register () {
   }
 
   return (
-    <>
-      <Container sx={{ mt: 2, mb: 4 }}>
-        <Reload />
+    <Main>
+      <Stack alignItems="center" direction="column">
+        <Typography color="primary" sx={{ mb: 2 }} variant="h4">Register</Typography>
 
-        <Stack alignItems="center" direction="column">
-          <Typography color="primary" sx={{ mb: 2 }} variant="h4">Register</Typography>
+        <Box component="form" onSubmit={handleSubmit}>
+          <Alert message={error || createUserMutation.error?.message} type="error" />
 
-          <Box component="form" onSubmit={handleSubmit}>
-            <Alert message={error || createUserMutation.error?.message} type="error" />
+          <Stack alignItems="flex-start" direction="row" flexWrap="wrap" spacing={2} useFlexGap>
+            <Container maxWidth="xs">
+              <Typography variant="h6">Account Info</Typography>
 
-            <Stack alignItems="flex-start" direction="row" flexWrap="wrap" spacing={2} useFlexGap>
-              <Container maxWidth="xs">
-                <Typography variant="h6">Account Info</Typography>
+              <TextField
+                autoCapitalize="off"
+                autoComplete="off"
+                autoCorrect="off"
+                fullWidth
+                id="username"
+                label="Username"
+                margin="normal"
+                name="username"
+                onChange={handleUsernameChange}
+                placeholder="ashketchum10"
+                required
+                spellCheck="false"
+                type="text"
+                value={username}
+              />
 
-                <TextField
-                  autoCapitalize="off"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  fullWidth
-                  id="username"
-                  label="Username"
-                  margin="normal"
-                  name="username"
-                  onChange={handleUsernameChange}
-                  placeholder="ashketchum10"
-                  required
-                  spellCheck="false"
-                  type="text"
-                  value={username}
-                />
+              <TextField
+                fullWidth
+                id="password"
+                label="Password"
+                margin="normal"
+                name="password"
+                onChange={handlePasswordChange}
+                placeholder="••••••••••••"
+                required
+                type="password"
+                value={password}
+              />
+              <TextField
+                fullWidth
+                id="password_confirm"
+                label="Confirm Password"
+                margin="normal"
+                name="password_confirm"
+                onChange={handlePasswordConfirmChange}
+                placeholder="••••••••••••"
+                required
+                type="password"
+                value={passwordConfirm}
+              />
 
-                <TextField
-                  fullWidth
-                  id="password"
-                  label="Password"
-                  margin="normal"
-                  name="password"
-                  onChange={handlePasswordChange}
-                  placeholder="••••••••••••"
-                  required
-                  type="password"
-                  value={password}
-                />
-                <TextField
-                  fullWidth
-                  id="password_confirm"
-                  label="Confirm Password"
-                  margin="normal"
-                  name="password_confirm"
-                  onChange={handlePasswordConfirmChange}
-                  placeholder="••••••••••••"
-                  required
-                  type="password"
-                  value={passwordConfirm}
-                />
+              <TextField
+                fullWidth
+                id="friend_code_3ds"
+                label="3DS Friend Code"
+                margin="normal"
+                name="friend_code_3ds"
+                onChange={handleFriendCode3dsChange}
+                placeholder="XXXX-XXXX-XXXX"
+                type="text"
+                value={friendCode3ds}
+              />
 
-                <TextField
-                  fullWidth
-                  id="friend_code_3ds"
-                  label="3DS Friend Code"
-                  margin="normal"
-                  name="friend_code_3ds"
-                  onChange={handleFriendCode3dsChange}
-                  placeholder="XXXX-XXXX-XXXX"
-                  type="text"
-                  value={friendCode3ds}
-                />
-
-                <TextField
-                  fullWidth
-                  id="friend_code_switch"
-                  label="Switch Friend Code"
-                  margin="normal"
-                  name="friend_code_switch"
-                  onChange={handleFriendCodeSwitchChange}
-                  placeholder="SW-XXXX-XXXX-XXXX"
-                  type="text"
-                  value={friendCodeSwitch}
-                />
-              </Container>
-
-              <Container maxWidth="xs">
-                <Stack alignItems="center" direction="row" spacing={1}>
-                  <Typography variant="h6">First Dex Info</Typography>
-
-                  <Tooltip
-                    arrow
-                    title={
-                      <Box sx={{ textAlign: 'center', maxWidth: '200px' }}>
-                        <Typography variant="caption">You can track multiple dexes on our app! This sets the settings for the first dex on your account.</Typography>
-                      </Box>
-                    }
-                  >
-                    <HelpIcon fontSize="small" sx={{ color: 'text.secondary' }} />
-                  </Tooltip>
-                </Stack>
-
-                <TextField
-                  fullWidth
-                  id="dex_title"
-                  inputProps={{ maxLength: 300 }}
-                  label="Title" margin="normal"
-                  name="dex_title"
-                  onChange={handleTitleChange}
-                  placeholder="Living Dex"
-                  required
-                  type="text"
-                  value={title}
-                />
-
-                <FormControl fullWidth margin="normal">
-                  <InputLabel>Game</InputLabel>
-                  <Select label="Game" onChange={handleGameChange} value={game}>
-                    {games.map((game) => (
-                      <MenuItem key={game.id} value={game.id}>{game.name}</MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-
-                <FormControl fullWidth margin="normal">
-                  <FormLabel>Dex Type</FormLabel>
-                  <RadioGroup aria-labelledby="" name="dex-type" row>
-                    {dexTypesByGameFamilyId[gamesById[game].game_family.id].map((dt) => (
-                      <FormControlLabel
-                        control={
-                          <Radio
-                            checked={dexType === dt.id}
-                            name="dex-type"
-                            onChange={() => setDexType(dt.id)}
-                          />
-                        }
-                        key={dt.id}
-                        label={dt.name}
-                      />
-                    ))}
-                  </RadioGroup>
-                </FormControl>
-
-                <FormControl fullWidth margin="normal">
-                  <FormLabel>Type</FormLabel>
-                  <RadioGroup aria-labelledby="" name="type" row>
-                    <FormControlLabel
-                      control={
-                        <Radio
-                          checked={!shiny}
-                          name="type"
-                          onChange={() => setShiny(false)}
-                        />
-                      }
-                      label="Normal"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Radio
-                          checked={shiny}
-                          name="type"
-                          onChange={() => setShiny(true)}
-                        />
-                      }
-                      label="Shiny"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </Container>
-            </Stack>
+              <TextField
+                fullWidth
+                id="friend_code_switch"
+                label="Switch Friend Code"
+                margin="normal"
+                name="friend_code_switch"
+                onChange={handleFriendCodeSwitchChange}
+                placeholder="SW-XXXX-XXXX-XXXX"
+                type="text"
+                value={friendCodeSwitch}
+              />
+            </Container>
 
             <Container maxWidth="xs">
-              <Button
-                disabled={createUserMutation.isLoading}
-                endIcon={createUserMutation.isLoading ? <CircularProgress color="inherit" size={14} sx={{ display: createUserMutation.isLoading ? '' : 'none' }} thickness={6} /> : <ArrowRightIcon />}
+              <Stack alignItems="center" direction="row" spacing={1}>
+                <Typography variant="h6">First Dex Info</Typography>
+
+                <Tooltip
+                  arrow
+                  title={
+                    <Box sx={{ textAlign: 'center', maxWidth: '200px' }}>
+                      <Typography variant="caption">You can track multiple dexes on our app! This sets the settings for the first dex on your account.</Typography>
+                    </Box>
+                  }
+                >
+                  <HelpIcon fontSize="small" sx={{ color: 'text.secondary' }} />
+                </Tooltip>
+              </Stack>
+
+              <TextField
                 fullWidth
-                size="large"
-                sx={{ mt: 2, mb: 2 }}
-                type="submit"
-                variant="contained"
-              >
-                Let&apos;s go!
-              </Button>
+                id="dex_title"
+                inputProps={{ maxLength: 300 }}
+                label="Title" margin="normal"
+                name="dex_title"
+                onChange={handleTitleChange}
+                placeholder="Living Dex"
+                required
+                type="text"
+                value={title}
+              />
 
-              <Typography align="center">Already have an account? <Anchor component={Link} to="/login">Login here</Anchor>!</Typography>
+              <FormControl fullWidth margin="normal">
+                <InputLabel>Game</InputLabel>
+                <Select label="Game" onChange={handleGameChange} value={game}>
+                  {games.map((game) => (
+                    <MenuItem key={game.id} value={game.id}>{game.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              <FormControl fullWidth margin="normal">
+                <FormLabel>Dex Type</FormLabel>
+                <RadioGroup aria-labelledby="" name="dex-type" row>
+                  {dexTypesByGameFamilyId[gamesById[game].game_family.id].map((dt) => (
+                    <FormControlLabel
+                      control={
+                        <Radio
+                          checked={dexType === dt.id}
+                          name="dex-type"
+                          onChange={() => setDexType(dt.id)}
+                        />
+                      }
+                      key={dt.id}
+                      label={dt.name}
+                    />
+                  ))}
+                </RadioGroup>
+              </FormControl>
+
+              <FormControl fullWidth margin="normal">
+                <FormLabel>Type</FormLabel>
+                <RadioGroup aria-labelledby="" name="type" row>
+                  <FormControlLabel
+                    control={
+                      <Radio
+                        checked={!shiny}
+                        name="type"
+                        onChange={() => setShiny(false)}
+                      />
+                    }
+                    label="Normal"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Radio
+                        checked={shiny}
+                        name="type"
+                        onChange={() => setShiny(true)}
+                      />
+                    }
+                    label="Shiny"
+                  />
+                </RadioGroup>
+              </FormControl>
             </Container>
-          </Box>
-        </Stack>
-      </Container>
+          </Stack>
 
-      <Footer />
-    </>
+          <Container maxWidth="xs">
+            <Button
+              disabled={createUserMutation.isLoading}
+              endIcon={createUserMutation.isLoading ? <CircularProgress color="inherit" size={14} sx={{ display: createUserMutation.isLoading ? '' : 'none' }} thickness={6} /> : <ArrowRightIcon />}
+              fullWidth
+              size="large"
+              sx={{ mt: 2, mb: 2 }}
+              type="submit"
+              variant="contained"
+            >
+              Let&apos;s go!
+            </Button>
+
+            <Typography align="center">Already have an account? <Anchor component={Link} to="/login">Login here</Anchor>!</Typography>
+          </Container>
+        </Box>
+      </Stack>
+    </Main>
   );
 }

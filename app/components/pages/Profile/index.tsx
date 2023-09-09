@@ -15,13 +15,10 @@ import { Notification } from '../../library/Notification';
 import { useSession } from '../../../hooks/contexts/use-session';
 import { useUser } from '../../../hooks/queries/users';
 
-import { Box, Button, Container, Stack } from '@mui/material';
+import { Box, Button, Stack } from '@mui/material';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
-import { useTheme } from '@mui/material/styles';
 
 export function Profile () {
-  const theme = useTheme();
-
   const { username } = useParams<{ username: string }>();
 
   const {
@@ -79,7 +76,7 @@ export function Profile () {
     //   </Container>
     //   <Footer />
     // </>
-    <Main>
+    <Main size="md">
       <Box>
         <Notification />
         <Header profile />
