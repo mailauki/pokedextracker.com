@@ -17,7 +17,6 @@ export function Progress ({ caught, total }: Props) {
     <Stack sx={{ mt: 1, mb: 2, position: 'relative', width: '100%' }}>
       <LinearProgress
         color="secondary"
-        // sx={{ height: 25, borderRadius: 5, m: 0.5 }}
         sx={{ height: 25, borderRadius: theme.shape.pill, m: 0.5 }}
         value={percent}
         variant="determinate"

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { useSession } from '../../hooks/contexts/use-session';
 
-import { AppBar, Avatar, Box, Button, Container, IconButton, Link as Anchor, List, Stack, Typography, ListSubheader, ListItem, ListItemText } from '@mui/material';
+import { AppBar, Avatar, Box, Button, Container, IconButton, Link as Anchor, List, Stack, Typography, ListSubheader, ListItem, ListItemText, Toolbar } from '@mui/material';
 import Bullet from '@mui/icons-material/Circle';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
 import { RssFeed, Twitter } from '@mui/icons-material';
@@ -27,7 +27,7 @@ export function Home () {
           backgroundBlendMode: 'difference',
         }}
       >
-        <Container maxWidth="sm" sx={{ mt: 2, mb: 4 }}>
+        <Container maxWidth="md" sx={{ mt: 2, mb: 4 }}>
           <Stack alignItems="center" direction="column" sx={{ textAlign: 'center' }}>
             <Avatar
               alt="Gotta catch 'em all!"
@@ -265,17 +265,17 @@ export function Home () {
       </Box>
 
       <AppBar color="inherit" component="footer" elevation={1} position="relative">
-        <Stack
+        <Toolbar
           alignItems="center"
+          component={Stack}
           direction="row"
           justifyContent="center"
           spacing={1}
-          sx={{ p: 2 }}
         >
           <Typography>Made with</Typography>
           <i className="pkicon pkicon-ball-love" />
           <Typography>in San Francisco</Typography>
-        </Stack>
+        </Toolbar>
       </AppBar>
     </>
   );

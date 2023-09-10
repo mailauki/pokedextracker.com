@@ -5,14 +5,14 @@ import { useParams } from 'react-router';
 import { DexIndicator } from './DexIndicator';
 import { DonatedFlair } from './DonatedFlair';
 import { ReactGA } from '../../utils/analytics';
-// import { Share } from './Share';
+import { Share } from './Share';
 import { useSession } from '../../hooks/contexts/use-session';
 import { useUser } from '../../hooks/queries/users';
 
 import type { Dex } from '../../types';
 import type { MouseEvent } from 'react';
 
-import { IconButton, Stack, Typography } from '@mui/material';
+import { ClickAwayListener, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import { Link, Twitter } from '@mui/icons-material';
 
 interface Props {
@@ -28,21 +28,21 @@ export function Header ({ profile = false }: Props) {
 
   const [showShare, setShowShare] = useState(false);
 
-  useEffect(() => {
-    const closeShare = () => setShowShare(false);
+  // useEffect(() => {
+  //   const closeShare = () => setShowShare(false);
 
-    window.addEventListener('click', closeShare);
+  //   window.addEventListener('click', closeShare);
 
-    return () => window.removeEventListener('click', closeShare);
-  }, []);
+  //   return () => window.removeEventListener('click', closeShare);
+  // }, []);
 
-  const handleShareClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.stopPropagation();
+  // const handleShareClick = (e: MouseEvent<HTMLAnchorElement>) => {
+  //   e.stopPropagation();
 
-    ReactGA.event({ action: showShare ? 'close' : 'open', category: 'Share' });
+  //   ReactGA.event({ action: showShare ? 'close' : 'open', category: 'Share' });
 
-    setShowShare((prev) => !prev);
-  };
+  //   setShowShare((prev) => !prev);
+  // };
 
   const handleTweetClick = () => ReactGA.event({ action: 'click tweet', category: 'Share' });
 
@@ -55,14 +55,26 @@ export function Header ({ profile = false }: Props) {
           {dex?.title || `${user.username}'s Profile`}
         </Typography>
 
-        <div className="share-container">
-          <IconButton
-            component="a"
-            onClick={handleShareClick}
-            size="small"
-          >
-            <Link fontSize="small" />
-          </IconButton>
+        <Stack direction="row">
+          <ClickAwayListener onClickAway={() => setShowShare(false)}>
+            <div>
+              <Tooltip
+                arrow
+                disableFocusListener
+                disableHoverListener
+                onClose={() => setShowShare(false)}
+                open={showShare}
+                title={<Share profile={profile} />}
+              >
+                <IconButton
+                  onClick={() => setShowShare(true)}
+                  size="small"
+                >
+                  <Link fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            </div>
+          </ClickAwayListener>
 
           <IconButton
             component="a"
@@ -74,7 +86,7 @@ export function Header ({ profile = false }: Props) {
           >
             <Twitter fontSize="small" />
           </IconButton>
-        </div>
+        </Stack>
       </Stack>
 
       {profile && <DonatedFlair user={user} />}

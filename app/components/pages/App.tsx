@@ -23,6 +23,22 @@ import CssBaseline from '@mui/material/CssBaseline';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { amber, lightBlue } from '@mui/material/colors';
 
+declare module '@mui/material/styles' {
+  interface PaletteColor {
+    hightlight?: string;
+  }
+
+  interface SimplePaletteColorOptions {
+    hightlight?: string;
+  }
+
+  interface ThemeOptions {
+    shape?: {
+      pill?: number;
+    };
+  }
+}
+
 const history = createBrowserHistory();
 history.listen(() => logPageView());
 // @ts-ignore Rollbar's types are wrong. See https://github.com/rollbar/rollbar-react/issues/69
@@ -47,27 +63,38 @@ export function App () {
           ...(!darkMode
             ? {
               primary: {
-                // main: '#12345F',
                 main: lightBlue[900],
-                // background: '#18447D80',
-                background: alpha(lightBlue[900], 0.5),
+                hightlight: alpha(lightBlue[900], 0.5),
               },
               secondary: amber,
             }
             : {
               primary: {
-                // main: '#12345F',
                 main: lightBlue[900],
-                // background: '#102D5280',
-                background: alpha(lightBlue[900], 0.5),
+                hightlight: alpha(lightBlue[900], 0.5),
               },
               secondary: amber,
             }),
         },
         shape: {
-          // pill: '30px',
           pill: 5,
-        }
+        },
+        components: {
+          MuiTooltip: {
+            styleOverrides: {
+              // root: ({ ownerState, theme }) => ({
+              //   // ...(ownerState && {
+              //   //   backgroundColor: '#F5F5F9',
+              //   //   // color: theme.palette.grey[500],
+              //   //   color: 'rgba(0, 0, 0, 0.87)',
+              //   // }),
+              // }),
+              // root: {
+              //   backgroundColor: '#F5F5F9',
+              // },
+            },
+          },
+        },
       }),
     [darkMode],
   );

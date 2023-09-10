@@ -123,7 +123,7 @@ export function Pokemon ({ capture, delay = 0, setSelectedPokemon }: Props) {
       elevation={capture.captured ? 0 : 2}
       sx={{
         position: 'relative',
-        backgroundColor: capture.captured ? 'primary.background' : '',
+        backgroundColor: capture.captured ? 'primary.hightlight' : '',
       }}
     >
       <CardActionArea className="set-captured" onClick={handleSetCapturedClick}>

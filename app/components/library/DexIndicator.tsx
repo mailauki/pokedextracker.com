@@ -15,7 +15,6 @@ export function DexIndicator ({ dex }: Props) {
       flexWrap="wrap"
       justifyContent="center"
       spacing={1}
-      // sx={{ textTransform: 'uppercase' }}
       textTransform="uppercase"
       useFlexGap
     >
