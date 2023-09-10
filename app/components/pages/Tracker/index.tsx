@@ -1,18 +1,12 @@
 import keyBy from 'lodash/keyBy';
-// import throttle from 'lodash/throttle';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 
 import { Dex } from './Dex';
-// import { Footer } from '../../library/Footer';
 import { Loading } from '../../library/Loading';
-// import { Info } from './Info';
 import { InfoDrawer } from './InfoDrawer';
-// import { Nav } from '../../library/Nav';
 import { Main } from '../../library/Main';
 import { NotFound } from '../NotFound';
-// import { Reload } from '../../library/Reload';
-// import { SCROLL_DEBOUNCE, SHOW_SCROLL_THRESHOLD } from './Scroll';
 import { SearchBar } from './SearchBar';
 import { TrackerContextProvider, useTrackerContext } from './use-tracker';
 import { useCaptures } from '../../../hooks/queries/captures';
@@ -45,7 +39,6 @@ export function TrackerInner () {
 
   const [query, setQuery] = useState('');
   const [hideCaught, setHideCaught] = useState(false);
-  // const [showScroll, setShowScroll] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(0);
 
   useEffect(() => {
@@ -65,21 +58,7 @@ export function TrackerInner () {
     }
   }, [capturesFromServer]);
 
-  const { showInfo, setShowInfo } = useLocalStorageContext();
-
-  // const handleScroll = throttle(() => {
-  //   if (!showScroll && trackerRef.current && trackerRef.current.scrollTop >= SHOW_SCROLL_THRESHOLD) {
-  //     setShowScroll(true);
-  //   } else if (showScroll && trackerRef.current && trackerRef.current.scrollTop < SHOW_SCROLL_THRESHOLD) {
-  //     setShowScroll(false);
-  //   }
-  // }, SCROLL_DEBOUNCE);
-
-  // const handleScrollButtonClick = useCallback(() => {
-  //   if (trackerRef.current) {
-  //     trackerRef.current.scrollTop = 0;
-  //   }
-  // }, [trackerRef.current]);
+  const { showInfo } = useLocalStorageContext();
 
   if (userIsLoading || capturesIsLoading || !selectedPokemon) {
     return <Loading />;

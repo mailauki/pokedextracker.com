@@ -12,13 +12,18 @@ import DarkIcon from '@mui/icons-material/Brightness7';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Logout, Person, Settings } from '@mui/icons-material';
 
-export function Nav () {
+interface Props {
+  darkMode: boolean;
+}
+
+export function Nav ({ darkMode }: Props) {
   const { isNightMode, setIsNightMode } = useLocalStorageContext();
   const { session, sessionUser, setToken } = useSession();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
   const handleNightModeClick = () => setIsNightMode(!isNightMode);
+  // const handleNightModeClick = () => setIsNightMode(!darkMode);
 
   const handleSignOutClick = () => {
     ReactGA.event({ action: 'sign out', category: 'Session' });
@@ -72,9 +77,9 @@ export function Nav () {
 
   const nav = (
     <>
-      <Tooltip arrow title={`Dark Mode ${isNightMode ? 'Off' : 'On'}`}>
+      <Tooltip arrow title={`Dark Mode ${darkMode ? 'Off' : 'On'}`}>
         <IconButton color="inherit" onClick={handleNightModeClick} size="small">
-          {isNightMode ? <DarkIcon fontSize="small" /> : <LightIcon fontSize="small" />}
+          {darkMode ? <DarkIcon fontSize="small" /> : <LightIcon fontSize="small" />}
         </IconButton>
       </Tooltip>
       <Button color="inherit" component="a" href="https://www.patreon.com/pokedextracker" rel="noopener noreferrer" target="_blank">Patreon</Button>

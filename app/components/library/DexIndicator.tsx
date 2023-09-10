@@ -15,7 +15,8 @@ export function DexIndicator ({ dex }: Props) {
       flexWrap="wrap"
       justifyContent="center"
       spacing={1}
-      sx={{ textTransform: 'uppercase' }}
+      // sx={{ textTransform: 'uppercase' }}
+      textTransform="uppercase"
       useFlexGap
     >
       {dex.shiny && <StarIcon color="error" fontSize="small" sx={{ fontSize: '14px' }} />}
