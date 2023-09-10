@@ -3,15 +3,12 @@ import { useParams } from 'react-router';
 
 import { DexCreate } from './DexCreate';
 import { DexPreview } from './DexPreview';
-// import { Footer } from '../../library/Footer';
 import { FriendCode } from '../../library/FriendCode';
 import { Header } from '../../library/Header';
-// import { Nav } from '../../library/Nav';
 import { Main } from '../../library/Main';
 import { NotFound } from '../NotFound';
 import { Loading } from '../../library/Loading';
 import { Notification } from '../../library/Notification';
-// import { Reload } from '../../library/Reload';
 import { useSession } from '../../../hooks/contexts/use-session';
 import { useUser } from '../../../hooks/queries/users';
 

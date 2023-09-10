@@ -60,14 +60,14 @@ export function SearchResults ({ captures, hideCaught, query, setHideCaught, set
     }
 
     return (
-      <div className="search-results search-results-empty">
+      <div>
         {message}
       </div>
     );
   }
 
   return (
-    <Box className="search-results" sx={{ mt: 6 }}>
+    <Box sx={{ mt: 6 }}>
       {filteredCaptures.map((capture, i) => (
         <Pokemon
           capture={capture}

@@ -1,5 +1,5 @@
 import keyBy from 'lodash/keyBy';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 
 import { DexIndicator } from './DexIndicator';
@@ -10,7 +10,7 @@ import { useSession } from '../../hooks/contexts/use-session';
 import { useUser } from '../../hooks/queries/users';
 
 import type { Dex } from '../../types';
-import type { MouseEvent } from 'react';
+// import type { MouseEvent } from 'react';
 
 import { ClickAwayListener, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import { Link, Twitter } from '@mui/icons-material';
@@ -49,8 +49,18 @@ export function Header ({ profile = false }: Props) {
   const ownPage = session?.id === user.id;
 
   return (
-    <Stack alignItems="center" direction="row" justifyContent="space-between">
-      <Stack alignItems="center" direction="row" flexWrap="wrap" useFlexGap>
+    <Stack
+      alignItems="center"
+      direction="row"
+      justifyContent="space-between"
+      sx={{ mt: 1 }}
+    >
+      <Stack
+        alignItems="center"
+        direction="row"
+        flexWrap="wrap"
+        useFlexGap
+      >
         <Typography color="primary" sx={{ mr: 1 }} variant="h4">
           {dex?.title || `${user.username}'s Profile`}
         </Typography>
