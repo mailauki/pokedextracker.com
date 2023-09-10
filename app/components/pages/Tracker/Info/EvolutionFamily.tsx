@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 import { useParams } from 'react-router';
 
 import { Evolutions } from './Evolutions';
-import { iconClass } from '../../../utils/pokemon';
-import { useUser } from '../../../hooks/queries/users';
+import { iconClass } from '../../../../utils/pokemon';
+import { useUser } from '../../../../hooks/queries/users';
 
 import type { Dispatch, SetStateAction } from 'react';
-import type { EvolutionFamily as EvolutionFamilyType } from '../../../types';
+import type { EvolutionFamily as EvolutionFamilyType } from '../../../../types';
 
 import { IconButton, Stack, Typography } from '@mui/material';
 
@@ -59,8 +59,8 @@ export function EvolutionFamily ({ family, setSelectedPokemon }: Props) {
 
   return (
     <Stack
-      // alignItems="center"
-      alignItems="stretch"
+      alignItems="center"
+      // alignItems="stretch"
       direction="row"
       justifyContent="space-evenly"
       sx={{ p: 3 }}

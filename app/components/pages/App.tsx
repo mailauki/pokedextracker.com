@@ -79,22 +79,6 @@ export function App () {
         shape: {
           pill: 5,
         },
-        components: {
-          MuiTooltip: {
-            styleOverrides: {
-              // root: ({ ownerState, theme }) => ({
-              //   // ...(ownerState && {
-              //   //   backgroundColor: '#F5F5F9',
-              //   //   // color: theme.palette.grey[500],
-              //   //   color: 'rgba(0, 0, 0, 0.87)',
-              //   // }),
-              // }),
-              // root: {
-              //   backgroundColor: '#F5F5F9',
-              // },
-            },
-          },
-        },
       }),
     [darkMode],
   );
@@ -103,7 +87,7 @@ export function App () {
     <Router history={history}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        {/* <div className={`root ${isNightMode ? 'night-mode' : ''}`}> */}
+
         <div className="page">
           <Nav darkMode={darkMode} />
           <Toolbar id="back-to-top-anchor" variant="dense" />

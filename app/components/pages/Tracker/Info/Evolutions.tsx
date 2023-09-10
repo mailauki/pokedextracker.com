@@ -2,9 +2,9 @@ import uniqBy from 'lodash/uniqBy';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-import { capitalize } from '../../../utils/formatting';
+import { capitalize } from '../../../../utils/formatting';
 
-import type { Evolution } from '../../../types';
+import type { Evolution } from '../../../../types';
 
 import { Stack, Typography } from '@mui/material';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';

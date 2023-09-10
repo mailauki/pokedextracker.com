@@ -10,7 +10,6 @@ import { useSession } from '../../hooks/contexts/use-session';
 import { useUser } from '../../hooks/queries/users';
 
 import type { Dex } from '../../types';
-// import type { MouseEvent } from 'react';
 
 import { ClickAwayListener, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import { Link, Twitter } from '@mui/icons-material';
@@ -27,22 +26,6 @@ export function Header ({ profile = false }: Props) {
   const dex = useMemo<Dex | null>(() => !profile ? keyBy(user.dexes, 'slug')[slug] : null, [profile, user, slug]);
 
   const [showShare, setShowShare] = useState(false);
-
-  // useEffect(() => {
-  //   const closeShare = () => setShowShare(false);
-
-  //   window.addEventListener('click', closeShare);
-
-  //   return () => window.removeEventListener('click', closeShare);
-  // }, []);
-
-  // const handleShareClick = (e: MouseEvent<HTMLAnchorElement>) => {
-  //   e.stopPropagation();
-
-  //   ReactGA.event({ action: showShare ? 'close' : 'open', category: 'Share' });
-
-  //   setShowShare((prev) => !prev);
-  // };
 
   const handleTweetClick = () => ReactGA.event({ action: 'click tweet', category: 'Share' });
 
