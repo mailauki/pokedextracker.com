@@ -4,7 +4,6 @@ import { useParams } from 'react-router';
 
 import { Dex } from './Dex';
 import { Loading } from '../../library/Loading';
-// import { InfoDrawer } from './Info/InfoDrawer';
 import { Info } from './Info/Info';
 import { Main } from '../../library/Main';
 import { NotFound } from '../NotFound';
