@@ -1,13 +1,12 @@
 import uniqBy from 'lodash/uniqBy';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { capitalize } from '../../../../utils/formatting';
 
 import type { Evolution } from '../../../../types';
 
-import { Stack, Typography } from '@mui/material';
+import { Stack, Tooltip, Typography } from '@mui/material';
 import ArrowRightIcon from '@mui/icons-material/ArrowRightAlt';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 function evolutionKey (evolution: Evolution) {
   return `${evolution.trigger}:${evolution.level}:${evolution.stone}:${evolution.held_item}:${evolution.notes}`;
@@ -45,10 +44,9 @@ export function Evolutions ({ evolutions, pokemonId }: Props) {
         notes = <span>{evolution.notes}</span>;
       } else {
         notes = (
-          <div className="tooltip">
-            <FontAwesomeIcon icon={faPlusCircle} />
-            <span className="tooltip-text">{evolution.notes}</span>
-          </div>
+          <Tooltip arrow title={evolution.notes}>
+            <AddCircleIcon fontSize="small" sx={{ fontSize: 'inherit' }} />
+          </Tooltip>
         );
       }
     }
@@ -59,7 +57,7 @@ export function Evolutions ({ evolutions, pokemonId }: Props) {
         direction="column"
         justifyContent="center"
         key={key}
-        sx={{ textAlign: 'center', maxWidth: '85px' }}
+        sx={{ textAlign: 'center', maxWidth: '100px' }}
       >
         <ArrowRightIcon
           fontSize="small"

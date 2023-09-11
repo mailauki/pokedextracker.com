@@ -59,8 +59,8 @@ export function EvolutionFamily ({ family, setSelectedPokemon }: Props) {
 
   return (
     <Stack
-      alignItems="center"
-      // alignItems="stretch"
+      // alignItems="center"
+      alignItems="stretch"
       direction="row"
       justifyContent="space-evenly"
       sx={{ p: 3 }}
