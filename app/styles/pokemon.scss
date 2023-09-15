@@ -175,12 +175,20 @@
 //     }
 //   }
 // }
+  
+.pokemon-card {
+  display: inherit;
+}
+
+.pokemon-card-mobile {
+  display: none;
+}
 
 .container {
   container-type: inline-size;
 }
 
-@container (max-width: 900px) {
+@container (max-width: 800px) {
   :root {
     --info-drawer-width: 100%;
   }
@@ -194,5 +202,13 @@
   .box-container, .search-results {
     display: flex;
     flex-direction: column;
+  }
+
+  .pokemon-card {
+    display: none;
+  }
+
+  .pokemon-card-mobile {
+    display: inherit;
   }
 }

@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVenus, faMars } from '@fortawesome/free-solid-svg-icons';
+import MaleIcon from '@mui/icons-material/Male';
+import FemaleIcon from '@mui/icons-material/Female';
 
 interface Props {
   name: string;
@@ -16,8 +16,8 @@ export function PokemonName ({ name }: Props) {
   return (
     <>
       {name.replace(/[♂♀]/g, '')}
-      {male && <FontAwesomeIcon icon={faMars} />}
-      {female && <FontAwesomeIcon icon={faVenus} />}
+      {male && <MaleIcon fontSize="inherit" />}
+      {female && <FemaleIcon fontSize="inherit" />}
     </>
   );
 }

@@ -3,7 +3,7 @@ import keyBy from 'lodash/keyBy';
 import { useMemo } from 'react';
 import { useParams } from 'react-router';
 
-// import { PokemonName } from '../../library/PokemonName';
+import { PokemonName } from '../../library/PokemonName';
 import { ReactGA } from '../../../utils/analytics';
 import { iconClass } from '../../../utils/pokemon';
 import { nationalId, padding } from '../../../utils/formatting';
@@ -17,7 +17,7 @@ import { useUser } from '../../../hooks/queries/users';
 import type { Dispatch, SetStateAction } from 'react';
 import type { UICapture } from './use-tracker';
 
-import { Avatar, Card, CardActionArea, CardActions, IconButton, Stack, Typography } from '@mui/material';
+import { Avatar, Card, CardActionArea, CardActions, CardHeader, IconButton, Stack, Typography } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 
 interface Props {
@@ -127,33 +127,73 @@ export function Pokemon ({ capture, delay = 0, setSelectedPokemon }: Props) {
       }}
     >
       <CardActionArea className="set-captured" onClick={handleSetCapturedClick}>
-        <Avatar
-          sx={{ height: '100%', width: '100%', backgroundColor: 'transparent' }}
-          variant="square"
-        >
-          <i className={iconClass(capture.pokemon, dex)} />
-        </Avatar>
+        <div className="pokemon-card-mobile">
+          <CardHeader
+            avatar={
+              <Avatar
+                sx={{ backgroundColor: 'transparent' }}
+                variant="square"
+              >
+                <i className={iconClass(capture.pokemon, dex)} />
+              </Avatar>
+            }
+            subheader={
+              <Typography
+                sx={{ m: 1.5 }}
+                variant="body2"
+              >
+                #{padding(idToDisplay, paddingDigits)}
+              </Typography>
+            }
+            sx={{ height: '100%' }}
+            title={
+              <Typography
+                fontWeight={500}
+                sx={{ m: 1.5, display: 'flex', alignItems: 'center' }}
+                variant="body1"
+              >
+                <PokemonName name={capture.pokemon.name} />
+              </Typography>
+            }
+          />
+        </div>
 
-        <Stack
-          alignItems="center"
-          direction="column"
-          height="var(--pokemon-box-size)"
-          justifyContent="space-between"
-          sx={{
-            bgcolor: 'transparent',
-            position: 'absolute',
-            top: 0, left: 0,
-          }}
-          width="100%"
-        >
-          <Typography sx={{ fontSize: 14, m: 1.5 }}>
-            {capture.pokemon.name}
-          </Typography>
+        <div className="pokemon-card">
+          <Avatar
+            sx={{ height: '100%', width: '100%', backgroundColor: 'transparent' }}
+            variant="square"
+          >
+            <i className={iconClass(capture.pokemon, dex)} />
+          </Avatar>
 
-          <Typography sx={{ fontSize: 12, m: 1.5 }}>
-            #{padding(idToDisplay, paddingDigits)}
-          </Typography>
-        </Stack>
+          <Stack
+            alignItems="center"
+            direction="column"
+            height="var(--pokemon-box-size)"
+            justifyContent="space-between"
+            sx={{
+              bgcolor: 'transparent',
+              position: 'absolute',
+              top: 0, left: 0,
+            }}
+            width="100%"
+          >
+            <Typography
+              fontWeight={500}
+              sx={{ m: 1.5, display: 'flex', alignItems: 'center' }}
+              variant="body1"
+            >
+              <PokemonName name={capture.pokemon.name} />
+            </Typography>
+
+            <Typography
+              sx={{ m: 1.5 }}
+              variant="body2"
+            >
+              #{padding(idToDisplay, paddingDigits)}
+            </Typography>
+          </Stack>
+        </div>
       </CardActionArea>
 
       <CardActions sx={{ position: 'absolute', bottom: 0, right: 0, p: 0.15 }}>

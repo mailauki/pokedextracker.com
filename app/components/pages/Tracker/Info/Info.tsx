@@ -6,7 +6,7 @@ import { useParams } from 'react-router';
 
 import { EvolutionFamily } from './EvolutionFamily';
 import { InfoLocations } from './InfoLocations';
-// import { PokemonName } from '../../library/PokemonName';
+import { PokemonName } from '../../../library/PokemonName';
 import { ReactGA } from '../../../../utils/analytics';
 import { iconClass } from '../../../../utils/pokemon';
 import { nationalId, padding, serebiiLink } from '../../../../utils/formatting';
@@ -16,7 +16,7 @@ import { useUser } from '../../../../hooks/queries/users';
 
 import type { Dex } from '../../../../types';
 
-import { AppBar, Box, Button, DialogContent, Divider, Drawer, IconButton, ListItem, ListItemIcon, ListItemText, Skeleton, Stack, Toolbar, Typography } from '@mui/material';
+import { AppBar, Avatar, Box, Button, DialogContent, Divider, Drawer, IconButton, ListItem, ListItemIcon, ListItemText, Skeleton, Stack, Toolbar, Typography } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -79,14 +79,6 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
 
     return SEREBII_LINKS[dex.game.game_family.id];
   }, [dex, pokemon]);
-
-  // if (!pokemon) {
-  //   return (
-  //     <Box>
-  //       <Toolbar variant="dense" />
-  //     </Box>
-  //   );
-  // }
 
   const { showInfo, setShowInfo } = useLocalStorageContext();
 
@@ -161,12 +153,29 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
               }
             >
               <ListItemIcon>
-                {!pokemon ? <Skeleton animation="wave" height={30} variant="circular" width={30} /> : <i className={iconClass(pokemon, dex)} />}
+                {!pokemon ? (
+                  <Skeleton animation="wave" height={30} variant="circular" width={30} />
+                ) : (
+                  <Avatar
+                    sx={{ backgroundColor: 'transparent' }}
+                    variant="square"
+                  >
+                    <i className={iconClass(pokemon, dex)} />
+                  </Avatar>
+                )}
               </ListItemIcon>
-              <ListItemText primary={<Typography variant="h4">{!pokemon ? <Skeleton animation="wave" width="80%" /> : pokemon.name}</Typography>} />
+              <ListItemText primary={
+                <Typography
+                  sx={{ display: 'flex', alignItems: 'center' }} variant="h4"
+                >
+                  {!pokemon ? (
+                    <Skeleton animation="wave" width="80%" />
+                  ) : (
+                    <PokemonName name={pokemon.name} />
+                  )}
+                </Typography>
+              } />
             </ListItem>
-
-            {/* <Divider /> */}
           </Box>
 
           <DialogContent dividers>
@@ -189,12 +198,9 @@ export function Info ({ selectedPokemon, setSelectedPokemon }: Props) {
           </DialogContent>
 
           <Box>
-            {/* <Divider /> */}
-
             {!pokemon ? (
               <Stack
                 alignItems="center"
-                // alignItems="stretch"
                 direction="row"
                 justifyContent="space-evenly"
                 sx={{ p: 3 }}
