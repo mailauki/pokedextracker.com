@@ -4,7 +4,7 @@
 test -f .env && . .env
 
 NOW=$(date +'%s')
-REPO="mailauki/pokedextracker.com"
+REPO="pokedextracker/pokedextracker.com"
 TAG="$(git rev-parse --short HEAD)"
 [[ -z $(git status -s) ]] || TAG="${TAG}-dirty-${NOW}"
 

@@ -181,7 +181,7 @@ export function Pokemon ({ capture, delay = 0, setSelectedPokemon }: Props) {
             <Typography
               fontWeight={500}
               sx={{ m: 1.5, display: 'flex', alignItems: 'center' }}
-              variant="body1"
+              variant="body2"
             >
               <PokemonName name={capture.pokemon.name} />
             </Typography>

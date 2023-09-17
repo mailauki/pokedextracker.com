@@ -2,7 +2,7 @@
   --pokemon-box-size: 120px;
 
   --info-drawer-button-width: 32px;
-  --info-drawer-width: 350px;
+  --info-drawer-width: 400px;
   --info-drawer-width-mobile: calc(100% - (var(--info-drawer-button-width)));
   --drawer-width: calc(var(--info-drawer-width) + var(--info-drawer-button-width));
 }
@@ -32,30 +32,10 @@
   width: 100%;
   height: var(--pokemon-box-size);
 
-  // &.pending {
-  // }
-
   .set-captured {
     width: 100%;
     height: var(--pokemon-box-size);
   }
-
-  // &.captured {
-  //   .set-captured,
-  //   .set-captured-mobile {
-  //   }
-
-  //   .game-family-legends_arceus {
-  //   }
-  // }
-
-  // &.disabled {
-  //   // opacity: .1;
-
-  //   &:hover {
-  //     // cursor: default;
-  //   }
-  // }
 
   &:not(.empty):not(.disabled):hover {
     .set-info {
@@ -65,116 +45,8 @@
         cursor: pointer;
       }
     }
-
-    // &:not(.viewing) {
-    //   // cursor: pointer;
-
-    //   .set-captured,
-    //   .set-capture-mobile:hover {
-    //   }
-    // }
   }
-
-  // .game-family-legends_arceus {
-  // }
 }
-
-// .set-captured {
-//   h4 {
-//   //   margin: 0;
-//   //   font-size: 17px;
-//   //   font-weight: 400;
-//   // }
-
-//   .icon-wrapper {
-//     // height: 49px;
-//   }
-// }
-
-// .set-captured-mobile {
-//   display: none;
-//   // border: 1px solid $gray-light;
-//   // border-radius: 6px;
-
-//   .icon-wrapper {
-//     // min-width: 52px;
-//     // text-align: center;
-//     // padding: 0 6px;
-//   }
-// }
-
-// .set-info {
-//   // opacity: 0;
-//   // position: absolute;
-//   // right: 0;
-//   // bottom: 0;
-//   // padding: 5px;
-// }
-
-// .evolution-pokemon-column,
-// .evolution-trigger-column {
-//   display: flex;
-//   flex-direction: column;
-//   // justify-content: space-around;
-//   justify-content: space-evenly;
-
-//   &.push {
-//     justify-content: flex-end;
-//   }
-// }
-
-// .evolution-pokemon-column {
-//   .pkicon-809 {
-//     margin-left: 3px;
-//   }
-
-//   a {
-//     cursor: pointer;
-//     padding: 0 5px;
-//   }
-// }
-
-// .evolution-trigger-column {
-//   flex-grow: 1;
-
-//   max-width: 90px;
-
-//   .evolution-trigger {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-
-//     margin: 8px 0;
-
-//     &:first-child {
-//       margin-top: 0;
-//     }
-
-//     &:last-child {
-//       margin-bottom: 0;
-//     }
-
-//     > .svg-inline--fa {
-//       margin-bottom: 3px;
-//       width: unset;
-//     }
-
-//     .tooltip {
-//       .fa-plus-circle {
-//         color: white;
-//       }
-
-//       .tooltip-text {
-//         color: black;
-//         background-color: white;
-
-//         &::after {
-//           border-color: #fff transparent transparent transparent;
-//         }
-//       }
-//     }
-//   }
-// }
   
 .pokemon-card {
   display: inherit;
