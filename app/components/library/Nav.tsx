@@ -66,7 +66,6 @@ export function Nav ({ darkMode }: Props) {
             </Stack>
           </Toolbar>
         </AppBar>
-        <Toolbar id="back-to-top-anchor" variant="dense" />
       </>
     );
   }
@@ -124,17 +123,11 @@ export function Nav ({ darkMode }: Props) {
             </Stack>
           </Toolbar>
         </AppBar>
-        {/* <Toolbar id="back-to-top-anchor" variant="dense" /> */}
       </>
     );
   }
 
   return (
-    // <nav>
-    //   {links}
-    //   <Link to="/login">Login</Link>
-    //   <Link to="/register">Register</Link>
-    // </nav>
     <>
       <AppBar color="secondary" position="fixed">
         <Toolbar sx={{ justifyContent: 'space-between' }} variant="dense">
@@ -145,7 +138,6 @@ export function Nav ({ darkMode }: Props) {
           </Stack>
         </Toolbar>
       </AppBar>
-      {/* <Toolbar id="back-to-top-anchor" sx={{ position: 'fixed', top: 0 }} variant="dense" /> */}
     </>
   );
 }
