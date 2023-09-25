@@ -27,6 +27,7 @@ interface Props {
   setHideCaught: Dispatch<SetStateAction<boolean>>;
   setQuery: Dispatch<SetStateAction<string>>;
   setSelectedPokemon: Dispatch<SetStateAction<number>>;
+  sortAlphabetically: boolean;
 }
 
 export function Dex ({
@@ -35,6 +36,7 @@ export function Dex ({
   setHideCaught,
   setQuery,
   setSelectedPokemon,
+  sortAlphabetically,
 }: Props) {
   const { username, slug } = useParams<{ username: string; slug: string }>();
 
@@ -92,6 +94,7 @@ export function Dex ({
           setHideCaught={setHideCaught}
           setQuery={setQuery}
           setSelectedPokemon={setSelectedPokemon}
+          sortAlphabetically={sortAlphabetically}
         /> :
         boxes
       }

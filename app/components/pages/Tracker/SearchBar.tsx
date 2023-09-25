@@ -1,4 +1,4 @@
-import { AppBar, Checkbox, FormControlLabel, IconButton, InputAdornment, TextField, Toolbar } from '@mui/material';
+import { AppBar, Checkbox, FormControl, FormControlLabel, FormLabel, IconButton, InputAdornment, Radio, RadioGroup, Stack, TextField, Toolbar } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useEffect, useRef } from 'react';
@@ -12,9 +12,11 @@ interface Props {
   query: string;
   setHideCaught: Dispatch<SetStateAction<boolean>>;
   setQuery: Dispatch<SetStateAction<string>>;
+  setSortAlphabetically: Dispatch<SetStateAction<boolean>>;
+  sortAlphabetically: boolean;
 }
 
-export function SearchBar ({ hideCaught, query, setHideCaught, setQuery }: Props) {
+export function SearchBar ({ hideCaught, query, setHideCaught, setQuery, setSortAlphabetically, sortAlphabetically }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -32,6 +34,7 @@ export function SearchBar ({ hideCaught, query, setHideCaught, setQuery }: Props
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value);
   const handleHideCaughtChange = (e: ChangeEvent<HTMLInputElement>) => setHideCaught(e.target.checked);
+  const handleSortChange = (e: ChangeEvent<HTMLInputElement>) => setSortAlphabetically(e.target.checked);
 
   const handleClearClick = () => {
     setQuery('');
@@ -89,17 +92,49 @@ export function SearchBar ({ hideCaught, query, setHideCaught, setQuery }: Props
           value={query}
         />
 
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={hideCaught}
-              id="hide-caught"
-              name="hide-caught"
-              onChange={handleHideCaughtChange}
-            />
-          }
-          label="Hide Caught Pokémon"
-        />
+        <Stack direction="row" spacing={4}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={hideCaught}
+                id="hide-caught"
+                name="hide-caught"
+                onChange={handleHideCaughtChange}
+              />
+            }
+            label="Hide Caught Pokémon"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={sortAlphabetically}
+                id="sort-alphabetically"
+                name="sort-alphabetically"
+                onChange={handleSortChange}
+              />
+            }
+            label="Sort Alphabetically"
+          />
+          {/* <FormControl>
+            <RadioGroup
+              defaultValue="number"
+              name="sort"
+              row
+              onChange={handleSortChange}
+            >
+              <FormControlLabel
+                control={<Radio />}
+                label="Sort Numerically"
+                value="number"
+              />
+              <FormControlLabel
+                control={<Radio />}
+                label="Sort Alphabetically"
+                value="alpha"
+              />
+            </RadioGroup>
+          </FormControl> */}
+        </Stack>
       </Toolbar>
     </AppBar>
   );

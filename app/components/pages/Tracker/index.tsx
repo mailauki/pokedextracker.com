@@ -40,6 +40,7 @@ export function TrackerInner () {
   const [query, setQuery] = useState('');
   const [hideCaught, setHideCaught] = useState(false);
   const [selectedPokemon, setSelectedPokemon] = useState(0);
+  const [sortAlphabetically, setSortAlphabetically] = useState(false);
 
   useEffect(() => {
     document.title = `${username}'s Living Dex | Pokédex Tracker`;
@@ -76,6 +77,8 @@ export function TrackerInner () {
           query={query}
           setHideCaught={setHideCaught}
           setQuery={setQuery}
+          setSortAlphabetically={setSortAlphabetically}
+          sortAlphabetically={sortAlphabetically}
         />
 
         <Main size="md">
@@ -85,9 +88,13 @@ export function TrackerInner () {
             setHideCaught={setHideCaught}
             setQuery={setQuery}
             setSelectedPokemon={setSelectedPokemon}
+            sortAlphabetically={sortAlphabetically}
           />
         </Main>
       </Box>
+      {/* {console.log({hideCaught})}
+      {console.log({query})}
+      {console.log({sortAlphabetically})} */}
 
       <Info selectedPokemon={selectedPokemon} setSelectedPokemon={setSelectedPokemon} />
     </>
